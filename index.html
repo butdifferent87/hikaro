@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hikaro — 韓国語学習アプリ</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background: #fafafa;
+      color: #222;
+      line-height: 1.8;
+    }
+    header {
+      background: #e8647a;
+      padding: 48px 20px 40px;
+      text-align: center;
+    }
+    header h1 { color: #fff; font-size: 36px; font-weight: 800; letter-spacing: 0.06em; }
+    header p  { color: rgba(255,255,255,0.88); font-size: 15px; margin-top: 8px; }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .link-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 22px 28px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      text-decoration: none;
+      color: #222;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: box-shadow 0.15s;
+    }
+    .link-card:hover { box-shadow: 0 4px 16px rgba(232,100,122,0.15); }
+    .link-card .icon {
+      width: 44px;
+      height: 44px;
+      background: #fdf0f3;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .link-card .text h2 { font-size: 15px; font-weight: 700; color: #e8647a; }
+    .link-card .text p  { font-size: 13px; color: #888; margin-top: 2px; }
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      padding: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>hikaro</h1>
+  <p>日本語話者のための韓国語学習アプリ</p>
+</header>
+
+<div class="container">
+  <div class="links">
+    <a href="privacy.html" class="link-card">
+      <div class="icon">🔒</div>
+      <div class="text">
+        <h2>プライバシーポリシー</h2>
+        <p>個人情報の取り扱いについて / 개인정보처리방침</p>
+      </div>
+    </a>
+    <a href="terms.html" class="link-card">
+      <div class="icon">📄</div>
+      <div class="text">
+        <h2>利用規約</h2>
+        <p>サービス利用条件について / 이용약관</p>
+      </div>
+    </a>
+    <a href="mailto:hikaro.world@gmail.com" class="link-card">
+      <div class="icon">✉️</div>
+      <div class="text">
+        <h2>お問い合わせ</h2>
+        <p>hikaro.world@gmail.com</p>
+      </div>
+    </a>
+  </div>
+</div>
+
+<footer>© 2026 hikaro — Jangyean Cho</footer>
+</body>
+</html>
