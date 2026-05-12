@@ -1,26 +1,295 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hikaro - 韓国語学習アプリ</title>
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 720px; margin: 0 auto; padding: 48px 24px; line-height: 1.7; color: #333; text-align: center; }
-        h1 { font-size: 2em; margin-bottom: 0.3em; }
-        .subtitle { color: #666; margin-bottom: 2em; }
-        .links { margin-top: 2em; }
-        .links a { display: inline-block; margin: 0 12px; color: #1a73e8; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hikaro — 한국어 학습 앱</title>
+<meta name="description" content="한국어 공부에 몇 번이나 좌절해온 분들을 위한 학습 앱. 올바른 가이드와 학습 지도로 안내합니다.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #FAFAF8;
+    color: #1A1A1A;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    background: #ffffff;
+    min-height: 100vh;
+  }
+
+  .page-icon { font-size: 48px; margin-bottom: 8px; }
+  .page-title { font-size: 32px; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.5px; }
+
+  .callout { background: #f7f6f3; border-radius: 4px; padding: 20px 24px; margin-bottom: 24px; }
+  .callout-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1A1A1A; }
+
+  .quote-block { border-left: 3px solid #009068; padding: 6px 0 6px 16px; margin: 8px 0; color: #555; font-size: 15px; }
+
+  p { font-size: 16px; margin-bottom: 10px; color: #1A1A1A; }
+  .text-muted { color: #787774; font-size: 14px; }
+  .text-accent { color: #007050; font-weight: 500; }
+  .text-bold { font-weight: 700; }
+
+  .divider { border: none; border-top: 1px solid #C0ECD8; margin: 32px 0; }
+
+  .section-heading { font-size: 22px; font-weight: 700; margin-bottom: 16px; padding-bottom: 4px; border-bottom: 2px solid #C0ECD8; }
+
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .problem-card { background: #EAF8F2; border: 1px solid #C0ECD8; border-radius: 4px; padding: 20px; }
+  .problem-card .problem-num { font-size: 12px; font-weight: 700; color: #007050; margin-bottom: 4px; letter-spacing: 1px; }
+  .problem-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .problem-card p { font-size: 13px; color: #666; margin-bottom: 0; line-height: 1.7; }
+
+  .result-arrow { text-align: center; padding: 12px 0; color: #999; font-size: 14px; }
+  .result-arrow .arrow { font-size: 20px; display: block; margin-bottom: 4px; }
+  .result-consequence { background: #f7f6f3; border-radius: 4px; padding: 16px 20px; margin-bottom: 24px; text-align: center; font-size: 15px; color: #555; }
+
+  .solution-box { background: #f0f7f0; border: 1px solid #c8e6c9; border-radius: 4px; padding: 28px; margin: 24px 0; }
+  .solution-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: #2e7d32; }
+  .solution-box p { font-size: 15px; color: #444; margin-bottom: 0; }
+
+  .roadmap { display: flex; align-items: stretch; gap: 0; margin: 20px 0 16px; }
+  .roadmap-step { flex: 1; padding: 16px 14px; text-align: center; position: relative; }
+  .roadmap-step:first-child { border-radius: 8px 0 0 8px; }
+  .roadmap-step:last-child { border-radius: 0 8px 8px 0; }
+  .roadmap-step.step-1 { background: #e8f5e9; }
+  .roadmap-step.step-2 { background: #c8e6c9; }
+  .roadmap-step.step-3 { background: #a5d6a7; }
+  .roadmap-label { font-size: 11px; font-weight: 700; color: #2e7d32; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .roadmap-title { font-size: 15px; font-weight: 700; color: #1b5e20; margin-bottom: 4px; }
+  .roadmap-desc { font-size: 12px; color: #555; line-height: 1.5; }
+  .roadmap-arrow { display: flex; align-items: center; font-size: 18px; color: #81c784; padding: 0 2px; font-weight: 700; }
+  .roadmap-you { display: inline-block; background: #fff; border: 2px solid #2e7d32; color: #2e7d32; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; margin-top: 6px; }
+
+  .result-grid { display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
+  .result-card { background: #EAF8F2; border-radius: 4px; padding: 20px 24px; }
+  .result-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+
+  .steps { margin: 16px 0; }
+  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+  .step-num { background: #007050; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+
+  .cta-block { background: #f7f6f3; border-radius: 4px; padding: 24px 28px; margin: 24px 0; text-align: center; }
+  .cta-block .cta-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  .cta-link { display: inline-block; background: #007050; color: #fff; padding: 12px 32px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 500; margin-top: 12px; }
+
+  .profile-section { display: flex; gap: 16px; align-items: flex-start; margin: 16px 0; }
+  .profile-avatar { width: 56px; height: 56px; background: #e8e7e4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+  .profile-info { flex: 1; }
+  .profile-info h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .profile-info p { font-size: 13px; color: #787774; margin-bottom: 2px; }
+
+  .channel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  .channel-card { background: #f7f6f3; border-radius: 4px; padding: 16px 12px; text-align: center; text-decoration: none; color: #1A1A1A; transition: background 0.15s; }
+  .channel-card:hover { background: #EAF8F2; }
+  .channel-icon { font-size: 24px; margin-bottom: 6px; }
+  .channel-name { font-size: 13px; font-weight: 500; }
+  .channel-desc { font-size: 11px; color: #999; margin-top: 2px; }
+
+  .final-cta { background: #1A1A1A; color: #ffffff; border-radius: 4px; padding: 32px 28px; margin: 32px 0 0; text-align: center; }
+  .final-cta h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .final-cta p { color: #ccc; font-size: 15px; margin-bottom: 16px; }
+  .final-cta .cta-link { background: #ffffff; color: #1A1A1A; }
+
+  .footer { text-align: center; padding: 32px 0 0; }
+  .footer a { color: #787774; font-size: 13px; text-decoration: none; margin: 0 12px; }
+  .footer a:hover { text-decoration: underline; }
+  .footer .contact { margin-top: 12px; font-size: 12px; color: #999; }
+
+  @media (max-width: 600px) {
+    .problem-grid { grid-template-columns: 1fr; }
+    .channel-grid { grid-template-columns: repeat(2, 1fr); }
+    .roadmap { flex-direction: column; gap: 8px; }
+    .roadmap-step { border-radius: 8px !important; }
+    .roadmap-arrow { justify-content: center; transform: rotate(90deg); }
+  }
+</style>
 </head>
 <body>
-    <h1>hikaro</h1>
-    <p class="subtitle">日本語話者のための韓国語学習アプリ</p>
-    <div class="links">
-        <a href="terms.html">利用規約</a>
-        <a href="privacy.html">プライバシーポリシー</a>
+
+<div class="page">
+
+  <div class="page-icon">🇰🇷</div>
+  <div class="page-title">한국어 코치, 후유입니다</div>
+
+  <div class="callout">
+    <div class="callout-title">한국어 공부, 몇 번이나 포기하셨나요?</div>
+    <div class="quote-block">「또 단어를 외우려다가, 또 까먹었어…」</div>
+    <div class="quote-block">「몇 번을 시작해도, 어차피 안 돼…」</div>
+    <div class="quote-block">「혹시 나는 재능이 없는 걸까…」</div>
+    <p style="margin-top: 12px;">이 말이 내 이야기처럼 느껴졌다면, 꼭 읽어보세요.<br>
+    <span class="text-accent">한국어 공부에 몇 번이나 좌절해온 분들을 위해 쓴 글입니다.</span></p>
+  </div>
+
+  <hr class="divider">
+
+  <p>한국어 공부에서 몇 번이나 좌절해왔다면, 그건 재능이 없다는 증거가 아닙니다.<br>
+  나이 때문도, 의지가 약해서도 아니에요.</p>
+
+  <p><span class="text-accent">원인은 딱 두 가지뿐입니다.</span></p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="problem-num">문제 1</div>
+      <h4>잘못된 방법</h4>
+      <p>언어학습에서 암기는 필수 과정입니다. 그런데 대부분의 학습자들은 종이에 반복해서 쓰면서 외우려고 합니다.<br><br>이 방법은 암기 효율이 매우 나쁘다는 사실이 증명되었습니다.<br><br>잘못된 방법으로 아무리 열심히 해도 결국 까먹게 되고, 또 까먹었다는 좌절감과 함께 기억력이나 재능, 나이탓을 하게 됩니다.</p>
     </div>
-    <p style="margin-top:3em; font-size:0.85em; color:#888;">
-        お問い合わせ: <a href="mailto:hikaro.world@gmail.com">hikaro.world@gmail.com</a>
-    </p>
+    <div class="problem-card">
+      <div class="problem-num">문제 2</div>
+      <h4>학습 방법에 확신이 없고 막막함</h4>
+      <p>"이렇게 공부하면 한국어를 잘 할 수 있겠다"는 확신이 아니라, 이 방법이 맞는 건지조차 확신이 없습니다.<br><br>내가 지금 어디쯤 와 있는지, 다음에 뭘 해야 하는지, 어떤 과정을 거치면 한국어를 잘 할 수 있는지 — 아무것도 보이지 않는 상태.<br><br>그래서 매일 열심히 할수록 성장이 아니라, 혼자서 안개 속을 헤매고 있는 기분이 듭니다.</p>
+    </div>
+  </div>
+
+  <div class="result-arrow"><span class="arrow">↓</span></div>
+  <div class="result-consequence">
+    도전과 좌절을 반복하면서 <span class="text-accent">자신감이 무너지고,</span> 결국 포기하게 됩니다.
+  </div>
+
+  <p style="margin-top: 16px;">이런 언어학습자들에게 가장 필요한 것은 무엇일까요?</p>
+
+  <p><span class="text-bold">잘못된 방법을 반복하지 않도록 도와주는 가이드,<br>
+  그리고 헤매지 않고 목적지까지 갈 수 있도록 길을 알려주는 지도입니다.</span></p>
+
+  <p style="color: #555;">효율적인 방법으로 학습하면, 같은 시간을 투자해도 훨씬 많이 기억에 남고,<br>
+  학습 단계를 알려주는 지도가 있다면 매일의 학습이 확신이 되기 때문입니다.</p>
+
+  <p style="margin-top: 16px; color: #555;">서울의 카페에서 점원과 한국어로 자연스럽게 대화하는 날.<br>
+  좋아하는 한국 드라마 대사가 자막 없이 들리는 경험.<br>
+  한국인 친구에게 "한국어 정말 잘하시네요"라고 처음 듣는 순간.</p>
+
+  <p><span class="text-accent">올바른 가이드와 지도만 있다면, 충분히 가능한 이야기입니다.</span></p>
+
+  <hr class="divider">
+
+  <div class="section-heading">필요한 것은 학습 지도입니다</div>
+
+  <div class="solution-box">
+    <h3>hikaro = 당신의 학습 지도</h3>
+
+    <p style="margin-bottom: 16px;">한국어를 잘 하게 되기까지, 크게 3단계가 있습니다.</p>
+
+    <div class="roadmap">
+      <div class="roadmap-step step-1">
+        <div class="roadmap-label">1단계</div>
+        <div class="roadmap-title">유아기</div>
+        <div class="roadmap-desc">기초 단어와 문법을<br>학습한다</div>
+        <div class="roadmap-you">대부분의 초심자가 이 단계를 졸업하지 못하고 좌절합니다</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-step step-2">
+        <div class="roadmap-label">2단계</div>
+        <div class="roadmap-title">청년기</div>
+        <div class="roadmap-desc">문장을 외우고,<br>문장을 만든다</div>
+      </div>
+      <div class="roadmap-arrow">→</div>
+      <div class="roadmap-step step-3">
+        <div class="roadmap-label">3단계</div>
+        <div class="roadmap-title">성인기</div>
+        <div class="roadmap-desc">정확한 단어와 표현으로,<br>더욱 자연스러운 한국어를 구사한다</div>
+      </div>
+    </div>
+
+    <p>지금 어떤 단계에 있고, 뭘 학습해야 하는지, 어떻게 학습해야 가장 효율적으로 지금 단계를 졸업할 수 있는지 — hikaro가 안내합니다.</p>
+    <p><span style="color: #2e7d32; font-weight: 500;">가장 효율적인 언어학습에 대한 고민과 연구는 hikaro가 하고, 앱에 반영합니다.<br>당신은 그저 앱을 열고, 포치포치만 하면 됩니다.</span></p>
+  </div>
+
+  <div class="result-grid">
+    <div class="result-card">
+      <h4>📖 마음껏 까먹어도 됩니다. 결국 외워지는 단어장이니까.</h4>
+      <ul style="margin:0; padding-left:20px; font-size:14px; color:#555;">
+        <li>"외웠는데 또 까먹었어"가 "나도 단어를 외울 수 있어!"로 바뀝니다.</li>
+        <li>억지로 외우려고 하지 않아도, 어느새 머릿속에 남아있습니다.</li>
+      </ul>
+    </div>
+    <div class="result-card">
+      <h4>🎬 가장 친절하고 쉬운 문법 가이드</h4>
+      <ul style="margin:0; padding-left:20px; font-size:14px; color:#555;">
+        <li>가장 자세한 문법 설명이 아니라, 가장 직관적이고 쉬운 설명을 목표로 만들었습니다.</li>
+        <li>문법마다 연습 기능이 있어서, 쉽고 효율적으로 문법을 익힐 수 있습니다.</li>
+      </ul>
+    </div>
+    <div class="result-card">
+      <h4>✏️ 내가 매일 쓰는 일본어를 한국어로</h4>
+      <ul style="margin:0; padding-left:20px; font-size:14px; color:#555;">
+        <li>한국어를 잘하게 되는 가장 빠르고 쉬운 방법은, 자신이 일상에서 매일 쓰는 일본어 단어와 표현을 하나씩 한국어로 바꿔나가는 것입니다.</li>
+        <li>hikaro는 일본어 문장을 한국어로 기록하고, 최적의 타이밍에 복습할 수 있게 도와주기 때문에 한국어 실력을 빠르게 키울 수 있습니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-heading" style="font-size: 18px; margin-top: 24px;">사용법은 심플</div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><p>앱을 다운로드한다</p></div>
+    <div class="step"><div class="step-num">2</div><p>매일 앱을 열고, "알아" "몰라"만 답한다</p></div>
+    <div class="step"><div class="step-num">3</div><p>나머지는 hikaro가 최적의 타이밍으로 복습을 돕는다</p></div>
+  </div>
+
+  <div class="cta-block">
+    <div class="cta-title">무료로 시작하고, 나에게 맞는지 확인하기</div>
+    <p class="text-muted">설치 1분, 첫 학습은 5분이면 충분합니다.</p>
+    <div style="display: flex; gap: 12px; justify-content: center;">
+      <a class="cta-link" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+      <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section-heading">만든 사람</div>
+
+  <div class="profile-section">
+    <div class="profile-avatar">🧑‍💻</div>
+    <div class="profile-info">
+      <h4>후유 (歩夢)</h4>
+      <p>SUNY Stonybrook 졸업 (화학공학과)</p>
+      <p>서울대학교 대학원</p>
+      <p>JLPT N1 합격 (2025.07) — 7개월 만에 취득</p>
+    </div>
+  </div>
+
+  <p style="margin-top: 12px;">일본인이 가장 쉽고 효율적으로 한국어를 배울 수 있는 방법을 연구하고 앱으로 구현합니다.<br>
+  <span class="text-muted">hikaro(光路) — 깜깜한 터널 속에서 헤매고 있는 언어학습자들에게 출구가 어디인지 알려주는 빛이 되고 싶다는 마음으로 이름을 지었습니다.</span></p>
+
+  <div class="section-heading" style="font-size: 18px; margin-top: 28px;">후유의 채널</div>
+  <p class="text-muted" style="margin-bottom: 12px;">한국어 공부법, 한국 문화, 학습 팁을 발신하고 있습니다.</p>
+
+  <div class="channel-grid">
+    <a class="channel-card" href="#"><div class="channel-icon">▶️</div><div class="channel-name">YouTube</div><div class="channel-desc">공부법·해설 영상</div></a>
+    <a class="channel-card" href="#"><div class="channel-icon">📸</div><div class="channel-name">Instagram</div><div class="channel-desc">학습 카드·일상</div></a>
+    <a class="channel-card" href="#"><div class="channel-icon">🧵</div><div class="channel-name">Threads</div><div class="channel-desc">학습 팁·생각</div></a>
+    <a class="channel-card" href="#"><div class="channel-icon">📝</div><div class="channel-name">Note</div><div class="channel-desc">깊이 있는 글·칼럼</div></a>
+  </div>
+
+  <hr class="divider">
+
+  <div class="final-cta">
+    <h3>몇 번이나 실패했던 분들도,<br>분명 성공할 수 있습니다.</h3>
+    <p>이번에는 혼자가 아니라,<br>가이드와 지도가 있으니까요.</p>
+    <p style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px;">무료로 시작해보기</p>
+    <div style="display: flex; gap: 12px; justify-content: center;">
+      <a class="cta-link" href="https://apps.apple.com/kr/app/hikaro/id6758513552" style="background: #ffffff; color: #1A1A1A;">App Store →</a>
+      <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.fuyu.korean" style="background: #ffffff; color: #1A1A1A;">Google Play →</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="terms.html">이용약관</a>
+    <a href="privacy.html">개인정보 처리방침</a>
+    <div class="contact">문의: <a href="mailto:hikaro.world@gmail.com" style="margin: 0;">hikaro.world@gmail.com</a></div>
+  </div>
+
+</div>
+
 </body>
 </html>
