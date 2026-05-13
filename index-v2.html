@@ -626,6 +626,22 @@
     .header-cta a { font-size: 12px; padding: 6px 12px; }
     .header-cta { gap: 6px; }
   }
+
+  /* ── REVEAL ANIMATIONS ────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                transform 0.65s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-d1 { transition-delay: 0.08s; }
+  .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; }
+  .reveal-d4 { transition-delay: 0.32s; }
 </style>
 </head>
 <body>
@@ -647,30 +663,30 @@
 </header>
 
 <section class="hero" id="top">
-  <div class="hero-tagline">일본인을 위한 한국어 학습 앱</div>
-  <h1 class="hero-headline">한국어 공부,<br>몇 번이나 포기하셨나요?</h1>
-  <p class="hero-sub">재능이 아닙니다.<br><strong>지도가 없었던 겁니다.</strong></p>
-  <div class="hero-ctas">
+  <div class="hero-tagline reveal">일본인을 위한 한국어 학습 앱</div>
+  <h1 class="hero-headline reveal reveal-d1">한국어 공부,<br>몇 번이나 포기하셨나요?</h1>
+  <p class="hero-sub reveal reveal-d2">재능이 아닙니다.<br><strong>지도가 없었던 겁니다.</strong></p>
+  <div class="hero-ctas reveal reveal-d3">
     <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">📱 App Store →</a>
     <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">▶️ Google Play →</a>
   </div>
-  <p class="hero-note">설치 1분 · 첫 학습 5분 · 무료</p>
+  <p class="hero-note reveal reveal-d4">설치 1분 · 첫 학습 5분 · 무료</p>
 </section>
 
 <section class="bg-offwhite">
   <div class="section">
-    <div class="section-label">왜 계속 실패할까요</div>
-    <h2 class="section-title">한국어에 좌절하는 학습자들은,<br>대부분 같은 말을 합니다</h2>
+    <div class="section-label reveal">왜 계속 실패할까요</div>
+    <h2 class="section-title reveal reveal-d1">한국어에 좌절하는 학습자들은,<br>대부분 같은 말을 합니다</h2>
 
-    <div class="stakes-quotes">
+    <div class="stakes-quotes reveal reveal-d2">
       <div class="stakes-quote">"그렇게 열심히 단어를 외웠는데, 또 까먹었어..."</div>
       <div class="stakes-quote">"이렇게 계속 공부하면 정말 한국어를 잘 할 수 있을까?"</div>
       <div class="stakes-quote">"나는 머리가 좋지 않고 언어 재능도 없어서..."</div>
     </div>
 
-    <p class="stakes-summary">공부할수록 더 확신이 들고 앞으로 나아가는 게 아니라,<br>계속 헤매고 있는 느낌.</p>
+    <p class="stakes-summary reveal reveal-d3">공부할수록 더 확신이 들고 앞으로 나아가는 게 아니라,<br>계속 헤매고 있는 느낌.</p>
 
-    <div class="stakes-finisher">
+    <div class="stakes-finisher reveal reveal-d4">
       이 상태로 계속 공부한다면,<br>또 다시 좌절을 반복하게 되고 결국 포기하게 됩니다.
     </div>
   </div>
@@ -678,25 +694,25 @@
 
 <section class="bg-white" id="features">
   <div class="section">
-    <div class="section-label">hikaro가 제공하는 3가지</div>
-    <h2 class="section-title">단순한 도구가 아니라,<br>실력이 자라는 시스템</h2>
+    <div class="section-label reveal">hikaro가 제공하는 3가지</div>
+    <h2 class="section-title reveal reveal-d1">단순한 도구가 아니라,<br>실력이 자라는 시스템</h2>
 
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card reveal reveal-d1">
         <div class="service-icon">📚</div>
         <h3>단어장</h3>
         <div class="service-hook">마음껏 까먹어도 됩니다</div>
         <p class="service-desc">"외웠는데 또 까먹었어"가 "나도 단어를 외울 수 있어!"로 바뀝니다. 억지로 외우려 하지 않아도, 어느새 머릿속에 남아있습니다.</p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card reveal reveal-d2">
         <div class="service-icon">📖</div>
         <h3>문법 가이드</h3>
         <div class="service-hook">가장 친절하고 쉬운 설명</div>
         <p class="service-desc">가장 자세한 설명이 아니라, 가장 직관적이고 쉬운 설명을 목표로 만들었습니다. 문법마다 연습 기능이 있어서, 쉽고 효율적으로 익힙니다.</p>
       </div>
 
-      <div class="service-card">
+      <div class="service-card reveal reveal-d3">
         <div class="service-icon">💬</div>
         <h3>표현 학습</h3>
         <div class="service-hook">내가 매일 쓰는 일본어를 한국어로</div>
@@ -708,11 +724,11 @@
 
 <section class="bg-offwhite" id="proof">
   <div class="section">
-    <div class="section-label">실제 변화</div>
-    <h2 class="section-title">한 글자도 못 읽던 유저가,<br>3개월 만에 한국어로 보내온 메시지입니다.</h2>
+    <div class="section-label reveal">실제 변화</div>
+    <h2 class="section-title reveal reveal-d1">한 글자도 못 읽던 유저가,<br>3개월 만에 한국어로 보내온 메시지입니다.</h2>
 
     <div class="proof-main">
-      <div class="proof-story">
+      <div class="proof-story reveal reveal-d2">
         <div class="proof-score-row">
           <span class="proof-score-before">57</span>
           <span class="proof-score-arrow">→</span>
@@ -727,7 +743,7 @@
         <p class="proof-story-text">1월엔 한국어 한 글자도 읽지 못했습니다. 매일 hikaro로 학습했고, 3개월 후 저에게 한국어로 메시지를 보냈습니다.</p>
       </div>
 
-      <div class="proof-chat">
+      <div class="proof-chat reveal reveal-d3">
         <div class="proof-chat-label">실제 유저가 한국어로 보낸 메시지</div>
         <div class="chat-bubble">
           <p>응! 잘잤어!<br>지금부터 점심이야!<br>장연 밥 먹었어!?<br><br>4월29일부터 연휴야!<br>하고 싶은 일이 많이 있어서 준번을 생각해야돼!!<br>TOPIK1의 텍스트가 사실 아직 안 끝나니까 그냥 그 텍스트를 끝나고 싶어 ㅎㅎ<br>집에의 청소나 드라마도 남아 있으니까 하고 싶은 일이 너무 많이 있어 ㅋㅋㅋㅋ<br>파레토360도 완벽하고 싶어!!</p>
@@ -735,7 +751,7 @@
       </div>
     </div>
 
-    <div class="proof-extra" lang="ja">
+    <div class="proof-extra reveal" lang="ja">
       <div class="proof-extra-quote">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</div>
       <div class="proof-extra-attr">— 일본인 유저</div>
     </div>
@@ -744,11 +760,11 @@
 
 <section class="bg-white" id="plan">
   <div class="section">
-    <div class="section-label">해결책</div>
-    <h2 class="section-title">한국어를 잘 하게 되기까지,<br>3단계 학습 지도</h2>
+    <div class="section-label reveal">해결책</div>
+    <h2 class="section-title reveal reveal-d1">한국어를 잘 하게 되기까지,<br>3단계 학습 지도</h2>
 
     <div class="plan-steps">
-      <div class="step-card">
+      <div class="step-card reveal">
         <div class="step-number">STEP 01</div>
         <div class="step-stage">유아기</div>
         <div class="step-subtitle">기초 단어와 문법을 쌓는다</div>
@@ -762,9 +778,9 @@
         </div>
       </div>
 
-      <div class="connector"><div class="connector-arrow">↓</div></div>
+      <div class="connector reveal"><div class="connector-arrow">↓</div></div>
 
-      <div class="step-card">
+      <div class="step-card reveal reveal-d1">
         <div class="step-number">STEP 02</div>
         <div class="step-stage">청년기</div>
         <div class="step-subtitle">입에서 한국어가 나오기 시작한다</div>
@@ -779,9 +795,9 @@
         </div>
       </div>
 
-      <div class="connector"><div class="connector-arrow">↓</div></div>
+      <div class="connector reveal"><div class="connector-arrow">↓</div></div>
 
-      <div class="step-card dark">
+      <div class="step-card dark reveal reveal-d2">
         <div class="success-chip">여기까지 도달했다면, 한국어 공부 성공!</div>
         <div class="step-number">STEP 03</div>
         <div class="step-stage">성인기</div>
@@ -802,14 +818,14 @@
 
 <section class="bg-greentint" id="creator">
   <div class="section">
-    <div class="section-label">만든 사람</div>
-    <h2 class="section-title">왜 이 앱을 만들었는가</h2>
+    <div class="section-label reveal">만든 사람</div>
+    <h2 class="section-title reveal reveal-d1">왜 이 앱을 만들었는가</h2>
 
     <div class="creator-layout">
-      <div class="creator-photo">
+      <div class="creator-photo reveal reveal-d2">
         <img src="profile.jpg" alt="hikaro 창업자 후유">
       </div>
-      <div class="creator-text">
+      <div class="creator-text reveal reveal-d3">
         <p>저는 한국인이고, 20년 전부터 일본어 공부에 도전했지만 항상 실패했습니다.</p>
         <p>하지만 2025년 7월, JLPT N1을 7개월 만에 취득했습니다.</p>
         <p>저도 언어 학습자였기 때문에 정확히 알고 있습니다 — 무엇이 효과 있고, 무엇이 시간 낭비인지.</p>
@@ -823,12 +839,12 @@
 </section>
 
 <section class="final-cta">
-  <h2>지금까지의 한국어 공부 방법이 통하지 않았다면,<br>hikaro로 새롭게 시작하세요.</h2>
-  <div class="final-cta-buttons">
+  <h2 class="reveal">지금까지의 한국어 공부 방법이 통하지 않았다면,<br>hikaro로 새롭게 시작하세요.</h2>
+  <div class="final-cta-buttons reveal reveal-d1">
     <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">📱 App Store →</a>
     <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">▶️ Google Play →</a>
   </div>
-  <p class="final-cta-note">설치 1분 · 첫 학습 5분 · 무료</p>
+  <p class="final-cta-note reveal reveal-d2">설치 1분 · 첫 학습 5분 · 무료</p>
 </section>
 
 <footer class="site-footer">
@@ -838,6 +854,21 @@
   </div>
   <p class="contact">© 2026 hikaro · 문의: <a href="mailto:hikaro.contact@gmail.com">hikaro.contact@gmail.com</a></p>
 </footer>
+
+<script>
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+</script>
 
 </body>
 </html>
