@@ -483,6 +483,37 @@
     line-height: 1;
     font-weight: 700;
   }
+  /* ── CREATOR ──────────────────────────── */
+  .creator-layout {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-top: 56px;
+  }
+  .creator-photo img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+  }
+  .creator-text p {
+    font-size: 21px;
+    color: #1A1A1A;
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .creator-signature {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 17px;
+    color: #555;
+  }
+  .creator-signature strong {
+    color: #1A1A1A;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -652,6 +683,28 @@
           <span class="outcome-icon">→</span>
           <span><strong>목표</strong><br>내 생각의 80% 이상을 자연스러운 한국어로 말할 수 있습니다.</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-greentint" id="creator">
+  <div class="section">
+    <div class="section-label">만든 사람</div>
+    <h2 class="section-title">왜 이 앱을 만들었는가</h2>
+
+    <div class="creator-layout">
+      <div class="creator-photo">
+        <img src="profile.jpg" alt="hikaro 창업자 후유">
+      </div>
+      <div class="creator-text">
+        <p>저는 한국인이고, 20년 전부터 일본어 공부에 도전했지만 항상 실패했습니다.</p>
+        <p>하지만 2025년 7월, JLPT N1을 7개월 만에 취득했습니다.</p>
+        <p>저도 언어 학습자였기 때문에 정확히 알고 있습니다 — 무엇이 효과 있고, 무엇이 시간 낭비인지.</p>
+        <p>이 경험과 시행착오를 토대로, 일본인이 한국어를 가장 쉽고 효율적으로 배울 수 있는 방법을 연구했습니다.</p>
+        <p>그 결과가 hikaro입니다.</p>
+        <p>지금까지 몇 번을 한국어 공부에 실패했다면, 이번에는 hikaro가 여러분의 가이드이자, 지도가 되어줄 것입니다.</p>
+        <div class="creator-signature"><strong>— 후유</strong> · hikaro 개발자</div>
       </div>
     </div>
   </div>
