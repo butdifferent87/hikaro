@@ -71,11 +71,156 @@
   .bg-white { background: #ffffff; }
   .bg-offwhite { background: #FAFAF8; }
   .bg-greentint { background: #EAF8F2; }
+
+  /* ── HEADER (STICKY NAV) ─────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1A1A1A;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 200px;
+  }
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .site-logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #009068;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+  .site-nav {
+    display: flex;
+    gap: 32px;
+  }
+  .site-nav a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .site-nav a:hover { color: #fff; }
+  .header-cta {
+    display: flex;
+    gap: 8px;
+  }
+  .header-cta a {
+    background: #009068;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 4px;
+  }
+  .header-cta a.outline {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    background: #1A1A1A;
+    padding: 140px 200px 120px;
+    text-align: center;
+  }
+  .hero-tagline {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #009068;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .hero-headline {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -3px;
+    color: #fff;
+    margin-bottom: 28px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-sub {
+    font-size: 28px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+  .hero-sub strong { color: #C0ECD8; font-weight: 500; }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #009068;
+    color: #fff;
+    padding: 20px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    transition: background 0.15s;
+  }
+  .btn-download:hover { background: #007050; }
+  .btn-download.android {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-download.android:hover { background: rgba(255,255,255,0.14); }
+  .hero-note {
+    font-size: 14px;
+    color: rgba(255,255,255,0.35);
+  }
 </style>
 </head>
 <body>
 
-<!-- 섹션은 Task 2부터 순차 추가 -->
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="#top" class="site-logo">hikaro</a>
+    <nav class="site-nav">
+      <a href="#features">기능</a>
+      <a href="#proof">후기</a>
+      <a href="#plan">학습 지도</a>
+      <a href="#creator">창업자</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.hikaro" class="outline">Google Play</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-tagline">일본인을 위한 한국어 학습 앱</div>
+  <h1 class="hero-headline">한국어 공부,<br>몇 번이나 포기하셨나요?</h1>
+  <p class="hero-sub">재능이 아닙니다.<br><strong>지도가 없었던 겁니다.</strong></p>
+  <div class="hero-ctas">
+    <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">📱 App Store →</a>
+    <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">▶️ Google Play →</a>
+  </div>
+  <p class="hero-note">설치 1분 · 첫 학습 5분 · 무료</p>
+</section>
 
 </body>
 </html>
