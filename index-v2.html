@@ -367,6 +367,122 @@
     font-size: 14px;
     color: #787774;
   }
+  /* ── PLAN (3-STAGE LEARNING MAP) ───────── */
+  .plan-steps {
+    display: flex;
+    flex-direction: column;
+    margin: 56px 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .step-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 40px 44px;
+    border-left: 4px solid #C0ECD8;
+  }
+  .step-card.dark {
+    background: #fff;
+    border-left: 4px solid #009068;
+    position: relative;
+  }
+  .success-chip {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #FAFAF8;
+    background: #009068;
+    padding: 6px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .step-number {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #009068;
+    margin-bottom: 8px;
+  }
+  .step-stage {
+    font-size: 36px;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .step-subtitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: #009068;
+    margin-bottom: 24px;
+  }
+  .step-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .bullet-item {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.75;
+    padding-left: 22px;
+    position: relative;
+  }
+  .bullet-item::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #009068;
+    font-weight: 700;
+  }
+  .step-outcome {
+    padding: 18px 24px;
+    background: #EAF8F2;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 17px;
+    color: #007050;
+    font-weight: 600;
+    line-height: 1.7;
+  }
+  .step-card.dark .step-outcome {
+    background: #009068;
+    color: #FAFAF8;
+  }
+  .outcome-icon { flex-shrink: 0; }
+  .connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    position: relative;
+  }
+  .connector::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 24px;
+    width: 2px;
+    background: #009068;
+    transform: translateX(-50%);
+  }
+  .connector-arrow {
+    position: absolute;
+    bottom: 0;
+    font-size: 18px;
+    color: #009068;
+    line-height: 1;
+    font-weight: 700;
+  }
 </style>
 </head>
 <body>
@@ -479,6 +595,64 @@
     <div class="proof-extra" lang="ja">
       <div class="proof-extra-quote">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</div>
       <div class="proof-extra-attr">— 일본인 유저</div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white" id="plan">
+  <div class="section">
+    <div class="section-label">해결책</div>
+    <h2 class="section-title">한국어를 잘 하게 되기까지,<br>3단계 학습 지도</h2>
+
+    <div class="plan-steps">
+      <div class="step-card">
+        <div class="step-number">STEP 01</div>
+        <div class="step-stage">유아기</div>
+        <div class="step-subtitle">기초 단어와 문법을 쌓는다</div>
+        <div class="step-bullets">
+          <div class="bullet-item">언어학습에서 반드시 필요한 과정이기 때문에, 이 단계를 얼마나 효율적이고 빠르게 졸업하느냐가 관건입니다.</div>
+          <div class="bullet-item">hikaro에는 무엇을 외워야 하는지, 어떻게 쉽게 외울 수 있는지가 모두 준비되어 있습니다.</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>졸업하면?</strong><br>아직 느리고 완벽하진 않지만, 간단한 한국어 문장을 스스로 만들 수 있습니다.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-arrow">↓</div></div>
+
+      <div class="step-card">
+        <div class="step-number">STEP 02</div>
+        <div class="step-stage">청년기</div>
+        <div class="step-subtitle">입에서 한국어가 나오기 시작한다</div>
+        <div class="step-bullets">
+          <div class="bullet-item">문장을 외우고, 또 실제로 만들어 보면서 단어와 문법의 사용 감각을 익힙니다.</div>
+          <div class="bullet-item">문장을 만들 수 있게 되기 때문에, 점점 말을 할 수 있게 됩니다.</div>
+          <div class="bullet-item">단어와 문법은 아는데 막상 말이 안 나왔던 답답함이 풀립니다.</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>졸업하면?</strong><br>동사와 형용사의 변형이 좀 더 익숙해지고, 말할 수 있는 문장이 대폭 늘어납니다.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-arrow">↓</div></div>
+
+      <div class="step-card dark">
+        <div class="success-chip">여기까지 도달했다면, 한국어 공부 성공!</div>
+        <div class="step-number">STEP 03</div>
+        <div class="step-stage">성인기</div>
+        <div class="step-subtitle">더 정확하고, 더 자연스러운 한국어로 말할 수 있다</div>
+        <div class="step-bullets">
+          <div class="bullet-item">생각하지 않고도 한국어가 나오는 빈도가 많아집니다.</div>
+          <div class="bullet-item">단순 의미 전달이 아니라, 뉘앙스가 자연스럽게 신경 쓰이기 시작합니다.</div>
+          <div class="bullet-item">더 정확한 단어와 표현으로, 더욱 한국인스러운 문장을 말할 수 있게 됩니다.</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>목표</strong><br>내 생각의 80% 이상을 자연스러운 한국어로 말할 수 있습니다.</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
