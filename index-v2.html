@@ -535,6 +535,45 @@
     color: #fff;
     font-weight: 700;
   }
+  .creator-channels {
+    max-width: 720px;
+    margin: 80px auto 0;
+    text-align: center;
+    padding-top: 56px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .creator-channels-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .creator-channels-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .channel-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    padding: 18px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .channel-card:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.25);
+  }
   /* ── FINAL CTA ────────────────────────── */
   .final-cta {
     background: #FAFAF8;
@@ -658,6 +697,8 @@
     .bullet-item { font-size: 16px; }
     .step-outcome { font-size: 15px; }
     .success-chip { position: static; display: inline-block; margin-bottom: 12px; }
+    .channels-grid { grid-template-columns: repeat(2, 1fr); }
+    .creator-channels { margin-top: 48px; padding-top: 40px; }
 
     .final-cta h2 { font-size: 26px; }
     .final-cta-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
@@ -870,6 +911,17 @@
         <p>그 결과가 hikaro입니다.</p>
         <p>지금까지 몇 번을 한국어 공부에 실패했다면, 이번에는 hikaro가 여러분의 가이드이자, 지도가 되어줄 것입니다.</p>
         <div class="creator-signature"><strong>— 후유</strong> · hikaro 개발자</div>
+      </div>
+    </div>
+
+    <div class="creator-channels reveal">
+      <div class="creator-channels-title">후유의 채널</div>
+      <div class="creator-channels-sub">한국어 공부법, 한국 문화, 학습 팁을 발신하고 있습니다.</div>
+      <div class="channels-grid">
+        <a class="channel-card" href="#" target="_blank" rel="noopener">YouTube</a>
+        <a class="channel-card" href="#" target="_blank" rel="noopener">Instagram</a>
+        <a class="channel-card" href="#" target="_blank" rel="noopener">Threads</a>
+        <a class="channel-card" href="#" target="_blank" rel="noopener">Note</a>
       </div>
     </div>
   </div>
