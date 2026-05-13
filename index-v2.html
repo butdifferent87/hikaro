@@ -262,6 +262,111 @@
     color: #555;
     line-height: 1.75;
   }
+  /* ── PROOF ─────────────────────────────── */
+  .proof-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+    align-items: start;
+  }
+  .proof-story {
+    background: #FAFAF8;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 48px 40px;
+  }
+  .proof-score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .proof-score-before {
+    font-size: 48px;
+    font-weight: 700;
+    color: rgba(0,0,0,0.25);
+    line-height: 1;
+  }
+  .proof-score-arrow {
+    font-size: 28px;
+    color: #007050;
+  }
+  .proof-score-after {
+    font-size: 72px;
+    font-weight: 800;
+    color: #009068;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .proof-score-delta {
+    display: inline-block;
+    background: #EAF8F2;
+    color: #007050;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 16px;
+  }
+  .proof-score-label {
+    font-size: 14px;
+    color: #787774;
+    margin-bottom: 32px;
+  }
+  .proof-user-meta {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  .proof-user-meta strong { color: #1A1A1A; }
+  .proof-story-text {
+    font-size: 18px;
+    color: #444;
+    line-height: 1.8;
+    margin-top: 24px;
+  }
+  .proof-chat {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .proof-chat-label {
+    font-size: 13px;
+    color: #787774;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .chat-bubble {
+    background: #FAFAF8;
+    border-radius: 12px 12px 12px 3px;
+    padding: 24px 28px;
+  }
+  .chat-bubble p {
+    font-size: 17px;
+    color: #1A1A1A;
+    margin-bottom: 0;
+    line-height: 1.85;
+  }
+  .proof-extra {
+    margin-top: 56px;
+    padding: 32px 36px;
+    background: #FAFAF8;
+    border-left: 4px solid #009068;
+    border-radius: 4px;
+  }
+  .proof-extra-quote {
+    font-size: 19px;
+    color: #444;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .proof-extra-attr {
+    font-size: 14px;
+    color: #787774;
+  }
 </style>
 </head>
 <body>
@@ -338,6 +443,42 @@
         <div class="service-hook">내가 매일 쓰는 일본어를 한국어로</div>
         <p class="service-desc">자신이 일상에서 쓰는 일본어 표현을 하나씩 한국어로 바꿔나가는 가장 빠른 방법. hikaro가 최적의 타이밍에 복습을 도와 실력을 빠르게 키웁니다.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-offwhite" id="proof">
+  <div class="section">
+    <div class="section-label">실제 변화</div>
+    <h2 class="section-title">한 글자도 못 읽던 유저가,<br>3개월 만에 한국어로 보내온 메시지입니다.</h2>
+
+    <div class="proof-main">
+      <div class="proof-story">
+        <div class="proof-score-row">
+          <span class="proof-score-before">57</span>
+          <span class="proof-score-arrow">→</span>
+          <span class="proof-score-after">165</span>
+        </div>
+        <div class="proof-score-delta">+108점</div>
+        <div class="proof-score-label">TOPIK 모의고사 점수</div>
+
+        <div class="proof-user-meta"><strong>40대 일본인 · 니가타</strong></div>
+        <div class="proof-user-meta">hikaro 시작: 2025년 1월</div>
+
+        <p class="proof-story-text">1월엔 한국어 한 글자도 읽지 못했습니다. 매일 hikaro로 학습했고, 3개월 후 저에게 한국어로 메시지를 보냈습니다.</p>
+      </div>
+
+      <div class="proof-chat">
+        <div class="proof-chat-label">실제 유저가 한국어로 보낸 메시지</div>
+        <div class="chat-bubble">
+          <p>응! 잘잤어!<br>지금부터 점심이야!<br>장연 밥 먹었어!?<br><br>4월29일부터 연휴야!<br>하고 싶은 일이 많이 있어서 준번을 생각해야돼!!<br>TOPIK1의 텍스트가 사실 아직 안 끝나니까 그냥 그 텍스트를 끝나고 싶어 ㅎㅎ<br>집에의 청소나 드라마도 남아 있으니까 하고 싶은 일이 너무 많이 있어 ㅋㅋㅋㅋ<br>파레토360도 완벽하고 싶어!!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="proof-extra" lang="ja">
+      <div class="proof-extra-quote">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</div>
+      <div class="proof-extra-attr">— 일본인 유저</div>
     </div>
   </div>
 </section>
