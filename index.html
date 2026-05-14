@@ -6,290 +6,633 @@
 <title>hikaro — 한국어 학습 앱</title>
 <meta name="description" content="한국어 공부에 몇 번이나 좌절해온 분들을 위한 학습 앱. 올바른 가이드와 학습 지도로 안내합니다.">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+  @font-face {
+    font-family: 'ResourceHanRoundedKR';
+    src: url('fonts/ResourceHanRoundedKR-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ResourceHanRoundedKR';
+    src: url('fonts/ResourceHanRoundedKR-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ResourceHanRoundedJP';
+    src: url('fonts/ResourceHanRoundedJP-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ResourceHanRoundedJP';
+    src: url('fonts/ResourceHanRoundedJP-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'ResourceHanRoundedKR', sans-serif;
     background: #FAFAF8;
     color: #1A1A1A;
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
   }
 
-  .page {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-    background: #ffffff;
-    min-height: 100vh;
-  }
+  :lang(ja) { font-family: 'ResourceHanRoundedJP', sans-serif; }
 
-  .page-icon { font-size: 48px; margin-bottom: 8px; }
-  .page-title { font-size: 32px; font-weight: 700; margin-bottom: 32px; letter-spacing: -0.5px; }
-
-  .callout { background: #f7f6f3; border-radius: 4px; padding: 20px 24px; margin-bottom: 24px; }
-  .callout-title { font-size: 20px; font-weight: 700; margin-bottom: 12px; color: #1A1A1A; }
-
-  .quote-block { border-left: 3px solid #009068; padding: 6px 0 6px 16px; margin: 8px 0; color: #555; font-size: 15px; }
-
-  p { font-size: 16px; margin-bottom: 10px; color: #1A1A1A; }
+  p { font-size: 24px; margin-bottom: 16px; color: #1A1A1A; line-height: 1.7; }
   .text-muted { color: #787774; font-size: 14px; }
   .text-accent { color: #007050; font-weight: 500; }
-  .text-bold { font-weight: 700; }
 
-  .divider { border: none; border-top: 1px solid #C0ECD8; margin: 32px 0; }
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    background: #1A1A1A;
+    padding: 140px 80px 120px;
+    text-align: center;
+  }
+  .hero-brand {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #009068;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .hero-headline {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -3px;
+    color: #fff;
+    margin-bottom: 28px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-sub {
+    font-size: 28px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 56px;
+    line-height: 1.6;
+  }
+  .hero-sub strong { color: #C0ECD8; font-weight: 500; }
+  .btn-hero {
+    display: inline-block;
+    background: #009068;
+    color: #fff;
+    padding: 20px 56px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .hero-note {
+    margin-top: 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.3);
+  }
 
-  .section-heading { font-size: 22px; font-weight: 700; margin-bottom: 16px; padding-bottom: 4px; border-bottom: 2px solid #C0ECD8; }
+  /* ── SECTION COMMON ─────────────────────── */
+  .section {
+    max-width: none;
+    padding: 100px 200px;
+  }
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #007050;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+  }
+  .section-divider { border: none; border-top: 1px solid #C0ECD8; margin: 0; }
 
-  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
-  .problem-card { background: #EAF8F2; border: 1px solid #C0ECD8; border-radius: 4px; padding: 20px; }
-  .problem-card .problem-num { font-size: 12px; font-weight: 700; color: #007050; margin-bottom: 4px; letter-spacing: 1px; }
-  .problem-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .problem-card p { font-size: 13px; color: #666; margin-bottom: 0; line-height: 1.7; }
+  .bg-white { background: #ffffff; }
+  .bg-offwhite { background: #FAFAF8; }
 
-  .result-arrow { text-align: center; padding: 12px 0; color: #999; font-size: 14px; }
-  .result-arrow .arrow { font-size: 20px; display: block; margin-bottom: 4px; }
-  .result-consequence { background: #f7f6f3; border-radius: 4px; padding: 16px 20px; margin-bottom: 24px; text-align: center; font-size: 15px; color: #555; }
+  /* ── PROBLEM ─────────────────────────────── */
+  .callout { background: #EAF8F2; border-radius: 4px; padding: 32px 36px; margin-bottom: 32px; }
+  .callout-title { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
+  .quote-block { border-left: 3px solid #009068; padding: 8px 0 8px 20px; margin: 12px 0; color: #555; font-size: 20px; }
 
-  .solution-box { background: #f0f7f0; border: 1px solid #c8e6c9; border-radius: 4px; padding: 28px; margin: 24px 0; }
-  .solution-box h3 { font-size: 20px; font-weight: 700; margin-bottom: 16px; color: #2e7d32; }
-  .solution-box p { font-size: 15px; color: #444; margin-bottom: 0; }
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+  .problem-card { background: #fff; border: 1px solid #C0ECD8; border-radius: 4px; padding: 32px; }
+  .problem-num { font-size: 12px; font-weight: 700; color: #007050; margin-bottom: 8px; letter-spacing: 1px; }
+  .problem-card h4 { font-size: 24px; font-weight: 700; margin-bottom: 14px; }
+  .problem-card p { font-size: 20px; color: #555; margin-bottom: 0; line-height: 1.75; }
 
-  .roadmap { display: flex; align-items: stretch; gap: 0; margin: 20px 0 16px; }
-  .roadmap-step { flex: 1; padding: 16px 14px; text-align: center; position: relative; }
-  .roadmap-step:first-child { border-radius: 8px 0 0 8px; }
-  .roadmap-step:last-child { border-radius: 0 8px 8px 0; }
-  .roadmap-step.step-1 { background: #e8f5e9; }
-  .roadmap-step.step-2 { background: #c8e6c9; }
-  .roadmap-step.step-3 { background: #a5d6a7; }
-  .roadmap-label { font-size: 11px; font-weight: 700; color: #2e7d32; letter-spacing: 0.5px; margin-bottom: 4px; }
-  .roadmap-title { font-size: 15px; font-weight: 700; color: #1b5e20; margin-bottom: 4px; }
-  .roadmap-desc { font-size: 12px; color: #555; line-height: 1.5; }
-  .roadmap-arrow { display: flex; align-items: center; font-size: 18px; color: #81c784; padding: 0 2px; font-weight: 700; }
-  .roadmap-you { display: inline-block; background: #fff; border: 2px solid #2e7d32; color: #2e7d32; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 12px; margin-top: 6px; }
+  .agitation-box {
+    background: #1A1A1A;
+    border-radius: 4px;
+    padding: 48px 40px;
+    margin: 32px 0;
+    text-align: center;
+  }
+  .agitation-box p { color: rgba(255,255,255,0.6); font-size: 20px; margin-bottom: 12px; }
+  .agitation-main { color: #fff !important; font-size: 26px !important; font-weight: 700; margin-bottom: 0 !important; }
 
-  .result-grid { display: flex; flex-direction: column; gap: 16px; margin: 16px 0; }
+  /* ── SOLUTION ────────────────────────────── */
+  .steps { display: flex; flex-direction: column; margin: 48px 0 28px; }
+  .step-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 14px; padding: 40px 44px; border-left: 4px solid #C0ECD8; }
+  .step-card.dark { background: #fff; border-left: 4px solid #009068; position: relative; }
+  .success-chip { position: absolute; top: 24px; right: 24px; font-size: 12px; font-weight: 700; color: #FAFAF8; background: #009068; padding: 6px 14px; border-radius: 999px; white-space: nowrap; }
+  .step-number { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #009068; margin-bottom: 8px; }
+  .step-stage { font-size: 36px; font-weight: 800; color: #1A1A1A; margin-bottom: 8px; line-height: 1.2; }
+  .step-subtitle { font-size: 20px; font-weight: 500; color: #009068; margin-bottom: 24px; }
+  .step-bullets { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
+  .bullet-item { font-size: 20px; color: #555; line-height: 1.75; padding-left: 22px; position: relative; }
+  .bullet-item::before { content: '•'; position: absolute; left: 0; color: #009068; font-weight: 700; }
+  .step-outcome { padding: 18px 24px; background: #EAF8F2; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; font-size: 18px; color: #007050; font-weight: 600; line-height: 1.7; }
+  .step-card.dark .step-outcome { background: #009068; color: #FAFAF8; }
+  .outcome-icon { flex-shrink: 0; }
+  .connector { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 40px; position: relative; }
+  .connector::before { content: ''; position: absolute; left: 50%; top: 0; height: 24px; width: 2px; background: #009068; transform: translateX(-50%); }
+  .connector-arrow { position: absolute; bottom: 0; font-size: 18px; color: #009068; line-height: 1; font-weight: 700; }
+
+  /* ── SOCIAL PROOF ─────────────────────────── */
+  .proof-section { background: #1A1A1A; }
+  .proof-section .section-label { color: #009068; }
+  .proof-section .section-title { color: #fff; }
+
+  .topik-scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin: 32px 0 24px;
+    padding: 32px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .score-card { text-align: center; }
+  .score-period { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .score-num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
+  .score-unit { font-size: 18px; font-weight: 400; letter-spacing: 0; }
+  .score-card.before .score-num { color: rgba(255,255,255,0.25); }
+  .score-card.after .score-num { color: #009068; }
+  .score-badge { display: inline-block; font-size: 11px; font-weight: 700; margin-top: 6px; padding: 2px 10px; border-radius: 99px; }
+  .score-card.before .score-badge { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.35); }
+  .score-card.after .score-badge { background: rgba(0,144,104,0.2); color: #009068; }
+  .score-arrow-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .score-arrow { font-size: 28px; color: #007050; font-weight: 700; }
+  .score-change { font-size: 13px; font-weight: 700; color: #009068; }
+
+  .proof-context {
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+
+  .chat-bubble-wrap { max-width: 640px; margin: 0 auto 8px; }
+  .chat-bubble {
+    background: #fff;
+    border-radius: 12px 12px 12px 3px;
+    padding: 24px 28px;
+  }
+  .chat-bubble p { font-size: 18px; color: #1A1A1A; margin-bottom: 0; line-height: 1.85; }
+  .chat-label { text-align: left; font-size: 13px; color: rgba(255,255,255,0.25); margin-bottom: 40px; padding-left: 2px; }
+
+  .testimonials { display: flex; flex-direction: column; gap: 16px; }
+  .testimonial {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 24px 28px;
+  }
+  .testimonial-quote { font-size: 18px; color: rgba(255,255,255,0.8); line-height: 1.85; margin-bottom: 10px; }
+  .testimonial-attr { font-size: 14px; color: rgba(255,255,255,0.3); }
+
+  /* ── FEATURES ─────────────────────────────── */
+  .result-grid { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
   .result-card { background: #EAF8F2; border-radius: 4px; padding: 20px 24px; }
-  .result-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .result-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
 
-  .steps { margin: 16px 0; }
-  .step { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
-  .step-num { background: #007050; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  /* ── STEPS ───────────────────────────────── */
+  .steps { margin: 20px 0; }
+  .step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
+  .step-num { background: #007050; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 4px; }
 
-  .cta-block { background: #f7f6f3; border-radius: 4px; padding: 24px 28px; margin: 24px 0; text-align: center; }
-  .cta-block .cta-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+  /* ── CTA BLOCK ───────────────────────────── */
+  .cta-block { background: #EAF8F2; border-radius: 4px; padding: 28px; margin: 28px 0; text-align: center; }
+  .cta-block .cta-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
   .cta-link { display: inline-block; background: #007050; color: #fff; padding: 12px 32px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 500; margin-top: 12px; }
 
-  .profile-section { display: flex; gap: 16px; align-items: flex-start; margin: 16px 0; }
-  .profile-avatar { width: 56px; height: 56px; background: #e8e7e4; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-  .profile-info { flex: 1; }
-  .profile-info h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
-  .profile-info p { font-size: 13px; color: #787774; margin-bottom: 2px; }
+  /* ── CREATOR ─────────────────────────────── */
+  .creator-layout { display: flex; gap: 80px; align-items: flex-start; margin-top: 56px; }
+  .creator-photo { flex: 0 0 420px; }
+  .creator-photo img { width: 100%; border-radius: 8px; display: block; object-fit: cover; }
+  .creator-text { flex: 1; }
+  .creator-name { font-size: 48px; font-weight: 700; margin-bottom: 8px; letter-spacing: -1.5px; }
+  .creator-meta { font-size: 20px; color: #787774; margin-bottom: 36px; line-height: 1.7; }
+  .creator-creds { display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
+  .creator-cred { display: flex; align-items: flex-start; gap: 14px; font-size: 20px; color: #444; line-height: 1.6; }
+  .creator-cred-dot { width: 7px; height: 7px; border-radius: 50%; background: #009068; flex-shrink: 0; margin-top: 10px; }
+  @media (max-width: 768px) {
+    .creator-layout { flex-direction: column; gap: 32px; }
+    .creator-photo { flex: none; width: 100%; max-width: 320px; }
+  }
 
   .channel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
-  .channel-card { background: #f7f6f3; border-radius: 4px; padding: 16px 12px; text-align: center; text-decoration: none; color: #1A1A1A; transition: background 0.15s; }
+  .channel-card { background: #FAFAF8; border-radius: 4px; padding: 16px 12px; text-align: center; text-decoration: none; color: #1A1A1A; transition: background 0.15s; }
   .channel-card:hover { background: #EAF8F2; }
   .channel-icon { font-size: 24px; margin-bottom: 6px; }
   .channel-name { font-size: 13px; font-weight: 500; }
   .channel-desc { font-size: 11px; color: #999; margin-top: 2px; }
 
-  .final-cta { background: #1A1A1A; color: #ffffff; border-radius: 4px; padding: 32px 28px; margin: 32px 0 0; text-align: center; }
-  .final-cta h3 { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .final-cta p { color: #ccc; font-size: 15px; margin-bottom: 16px; }
-  .final-cta .cta-link { background: #ffffff; color: #1A1A1A; }
+  /* ── FINAL CTA ───────────────────────────── */
+  .final-cta {
+    background: #1A1A1A;
+    padding: 64px 24px;
+    text-align: center;
+  }
+  .final-cta h3 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.4; }
+  .final-cta .final-sub { color: rgba(255,255,255,0.55); font-size: 15px; margin-bottom: 0; }
+  .final-cta .final-cta-label { font-size: 18px; font-weight: 700; color: #fff; margin: 24px 0 0; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
+  .btn-white { display: inline-block; background: #ffffff; color: #1A1A1A; padding: 14px 36px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 700; }
+  .btn-outline { display: inline-block; background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 14px 36px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 500; }
 
-  .footer { text-align: center; padding: 32px 0 0; }
-  .footer a { color: #787774; font-size: 13px; text-decoration: none; margin: 0 12px; }
-  .footer a:hover { text-decoration: underline; }
-  .footer .contact { margin-top: 12px; font-size: 12px; color: #999; }
+  /* ── FOOTER ──────────────────────────────── */
+  .footer { text-align: center; padding: 28px 24px; background: #1A1A1A; border-top: 1px solid rgba(255,255,255,0.06); }
+  .footer a { color: rgba(255,255,255,0.35); font-size: 13px; text-decoration: none; margin: 0 12px; }
+  .footer a:hover { color: rgba(255,255,255,0.6); }
+  .footer .contact { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.2); }
+  .footer .contact a { margin: 0; color: rgba(255,255,255,0.2); }
 
+  /* ── ANIMATIONS ─────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.08s; }
+  .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; }
+  .reveal-d4 { transition-delay: 0.32s; }
+
+  /* ── RESPONSIVE ──────────────────────────── */
   @media (max-width: 600px) {
+    .hero-headline { font-size: 44px; letter-spacing: -1.5px; }
+    .hero { padding: 80px 24px 72px; }
+    .hero-sub { font-size: 20px; }
+    .btn-hero { display: block; text-align: center; padding: 18px 24px; font-size: 16px; }
+    .section { padding: 72px 24px; }
+    .section-title { font-size: 32px; }
+    p { font-size: 18px; }
     .problem-grid { grid-template-columns: 1fr; }
+    .problem-card { padding: 24px; }
+    .problem-card h4 { font-size: 20px; }
+    .problem-card p { font-size: 17px; }
+    .agitation-box { padding: 32px 24px; }
+    .agitation-box p { font-size: 17px; }
+    .agitation-main { font-size: 21px !important; }
+    .topik-scores { flex-direction: column; gap: 16px; padding: 24px 16px; }
+    .score-arrow-wrap { flex-direction: row; }
+    .score-arrow { transform: rotate(0deg); font-size: 22px; }
+    .score-num { font-size: 44px; }
+    .chat-bubble p { font-size: 16px; }
+    .testimonial-quote { font-size: 16px; }
     .channel-grid { grid-template-columns: repeat(2, 1fr); }
-    .roadmap { flex-direction: column; gap: 8px; }
-    .roadmap-step { border-radius: 8px !important; }
-    .roadmap-arrow { justify-content: center; transform: rotate(90deg); }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .step-card { padding: 24px 20px; }
+    .step-stage { font-size: 28px; }
+    .step-subtitle { font-size: 17px; }
+    .bullet-item { font-size: 17px; }
+    .step-outcome { font-size: 16px; }
+    .success-chip { position: static; display: inline-block; margin-bottom: 12px; }
+    .creator-name { font-size: 32px; }
+    .creator-meta { font-size: 17px; }
+    .creator-cred { font-size: 17px; }
   }
 </style>
 </head>
 <body>
 
-<div class="page">
-
-  <div class="page-icon">🇰🇷</div>
-  <div class="page-title">한국어 코치, 후유입니다</div>
-
-  <div class="callout">
-    <div class="callout-title">한국어 공부, 몇 번이나 포기하셨나요?</div>
-    <div class="quote-block">「또 단어를 외우려다가, 또 까먹었어…」</div>
-    <div class="quote-block">「몇 번을 시작해도, 어차피 안 돼…」</div>
-    <div class="quote-block">「혹시 나는 재능이 없는 걸까…」</div>
-    <p style="margin-top: 12px;">이 말이 내 이야기처럼 느껴졌다면, 꼭 읽어보세요.<br>
-    <span class="text-accent">한국어 공부에 몇 번이나 좌절해온 분들을 위해 쓴 글입니다.</span></p>
-  </div>
-
-  <hr class="divider">
-
-  <p>한국어 공부에서 몇 번이나 좌절해왔다면, 그건 재능이 없다는 증거가 아닙니다.<br>
-  나이 때문도, 의지가 약해서도 아니에요.</p>
-
-  <p><span class="text-accent">원인은 딱 두 가지뿐입니다.</span></p>
-
-  <div class="problem-grid">
-    <div class="problem-card">
-      <div class="problem-num">문제 1</div>
-      <h4>잘못된 방법</h4>
-      <p>언어학습에서 암기는 필수 과정입니다. 그런데 대부분의 학습자들은 종이에 반복해서 쓰면서 외우려고 합니다.<br><br>이 방법은 암기 효율이 매우 나쁘다는 사실이 증명되었습니다.<br><br>잘못된 방법으로 아무리 열심히 해도 결국 까먹게 되고, 또 까먹었다는 좌절감과 함께 기억력이나 재능, 나이탓을 하게 됩니다.</p>
-    </div>
-    <div class="problem-card">
-      <div class="problem-num">문제 2</div>
-      <h4>학습 방법에 확신이 없고 막막함</h4>
-      <p>"이렇게 공부하면 한국어를 잘 할 수 있겠다"는 확신이 아니라, 이 방법이 맞는 건지조차 확신이 없습니다.<br><br>내가 지금 어디쯤 와 있는지, 다음에 뭘 해야 하는지, 어떤 과정을 거치면 한국어를 잘 할 수 있는지 — 아무것도 보이지 않는 상태.<br><br>그래서 매일 열심히 할수록 성장이 아니라, 혼자서 안개 속을 헤매고 있는 기분이 듭니다.</p>
-    </div>
-  </div>
-
-  <div class="result-arrow"><span class="arrow">↓</span></div>
-  <div class="result-consequence">
-    도전과 좌절을 반복하면서 <span class="text-accent">자신감이 무너지고,</span> 결국 포기하게 됩니다.
-  </div>
-
-  <p style="margin-top: 16px;">이런 언어학습자들에게 가장 필요한 것은 무엇일까요?</p>
-
-  <p><span class="text-bold">잘못된 방법을 반복하지 않도록 도와주는 가이드,<br>
-  그리고 헤매지 않고 목적지까지 갈 수 있도록 길을 알려주는 지도입니다.</span></p>
-
-  <p style="color: #555;">효율적인 방법으로 학습하면, 같은 시간을 투자해도 훨씬 많이 기억에 남고,<br>
-  학습 단계를 알려주는 지도가 있다면 매일의 학습이 확신이 되기 때문입니다.</p>
-
-  <p style="margin-top: 16px; color: #555;">서울의 카페에서 점원과 한국어로 자연스럽게 대화하는 날.<br>
-  좋아하는 한국 드라마 대사가 자막 없이 들리는 경험.<br>
-  한국인 친구에게 "한국어 정말 잘하시네요"라고 처음 듣는 순간.</p>
-
-  <p><span class="text-accent">올바른 가이드와 지도만 있다면, 충분히 가능한 이야기입니다.</span></p>
-
-  <hr class="divider">
-
-  <div class="section-heading">필요한 것은 학습 지도입니다</div>
-
-  <div class="solution-box">
-    <h3>hikaro = 당신의 학습 지도</h3>
-
-    <p style="margin-bottom: 16px;">한국어를 잘 하게 되기까지, 크게 3단계가 있습니다.</p>
-
-    <div class="roadmap">
-      <div class="roadmap-step step-1">
-        <div class="roadmap-label">1단계</div>
-        <div class="roadmap-title">유아기</div>
-        <div class="roadmap-desc">기초 단어와 문법을<br>학습한다</div>
-        <div class="roadmap-you">대부분의 초심자가 이 단계를 졸업하지 못하고 좌절합니다</div>
-      </div>
-      <div class="roadmap-arrow">→</div>
-      <div class="roadmap-step step-2">
-        <div class="roadmap-label">2단계</div>
-        <div class="roadmap-title">청년기</div>
-        <div class="roadmap-desc">문장을 외우고,<br>문장을 만든다</div>
-      </div>
-      <div class="roadmap-arrow">→</div>
-      <div class="roadmap-step step-3">
-        <div class="roadmap-label">3단계</div>
-        <div class="roadmap-title">성인기</div>
-        <div class="roadmap-desc">정확한 단어와 표현으로,<br>더욱 자연스러운 한국어를 구사한다</div>
-      </div>
-    </div>
-
-    <p>지금 어떤 단계에 있고, 뭘 학습해야 하는지, 어떻게 학습해야 가장 효율적으로 지금 단계를 졸업할 수 있는지 — hikaro가 안내합니다.</p>
-    <p><span style="color: #2e7d32; font-weight: 500;">가장 효율적인 언어학습에 대한 고민과 연구는 hikaro가 하고, 앱에 반영합니다.<br>당신은 그저 앱을 열고, 포치포치만 하면 됩니다.</span></p>
-  </div>
-
-  <div class="result-grid">
-    <div class="result-card">
-      <h4>📖 마음껏 까먹어도 됩니다. 결국 외워지는 단어장이니까.</h4>
-      <ul style="margin:0; padding-left:20px; font-size:14px; color:#555;">
-        <li>"외웠는데 또 까먹었어"가 "나도 단어를 외울 수 있어!"로 바뀝니다.</li>
-        <li>억지로 외우려고 하지 않아도, 어느새 머릿속에 남아있습니다.</li>
-      </ul>
-    </div>
-    <div class="result-card">
-      <h4>🎬 가장 친절하고 쉬운 문법 가이드</h4>
-      <ul style="margin:0; padding-left:20px; font-size:14px; color:#555;">
-        <li>가장 자세한 문법 설명이 아니라, 가장 직관적이고 쉬운 설명을 목표로 만들었습니다.</li>
-        <li>문법마다 연습 기능이 있어서, 쉽고 효율적으로 문법을 익힐 수 있습니다.</li>
-      </ul>
-    </div>
-    <div class="result-card">
-      <h4>✏️ 내가 매일 쓰는 일본어를 한국어로</h4>
-      <ul style="margin:0; padding-left:20px; font-size:14px; color:#555;">
-        <li>한국어를 잘하게 되는 가장 빠르고 쉬운 방법은, 자신이 일상에서 매일 쓰는 일본어 단어와 표현을 하나씩 한국어로 바꿔나가는 것입니다.</li>
-        <li>hikaro는 일본어 문장을 한국어로 기록하고, 최적의 타이밍에 복습할 수 있게 도와주기 때문에 한국어 실력을 빠르게 키울 수 있습니다.</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-heading" style="font-size: 18px; margin-top: 24px;">사용법은 심플</div>
-
-  <div class="steps">
-    <div class="step"><div class="step-num">1</div><p>앱을 다운로드한다</p></div>
-    <div class="step"><div class="step-num">2</div><p>매일 앱을 열고, "알아" "몰라"만 답한다</p></div>
-    <div class="step"><div class="step-num">3</div><p>나머지는 hikaro가 최적의 타이밍으로 복습을 돕는다</p></div>
-  </div>
-
-  <div class="cta-block">
-    <div class="cta-title">무료로 시작하고, 나에게 맞는지 확인하기</div>
-    <p class="text-muted">설치 1분, 첫 학습은 5분이면 충분합니다.</p>
-    <div style="display: flex; gap: 12px; justify-content: center;">
-      <a class="cta-link" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
-      <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
-    </div>
-  </div>
-
-  <hr class="divider">
-
-  <div class="section-heading">만든 사람</div>
-
-  <div class="profile-section">
-    <div class="profile-avatar">🧑‍💻</div>
-    <div class="profile-info">
-      <h4>후유 (歩夢)</h4>
-      <p>SUNY Stonybrook 졸업 (화학공학과)</p>
-      <p>서울대학교 대학원</p>
-      <p>JLPT N1 합격 (2025.07) — 7개월 만에 취득</p>
-    </div>
-  </div>
-
-  <p style="margin-top: 12px;">일본인이 가장 쉽고 효율적으로 한국어를 배울 수 있는 방법을 연구하고 앱으로 구현합니다.<br>
-  <span class="text-muted">hikaro(光路) — 깜깜한 터널 속에서 헤매고 있는 언어학습자들에게 출구가 어디인지 알려주는 빛이 되고 싶다는 마음으로 이름을 지었습니다.</span></p>
-
-  <div class="section-heading" style="font-size: 18px; margin-top: 28px;">후유의 채널</div>
-  <p class="text-muted" style="margin-bottom: 12px;">한국어 공부법, 한국 문화, 학습 팁을 발신하고 있습니다.</p>
-
-  <div class="channel-grid">
-    <a class="channel-card" href="#"><div class="channel-icon">▶️</div><div class="channel-name">YouTube</div><div class="channel-desc">공부법·해설 영상</div></a>
-    <a class="channel-card" href="#"><div class="channel-icon">📸</div><div class="channel-name">Instagram</div><div class="channel-desc">학습 카드·일상</div></a>
-    <a class="channel-card" href="#"><div class="channel-icon">🧵</div><div class="channel-name">Threads</div><div class="channel-desc">학습 팁·생각</div></a>
-    <a class="channel-card" href="#"><div class="channel-icon">📝</div><div class="channel-name">Note</div><div class="channel-desc">깊이 있는 글·칼럼</div></a>
-  </div>
-
-  <hr class="divider">
-
-  <div class="final-cta">
-    <h3>몇 번이나 실패했던 분들도,<br>분명 성공할 수 있습니다.</h3>
-    <p>이번에는 혼자가 아니라,<br>가이드와 지도가 있으니까요.</p>
-    <p style="font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 16px;">무료로 시작해보기</p>
-    <div style="display: flex; gap: 12px; justify-content: center;">
-      <a class="cta-link" href="https://apps.apple.com/kr/app/hikaro/id6758513552" style="background: #ffffff; color: #1A1A1A;">App Store →</a>
-      <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.fuyu.korean" style="background: #ffffff; color: #1A1A1A;">Google Play →</a>
-    </div>
-  </div>
-
-  <div class="footer">
-    <a href="terms.html">이용약관</a>
-    <a href="privacy.html">개인정보 처리방침</a>
-    <div class="contact">문의: <a href="mailto:hikaro.world@gmail.com" style="margin: 0;">hikaro.world@gmail.com</a></div>
-  </div>
-
+<!-- ── HERO ─────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-brand reveal">hikaro</div>
+  <h1 class="hero-headline reveal reveal-d1">한국어 공부,<br>몇 번이나 포기하셨나요?</h1>
+  <p class="hero-sub reveal reveal-d2">재능이 아닙니다.<br><strong>지도가 없었던 겁니다.</strong></p>
+  <a class="btn-hero reveal reveal-d3" href="https://apps.apple.com/kr/app/hikaro/id6758513552">무료로 시작하기 →</a>
+  <p class="hero-note reveal reveal-d4">설치 1분 · 첫 학습 5분 · 무료</p>
 </div>
 
+
+<!-- ── PROBLEM ──────────────────────────────── -->
+<div class="bg-white">
+  <div class="section">
+    <div class="section-label reveal">왜 계속 실패하는가</div>
+    <h2 class="section-title reveal reveal-d1">몇 번이나 포기했다면,<br>그건 재능 때문이 아닙니다</h2>
+
+    <div class="callout reveal reveal-d2">
+      <div class="callout-title">이런 마음, 공감되시나요?</div>
+      <div class="quote-block">「또 단어를 외우려다가, 또 까먹었어…」</div>
+      <div class="quote-block">「몇 번을 시작해도, 어차피 안 돼…」</div>
+      <div class="quote-block">「혹시 나는 재능이 없는 걸까…」</div>
+      <p style="margin-top: 12px;">이 말이 내 이야기처럼 느껴졌다면, 꼭 읽어보세요.<br>
+      <span class="text-accent">원인은 딱 두 가지뿐입니다.</span></p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-num">문제 1</div>
+        <h4>잘못된 방법</h4>
+        <p>언어학습에서 암기는 필수입니다. 그런데 대부분의 학습자들은 암기 효율이 가장 나쁜 방법 — 종이에 반복해서 쓰기 — 으로 열심히 하고 있습니다.<br><br>잘못된 방법으로 아무리 노력해도 결국 까먹고, 또 좌절합니다.</p>
+      </div>
+      <div class="problem-card reveal reveal-d1">
+        <div class="problem-num">문제 2</div>
+        <h4>학습 지도가 없음</h4>
+        <p>지금 어디쯤 와 있는지, 다음에 뭘 해야 하는지, 어떻게 하면 한국어를 잘 할 수 있는지 — 아무것도 보이지 않는 상태.<br><br>매일 열심히 할수록 성장이 아니라, 혼자서 안개 속을 헤매는 기분이 듭니다.</p>
+      </div>
+    </div>
+
+    <div class="agitation-box reveal">
+      <p>이 상태가 계속되면 어떻게 될까요?</p>
+      <p>도전과 좌절이 반복되면서, 결국 <span style="color:#C0ECD8; font-weight:700;">"나는 언어 재능이 없어"</span>라는 결론을 내리게 됩니다.</p>
+      <p class="agitation-main">하지만 그건 틀렸습니다. <span style="color:#009068;">가이드</span><span style="color:#fff;">와</span><span style="color:#009068;"> 지도</span>가 없었던 겁니다.</p>
+      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
+        <p style="color:rgba(255,255,255,0.65); font-size:17px; margin-bottom:8px;">가이드는 잘못된 방법을 반복하지 않도록 해주고, 지도는 목적지까지 헤매지 않고 갈 수 있게 해줍니다.</p>
+        <p style="color:rgba(255,255,255,0.4); font-size:16px; margin-bottom:0;">같은 시간을 공부해도 훨씬 많이 기억에 남고, 매일 헤매는 기분이 아니라 확신을 갖고 학습할 수 있습니다.</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 28px; background: #EAF8F2; border-radius: 8px; padding: 24px;">
+      <span style="background: #009068; color: #fff; font-size: 15.6px; font-weight: 700; padding: 5px 24px; border-radius: 8px; display: inline-block;">나에게도 이런 날이 올까?</span>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+          <span style="color: #009068; font-weight: 700; flex-shrink: 0; margin-top: 2px;">✓</span>
+          <p style="margin: 0; color: #555;">서울의 카페에서 점원과 한국어로 자연스럽게 대화하는 날.</p>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+          <span style="color: #009068; font-weight: 700; flex-shrink: 0; margin-top: 2px;">✓</span>
+          <p style="margin: 0; color: #555;">좋아하는 한국 드라마 대사가 자막 없이 들리는 경험.</p>
+        </div>
+        <div style="display: flex; align-items: flex-start; gap: 12px;">
+          <span style="color: #009068; font-weight: 700; flex-shrink: 0; margin-top: 2px;">✓</span>
+          <p style="margin: 0; color: #555;">한국인 친구에게 "한국어 정말 잘하시네요"라고 처음 듣는 순간.</p>
+        </div>
+      </div>
+      <div style="margin-top: 20px; border-top: 1px solid #C0ECD8; padding-top: 16px;">
+        <p style="margin: 0; font-size: 17px; font-weight: 700; color: #007050;">올바른 가이드와 지도만 있다면, 충분히 가능한 이야기입니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── SOLUTION ─────────────────────────────── -->
+<div class="bg-offwhite">
+  <div class="section">
+    <div class="section-label reveal">해결책</div>
+    <h2 class="section-title reveal reveal-d1">hikaro = 당신의 학습 지도</h2>
+
+    <p class="reveal reveal-d2">한국어를 잘 하게 되기까지 크게 3단계가 있습니다. 지금 어떤 단계에 있고, 뭘 학습해야 하는지, 어떻게 학습해야 가장 효율적으로 다음 단계를 졸업할 수 있는지 — hikaro가 안내합니다.</p>
+
+    <div class="steps">
+
+      <div class="step-card reveal">
+        <div class="step-number">STEP 01</div>
+        <div class="step-stage">유아기</div>
+        <div class="step-subtitle">기초 단어와 문법을 쌓는다</div>
+        <div class="step-bullets">
+          <div class="bullet-item">언어학습에서 반드시 필요한 과정이기 때문에, 이 단계를 얼마나 효율적이고 빠르게 졸업하느냐가 관건입니다.</div>
+          <div class="bullet-item">hikaro에는 무엇을 외워야 하는지, 어떻게 쉽게 외울 수 있는지가 모두 준비되어 있습니다.</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>졸업하면?</strong><br>아직 느리고 완벽하진 않지만, 간단한 한국어 문장을 스스로 만들 수 있습니다.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-arrow">↓</div></div>
+
+      <div class="step-card reveal">
+        <div class="step-number">STEP 02</div>
+        <div class="step-stage">청년기</div>
+        <div class="step-subtitle">입에서 한국어가 나오기 시작한다</div>
+        <div class="step-bullets">
+          <div class="bullet-item">문장을 외우고, 또 실제로 만들어 보면서 단어와 문법의 사용 감각을 익힙니다.</div>
+          <div class="bullet-item">문장을 만들 수 있게 되기 때문에, 점점 말을 할 수 있게 됩니다.</div>
+          <div class="bullet-item">단어와 문법은 아는데 막상 말이 안 나왔던 답답함이 풀립니다.</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>졸업하면?</strong><br>동사와 형용사의 변형이 좀 더 익숙해지고, 말할 수 있는 문장이 대폭 늘어납니다.</span>
+        </div>
+      </div>
+
+      <div class="connector"><div class="connector-arrow">↓</div></div>
+
+      <div class="step-card dark reveal">
+        <div class="success-chip">여기까지 도달했다면, 한국어 공부 성공!</div>
+        <div class="step-number">STEP 03</div>
+        <div class="step-stage">성인기</div>
+        <div class="step-subtitle">더 정확하고, 더 자연스러운 한국어로 말할 수 있다</div>
+        <div class="step-bullets">
+          <div class="bullet-item">생각하지 않고도 한국어가 나오는 빈도가 많아집니다.</div>
+          <div class="bullet-item">단순 의미 전달이 아니라, 뉘앙스가 자연스럽게 신경 쓰이기 시작합니다.</div>
+          <div class="bullet-item">더 정확한 단어와 표현으로, 더욱 한국인스러운 문장을 말할 수 있게 됩니다.</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>목표</strong><br>내 생각의 80% 이상을 자연스러운 한국어로 말할 수 있습니다.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p><span style="color: #007050; font-weight: 500;">가장 효율적인 언어학습에 대한 고민과 연구는 hikaro가 하고, 앱에 반영합니다.<br>당신은 그저 앱을 열고, 포치포치만 하면 됩니다.</span></p>
+  </div>
+</div>
+
+
+<!-- ── SOCIAL PROOF ──────────────────────────── -->
+<div class="proof-section">
+  <div class="section">
+    <div class="section-label reveal">실제 사용자</div>
+    <h2 class="section-title reveal reveal-d1">지도가 생기면,<br>이렇게 달라집니다</h2>
+
+    <div class="topik-scores reveal reveal-d2">
+      <div class="score-card before">
+        <div class="score-period">1월 · hikaro 시작 전</div>
+        <div class="score-num">57<span class="score-unit">점</span></div>
+        <div class="score-badge">TOPIK 모의고사</div>
+      </div>
+      <div class="score-arrow-wrap">
+        <div class="score-arrow">→</div>
+        <div class="score-change">+108점</div>
+      </div>
+      <div class="score-card after">
+        <div class="score-period">4월 · 3개월 후</div>
+        <div class="score-num">165<span class="score-unit">점</span></div>
+        <div class="score-badge">TOPIK 모의고사</div>
+      </div>
+    </div>
+
+    <p class="proof-context reveal">1월에 한국어를 한 글자도 읽지 못했던 유저가,<br>4개월 후 저한테 한국어로 직접 보내온 메시지입니다.</p>
+
+    <div class="chat-bubble-wrap reveal">
+      <div class="chat-bubble">
+        <p>응! 잘잤어!<br>지금부터 점심이야!<br>장연 밥 먹었어!?<br><br>4월29일부터 연휴야!<br>하고 싶은 일이 많이 있어서 준번을 생각해야돼!!<br>TOPIK1의 텍스트가 사실 아직 안 끝나니까 그냥 그 텍스트를 끝나고 싶어 ㅎㅎ<br>집에의 청소나 드라마도 남아 있으니까 하고 싶은 일이 너무 많이 있어 ㅋㅋㅋㅋ<br>파레토360도 완벽하고 싶어!!</p>
+      </div>
+    </div>
+    <div class="chat-label">실제 유저 메시지 원문</div>
+
+    <div class="testimonials">
+      <div class="testimonial reveal" lang="ja">
+        <div class="testimonial-quote">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</div>
+        <div class="testimonial-attr">20代・会社員</div>
+      </div>
+      <div class="testimonial reveal reveal-d1" lang="ja">
+        <div class="testimonial-quote">「耳が覚えると文字を確認したくなり、自然と覚えていくのが楽しいです。何回、スゴイ！合ってる！分かる～！と口に出た事か。」</div>
+        <div class="testimonial-attr">30代</div>
+      </div>
+      <div class="testimonial reveal reveal-d2" lang="ja">
+        <div class="testimonial-quote">「何故か次の日には覚えてる単語も増えたりとかして、ちょっと嬉しかったり」</div>
+        <div class="testimonial-attr">40代・主婦</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── FEATURES ──────────────────────────────── -->
+<div class="bg-white">
+  <div class="section">
+    <div class="section-label reveal">올바른 방법</div>
+    <h2 class="section-title reveal reveal-d1">올바른 방법으로 학습하면,<br>이렇게 달라집니다</h2>
+
+    <div class="result-grid">
+      <div class="result-card reveal">
+        <h4>마음껏 까먹어도 됩니다. 결국 외워지는 단어장이니까.</h4>
+        <ul style="margin:8px 0 0; padding-left:20px; font-size:15px; color:#555; line-height:1.8;">
+          <li>"외웠는데 또 까먹었어"가 "나도 단어를 외울 수 있어!"로 바뀝니다.</li>
+          <li>억지로 외우려고 하지 않아도, 어느새 머릿속에 남아있습니다.</li>
+        </ul>
+      </div>
+      <div class="result-card reveal reveal-d1">
+        <h4>가장 친절하고 쉬운 문법 가이드</h4>
+        <ul style="margin:8px 0 0; padding-left:20px; font-size:15px; color:#555; line-height:1.8;">
+          <li>가장 자세한 설명이 아니라, 가장 직관적이고 쉬운 설명을 목표로 만들었습니다.</li>
+          <li>문법마다 연습 기능이 있어서, 쉽고 효율적으로 익힐 수 있습니다.</li>
+        </ul>
+      </div>
+      <div class="result-card reveal reveal-d2">
+        <h4>내가 매일 쓰는 일본어를 한국어로</h4>
+        <ul style="margin:8px 0 0; padding-left:20px; font-size:15px; color:#555; line-height:1.8;">
+          <li>자신이 일상에서 쓰는 일본어 표현을 하나씩 한국어로 바꿔나가는 가장 빠른 방법.</li>
+          <li>hikaro가 최적의 타이밍에 복습을 도와 실력을 빠르게 키울 수 있습니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── STEPS ─────────────────────────────────── -->
+<div class="bg-offwhite">
+  <div class="section">
+    <div class="section-label">사용법</div>
+    <h2 class="section-title">사용법은 심플합니다</h2>
+
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>앱을 다운로드한다</p></div>
+      <div class="step"><div class="step-num">2</div><p>매일 앱을 열고, "알아" "몰라"만 답한다</p></div>
+      <div class="step"><div class="step-num">3</div><p>나머지는 hikaro가 최적의 타이밍으로 복습을 돕는다</p></div>
+    </div>
+
+    <div class="cta-block">
+      <div class="cta-title">무료로 시작하고, 나에게 맞는지 확인하기</div>
+      <p class="text-muted">설치 1분, 첫 학습은 5분이면 충분합니다.</p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <a class="cta-link" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+        <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── CREATOR ───────────────────────────────── -->
+<div class="bg-white">
+  <div class="section">
+    <div class="section-label reveal">만든 사람</div>
+
+    <div class="creator-layout">
+      <div class="creator-photo reveal">
+        <img src="profile.jpg" alt="후유 (歩夢)">
+      </div>
+      <div class="creator-text reveal reveal-d1">
+        <div class="creator-name">후유 (歩夢)</div>
+        <div class="creator-meta">hikaro 개발자 · 한국어 학습 연구자</div>
+
+        <p>일본인이 가장 쉽고 효율적으로 한국어를 배울 수 있는 방법을 연구하고, 앱으로 구현합니다.</p>
+        <p class="text-muted">hikaro(光路) — 깜깜한 터널 속에서 헤매고 있는 언어학습자들에게 출구가 어디인지 알려주는 빛이 되고 싶다는 마음으로 이름을 지었습니다.</p>
+
+        <div class="creator-creds">
+          <div class="creator-cred"><div class="creator-cred-dot"></div>SUNY Stonybrook 졸업 (화학공학과)</div>
+          <div class="creator-cred"><div class="creator-cred-dot"></div>서울대학교 대학원</div>
+          <div class="creator-cred"><div class="creator-cred-dot"></div>JLPT N1 합격 (2025.07) — 7개월 만에 취득</div>
+        </div>
+
+        <div style="font-size: 17px; font-weight: 700; margin: 32px 0 8px;">후유의 채널</div>
+        <p class="text-muted" style="margin-bottom: 14px;">한국어 공부법, 한국 문화, 학습 팁을 발신하고 있습니다.</p>
+        <div class="channel-grid">
+          <a class="channel-card" href="#"><div class="channel-name">YouTube</div><div class="channel-desc">공부법·해설 영상</div></a>
+          <a class="channel-card" href="#"><div class="channel-name">Instagram</div><div class="channel-desc">학습 카드·일상</div></a>
+          <a class="channel-card" href="#"><div class="channel-name">Threads</div><div class="channel-desc">학습 팁·생각</div></a>
+          <a class="channel-card" href="#"><div class="channel-name">Note</div><div class="channel-desc">깊이 있는 글·칼럼</div></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FINAL CTA ──────────────────────────────── -->
+<div class="final-cta">
+  <h3 class="reveal">몇 번이나 실패했던 분들도,<br>분명 성공할 수 있습니다.</h3>
+  <p class="final-sub reveal reveal-d1">이번에는 혼자가 아니라,<br>가이드와 지도가 있으니까요.</p>
+  <p class="final-cta-label reveal reveal-d2">무료로 시작해보기</p>
+  <div class="cta-buttons reveal reveal-d3">
+    <a class="btn-white" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+    <a class="btn-outline" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<div class="footer">
+  <a href="terms.html">이용약관</a>
+  <a href="privacy.html">개인정보 처리방침</a>
+  <div class="contact">문의: <a href="mailto:hikaro.world@gmail.com">hikaro.world@gmail.com</a></div>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
