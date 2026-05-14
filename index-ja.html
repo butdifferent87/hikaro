@@ -145,6 +145,30 @@
     background: #1A1A1A;
     padding: 140px 200px 120px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,20,15,0.55) 0%, rgba(10,20,15,0.45) 60%, rgba(10,20,15,0.65) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
   }
   .hero-tagline {
     display: inline-block;
@@ -1194,15 +1218,21 @@
 </header>
 
 <section class="hero" id="top">
-  <h1 class="hero-headline reveal">韓国語の勉強、<br>何度も挫折していませんか？</h1>
-  <p class="hero-sub reveal reveal-d1">覚えても忘れて、何年経っても初級のまま。<br><strong>才能のせいじゃありません。正しい勉強法を知らなかっただけです。</strong></p>
-  <div class="hero-divider reveal reveal-d2"></div>
-  <p class="hero-solution reveal reveal-d2">韓国語学習アプリhikaroがあれば、<br><strong>もう迷わなくていいです。</strong></p>
-  <div class="hero-ctas reveal reveal-d3">
-    <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
-    <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">Google Play →</a>
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="videos/hero-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-headline reveal">韓国語の勉強、<br>何度も挫折していませんか？</h1>
+    <p class="hero-sub reveal reveal-d1">覚えても忘れて、何年経っても初級のまま。<br><strong>才能のせいじゃありません。正しい勉強法を知らなかっただけです。</strong></p>
+    <div class="hero-divider reveal reveal-d2"></div>
+    <p class="hero-solution reveal reveal-d2">韓国語学習アプリhikaroがあれば、<br><strong>もう迷わなくていいです。</strong></p>
+    <div class="hero-ctas reveal reveal-d3">
+      <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+      <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">Google Play →</a>
+    </div>
+    <p class="hero-note reveal reveal-d4">インストール1分・最初のレッスン5分・無料</p>
   </div>
-  <p class="hero-note reveal reveal-d4">インストール1分・最初のレッスン5分・無料</p>
 </section>
 
 <section class="bg-offwhite">
