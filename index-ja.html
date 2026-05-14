@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hikaro — 日本人のための韓国語学習アプリ</title>
+<meta name="description" content="20年間日本語学習に失敗した後、7ヶ月でJLPT N1を取得した開発者が作った、韓国語学習ガイドアプリ。">
+<style>
+  @font-face {
+    font-family: 'ResourceHanRoundedKR';
+    src: url('fonts/ResourceHanRoundedKR-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ResourceHanRoundedKR';
+    src: url('fonts/ResourceHanRoundedKR-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ResourceHanRoundedJP';
+    src: url('fonts/ResourceHanRoundedJP-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'ResourceHanRoundedJP';
+    src: url('fonts/ResourceHanRoundedJP-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'ResourceHanRoundedJP', sans-serif;
+    background: #FAFAF8;
+    color: #1A1A1A;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :lang(ko) { font-family: 'ResourceHanRoundedKR', sans-serif; }
+
+  p { font-size: 24px; margin-bottom: 16px; color: #1A1A1A; line-height: 1.7; }
+
+  .section {
+    max-width: none;
+    padding: 100px 200px;
+  }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #007050;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+  }
+
+  .bg-dark { background: #1A1A1A; }
+  .bg-white { background: #ffffff; }
+  .bg-offwhite { background: #FAFAF8; }
+  .bg-greentint { background: #EAF8F2; }
+
+  /* ── HEADER (STICKY NAV) ─────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1A1A1A;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 200px;
+  }
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .site-logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #009068;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+  .site-nav {
+    display: flex;
+    gap: 32px;
+  }
+  .site-nav a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .site-nav a:hover { color: #fff; }
+  .header-cta {
+    display: flex;
+    gap: 8px;
+  }
+  .header-cta a {
+    background: #fff;
+    color: #1A1A1A;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .header-cta a:hover { background: #F0F0EB; }
+  .header-cta a.outline {
+    background: #009068;
+    color: #fff;
+    border: none;
+  }
+  .header-cta a.outline:hover { background: #007050; }
+
+  /* ── HERO ────────────────────────────────── */
+  .hero {
+    background: #1A1A1A;
+    padding: 140px 200px 120px;
+    text-align: center;
+  }
+  .hero-tagline {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #009068;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .hero-headline {
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -3px;
+    color: #fff;
+    margin-bottom: 28px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-sub {
+    font-size: 28px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .hero-sub strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+  .hero-divider {
+    width: 48px;
+    height: 3px;
+    background: #009068;
+    margin: 0 auto 28px;
+    border-radius: 2px;
+  }
+  .hero-solution {
+    font-size: 28px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 56px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+  }
+  .hero-solution strong { color: #009068; font-weight: 700; }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #009068;
+    color: #fff;
+    padding: 20px 36px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    transition: background 0.15s;
+  }
+  .btn-download:hover { background: #007050; }
+  .btn-download.android {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-download.android:hover { background: rgba(255,255,255,0.14); }
+
+  /* Hero CTA color override: App Store white, Google Play medium green */
+  .hero .btn-download {
+    background: #fff;
+    color: #1A1A1A;
+  }
+  .hero .btn-download:hover { background: #F0F0EB; }
+  .hero .btn-download.android {
+    background: #009068;
+    color: #fff;
+    border: none;
+  }
+  .hero .btn-download.android:hover { background: #007050; }
+  .hero-note {
+    font-size: 13px;
+    color: #FAFAF8;
+  }
+  /* ── STAKES ─────────────────────────────── */
+  .stakes-quotes {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .stakes-quote {
+    border-left: 4px solid #009068;
+    padding: 4px 0 4px 24px;
+    font-size: 22px;
+    color: #444;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .stakes-summary {
+    font-size: 22px;
+    color: #555;
+    line-height: 1.7;
+    margin-top: 32px;
+  }
+  .stakes-finisher {
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 26px;
+    font-weight: 700;
+    color: #1A1A1A;
+    line-height: 1.5;
+    text-align: center;
+  }
+  /* ── SERVICES ────────────── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .services-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .service-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 40px 36px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .service-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+  .service-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  .service-card h3 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1A1A1A;
+  }
+  .service-hook {
+    font-size: 18px;
+    font-weight: 500;
+    color: #007050;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .service-desc {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.75;
+  }
+  .service-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .service-bullets li {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+  .service-bullets li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #009068;
+    font-weight: 700;
+  }
+  .service-bullets li strong {
+    color: #1A1A1A;
+    font-weight: 700;
+  }
+  .service-founder-note {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0,144,104,0.15);
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+  }
+  .service-founder-note strong { color: #007050; font-weight: 700; }
+  .service-founder-note-author {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #007050;
+    font-weight: 700;
+  }
+  .service-card { display: flex; flex-direction: column; }
+  /* User testimonials grouped block */
+  .user-testimonials {
+    margin-top: 64px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .user-testimonials-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin: 0 0 32px;
+    letter-spacing: -0.3px;
+  }
+  .user-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .ut-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 22px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .ut-tag {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    color: #007050;
+    background: #EAF8F2;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .ut-quote {
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 1.7;
+    margin: 0 0 6px;
+  }
+  .ut-quote-ja {
+    font-size: 14px;
+    color: #5C6863;
+    line-height: 1.65;
+    margin: 0 0 6px;
+  }
+  .ut-author {
+    margin-top: auto;
+    padding-top: 12px;
+    font-size: 12px;
+    color: #007050;
+    font-weight: 700;
+  }
+  /* ── PROOF ─────────────────────────────── */
+  .proof-main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 56px;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .proof-story {
+    display: contents;
+  }
+  .proof-score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  /* ── BEFORE/AFTER SCORE CARD ─────────────── */
+  .proof-score-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0 32px;
+    margin-bottom: 32px;
+  }
+  .proof-score-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .proof-score-col-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FAFAF8;
+    letter-spacing: 0.5px;
+  }
+  .proof-score-num {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .proof-score-num.before { color: #FAFAF8; }
+  .proof-score-num.after  { color: #009068; }
+  .proof-score-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    color: #FAFAF8;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+  .proof-score-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #FAFAF8;
+    font-size: 22px;
+  }
+  .proof-score-delta {
+    display: inline-block;
+    background: rgba(0,144,104,0.2);
+    color: #009068;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+  .proof-score-label {
+    font-size: 14px;
+    color: #787774;
+    margin-bottom: 32px;
+  }
+  .proof-user-meta {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .proof-user-meta strong { color: #FAFAF8; }
+  .proof-story-text {
+    font-size: 18px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    margin-top: 0;
+  }
+  .proof-chat {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .proof-chat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .chat-bubble {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px 12px 12px 3px;
+    padding: 24px 28px;
+  }
+  .chat-bubble p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 0;
+    line-height: 1.85;
+  }
+  .proof-extra {
+    margin-top: 0;
+    padding: 32px 36px;
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid #009068;
+    border-radius: 4px;
+  }
+  .proof-extra-quote {
+    font-size: 19px;
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .proof-extra-attr {
+    font-size: 14px;
+    color: #787774;
+  }
+  /* ── PLAN (3-STAGE LEARNING MAP) ───────── */
+  .journey-map {
+    margin: 48px auto 0;
+    max-width: 720px;
+    padding: 0 20px;
+  }
+  .journey-track {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+  }
+  .journey-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 80px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    font-family: inherit;
+  }
+  .journey-node:hover .journey-dot {
+    transform: scale(1.15);
+  }
+  .journey-node:focus-visible {
+    outline: 2px solid #009068;
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+  .journey-flag {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 800;
+    color: #FAFAF8;
+    background: #009068;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .journey-flag::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #009068;
+  }
+  .journey-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #C0ECD8;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,144,104,0.15);
+    margin-bottom: 12px;
+    transition: all 0.4s ease;
+  }
+  .journey-node.passed .journey-dot {
+    background: #009068;
+    box-shadow: 0 0 0 1px rgba(0,144,104,0.25);
+  }
+  .journey-node.active .journey-dot {
+    background: #009068;
+    transform: scale(1.25);
+    box-shadow: 0 0 0 4px rgba(0,144,104,0.2), 0 0 0 1px rgba(0,144,104,0.4);
+  }
+  .journey-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #A8C5B5;
+    letter-spacing: -0.2px;
+    transition: color 0.4s ease;
+  }
+  .journey-node.passed .journey-label,
+  .journey-node.active .journey-label {
+    color: #007050;
+  }
+  .journey-line {
+    flex: 1;
+    height: 2px;
+    background: #E3F0E9;
+    margin-top: 8px;
+    align-self: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+  .journey-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: #009068;
+    transition: width 0.5s ease;
+  }
+  .journey-line.filled::after { width: 100%; }
+  .plan-steps {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+    margin: 56px 0;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .step-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 32px 28px;
+    border-top: 4px solid #009068;
+    border-left: none;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .step-card.dark {
+    background: #fff;
+    border-top: 4px solid #009068;
+    border-left: none;
+    position: relative;
+  }
+  .success-chip {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 700;
+    color: #FAFAF8;
+    background: #009068;
+    padding: 6px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .step-number {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #009068;
+    margin-bottom: 8px;
+  }
+  .step-stage {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .step-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #009068;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .step-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .bullet-item {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 18px;
+    position: relative;
+  }
+  .bullet-item::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #009068;
+    font-weight: 700;
+  }
+  .step-outcome {
+    padding: 14px 18px;
+    background: #EAF8F2;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    color: #007050;
+    font-weight: 600;
+    line-height: 1.65;
+    margin-top: auto;
+  }
+  .step-card.dark .step-outcome {
+    background: #009068;
+    color: #FAFAF8;
+  }
+  .outcome-icon { flex-shrink: 0; }
+  .plan-closer {
+    margin: 72px auto 0;
+    text-align: center;
+    max-width: 720px;
+  }
+  .plan-closer-main {
+    font-size: 17px;
+    color: #6B7570;
+    line-height: 1.7;
+    margin: 0 0 20px;
+    font-weight: 400;
+  }
+  .plan-closer-sub {
+    font-size: 22px;
+    color: #007050;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+  }
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 24px;
+    align-self: center;
+  }
+  .connector-arrow {
+    font-size: 22px;
+    color: #009068;
+    line-height: 1;
+    font-weight: 700;
+  }
+  /* ── CREATOR ──────────────────────────── */
+  .creator-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 56px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .creator-photo img {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+  }
+  #proof { background: #1A1A1A; }
+  #proof .section-label { color: #009068; }
+  #proof .section-title { color: #fff; }
+  .topik-scores {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    margin: 32px 0 24px;
+    padding: 32px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .score-card { text-align: center; }
+  .score-period { font-size: 12px; color: #FAFAF8; margin-bottom: 8px; }
+  .score-num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
+  .score-unit { font-size: 18px; font-weight: 400; letter-spacing: 0; }
+  .score-card.before .score-num { color: #FAFAF8; }
+  .score-card.after .score-num { color: #009068; }
+  .score-badge { display: inline-block; font-size: 11px; font-weight: 700; margin-top: 6px; padding: 2px 10px; border-radius: 99px; }
+  .score-card.before .score-badge { background: rgba(255,255,255,0.07); color: #FAFAF8; }
+  .score-card.after .score-badge { background: rgba(0,144,104,0.2); color: #009068; }
+  .score-arrow-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .score-arrow { font-size: 28px; color: #007050; font-weight: 700; }
+  .score-change { font-size: 13px; font-weight: 700; color: #009068; }
+  .proof-context {
+    text-align: center;
+    color: #FAFAF8;
+    font-size: 18px;
+    margin-bottom: 28px;
+    line-height: 1.7;
+  }
+  .chat-bubble-wrap { max-width: 640px; margin: 0 auto 8px; }
+  #proof .chat-bubble {
+    background: #fff;
+    border-radius: 12px 12px 12px 3px;
+    padding: 24px 28px;
+  }
+  #proof .chat-bubble p { font-size: 18px; color: #1A1A1A; margin-bottom: 0; line-height: 1.85; }
+  .chat-label { text-align: left; font-size: 13px; color: #FAFAF8; margin-bottom: 40px; padding-left: 2px; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .testimonials-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #009068;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .testimonials { display: flex; flex-direction: column; gap: 16px; }
+  .testimonial {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 24px 28px;
+  }
+  .testimonial-quote { font-size: 18px; color: rgba(255,255,255,0.8); line-height: 1.85; margin-bottom: 10px; }
+  .testimonial-attr { font-size: 14px; color: rgba(255,255,255,0.3); }
+  #creator { background: #1A1A1A; }
+  #creator .section-label { color: #009068; }
+  #creator .section-title { color: #fff; }
+  .creator-text p {
+    font-size: 21px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.85;
+    margin-bottom: 20px;
+  }
+  .creator-text strong { color: #009068; font-weight: 700; }
+  .creator-signature {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 17px;
+    color: rgba(255,255,255,0.5);
+  }
+  .creator-signature strong {
+    color: #fff;
+    font-weight: 700;
+  }
+  .creator-channels {
+    max-width: 720px;
+    margin: 80px auto 0;
+    text-align: center;
+    padding-top: 56px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .creator-channels-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .creator-channels-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .channel-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    padding: 18px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .channel-card:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.25);
+  }
+  /* ── FINAL CTA ────────────────────────── */
+  .final-cta {
+    background: #FAFAF8;
+    padding: 100px 200px;
+    text-align: center;
+  }
+  .final-cta h2 {
+    color: #1A1A1A;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .final-cta-sub {
+    color: #555;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 56px;
+  }
+  .final-cta-label {
+    color: #1A1A1A;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .final-cta .btn-download {
+    background: #fff;
+    color: #1A1A1A;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .final-cta .btn-download:hover { background: #F0F0EB; }
+  .final-cta .btn-download.android {
+    background: #009068;
+    color: #fff;
+    border: none;
+  }
+  .final-cta .btn-download.android:hover { background: #007050; }
+  .final-cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+  }
+  /* ── CHANNELS ─────────────────────────── */
+  .channels-block {
+    margin-top: 56px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .channels-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin: 0 0 8px;
+    letter-spacing: -0.3px;
+  }
+  .channels-sub {
+    font-size: 15px;
+    color: rgba(0,0,0,0.45);
+    margin: 0 0 28px;
+    line-height: 1.6;
+  }
+  .channels-grid {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .channel-link {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1px solid rgba(0,0,0,0.14);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+  .channel-link:hover {
+    background: #009068;
+    border-color: #009068;
+    color: #fff;
+  }
+  .featured-video {
+    max-width: 720px;
+    margin: 56px auto 0;
+    text-align: left;
+  }
+  .featured-video-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #007050;
+    margin: 0 0 10px;
+  }
+  .video-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+    background: #000;
+  }
+  .video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  /* ── FOOTER ───────────────────────────── */
+  .site-footer {
+    background: #1A1A1A;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 200px;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(255,255,255,0.35);
+    font-size: 13px;
+    text-decoration: none;
+    margin: 0 14px;
+  }
+  .site-footer a:hover { color: rgba(255,255,255,0.6); }
+  .site-footer .contact {
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+  }
+  .site-footer .contact a { margin: 0; color: rgba(255,255,255,0.2); }
+
+  /* ── RESPONSIVE: TABLET ───────────────── */
+  @media (max-width: 1024px) {
+    .section { padding: 80px 80px; }
+    .hero { padding: 100px 80px 88px; }
+    .final-cta { padding: 80px 80px; }
+    .site-header { padding: 0 80px; }
+    .site-footer { padding: 32px 80px; }
+    .hero-headline { font-size: 64px; letter-spacing: -2px; }
+    .section-title { font-size: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .topik-scores { gap: 20px; padding: 24px 16px; }
+    .site-nav { gap: 20px; }
+    .site-nav a { font-size: 13px; }
+
+    /* plan horizontal scroll on tablet+ down */
+    .plan-steps {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding: 12px 0 20px;
+      scroll-padding-left: 80px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .step-card {
+      flex: 0 0 78%;
+      min-width: 280px;
+      scroll-snap-align: start;
+    }
+    .connector { display: none; }
+  }
+
+  /* ── RESPONSIVE: MOBILE ───────────────── */
+  @media (max-width: 600px) {
+    .section { padding: 64px 24px; }
+    .hero { padding: 80px 24px 72px; }
+    .final-cta { padding: 64px 24px; }
+    .site-header { padding: 0 24px; height: 56px; }
+    .site-footer { padding: 24px 24px; }
+
+    .hero-headline { font-size: 44px; letter-spacing: -1.5px; }
+    .hero-sub { font-size: 20px; }
+    .hero-solution { font-size: 20px; }
+    .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+    .btn-download { justify-content: center; padding: 16px 24px; font-size: 16px; }
+
+    .section-title { font-size: 30px; }
+    p { font-size: 18px; }
+
+    .stakes-quote { font-size: 18px; }
+    .stakes-summary { font-size: 18px; }
+    .stakes-finisher { font-size: 21px; }
+
+    .service-card { padding: 28px 24px; }
+    .service-card h3 { font-size: 22px; }
+    .service-hook { font-size: 16px; }
+    .service-desc { font-size: 16px; }
+
+    .topik-scores { flex-direction: column; gap: 16px; }
+    .score-arrow-wrap { flex-direction: row; }
+    .score-num { font-size: 44px; }
+    .testimonial-quote { font-size: 16px; }
+
+    .creator-layout { grid-template-columns: 1fr; gap: 32px; }
+    .creator-photo img { max-width: 320px; margin: 0 auto; }
+    .creator-text p { font-size: 18px; }
+
+    .journey-map { margin-top: 32px; padding: 0 8px; }
+    .journey-node { width: 60px; }
+    .journey-dot { width: 14px; height: 14px; }
+    .journey-label { font-size: 13px; }
+    .plan-steps {
+      scroll-padding-left: 24px;
+      margin: 32px -24px 0;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .plan-closer { margin-top: 48px; }
+    .plan-closer-main { font-size: 15px; }
+    .plan-closer-sub { font-size: 19px; }
+    .step-card { padding: 24px 20px; flex: 0 0 85%; }
+    .step-stage { font-size: 26px; }
+    .step-subtitle { font-size: 15px; }
+    .bullet-item { font-size: 15px; }
+    .step-outcome { font-size: 14px; }
+    .success-chip { top: -12px; }
+    .channels-grid { grid-template-columns: repeat(2, 1fr); }
+    .creator-channels { margin-top: 48px; padding-top: 40px; }
+
+    .final-cta h2 { font-size: 26px; }
+    .final-cta-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
+    .channels-grid { gap: 8px; }
+    .channel-link { padding: 8px 18px; font-size: 13px; }
+
+    .site-nav { display: none; }
+    .header-cta a { font-size: 12px; padding: 6px 12px; }
+    .header-cta { gap: 6px; }
+  }
+
+  /* ── REVEAL ANIMATIONS ────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                transform 0.65s cubic-bezier(0.22,1,0.36,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-d1 { transition-delay: 0.08s; }
+  .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; }
+  .reveal-d4 { transition-delay: 0.32s; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="#top" class="site-logo">hikaro</a>
+    <nav class="site-nav">
+      <a href="#proof">レビュー</a>
+      <a href="#plan">学習マップ</a>
+      <a href="#features">機能</a>
+      <a href="#creator">開発者</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.hikaro" class="outline">Google Play</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <h1 class="hero-headline reveal">韓国語の勉強、<br>何度も挫折していませんか？</h1>
+  <p class="hero-sub reveal reveal-d1">覚えても忘れて、何年経っても初級のまま。<br><strong>才能のせいじゃありません。正しい勉強法を知らなかっただけです。</strong></p>
+  <div class="hero-divider reveal reveal-d2"></div>
+  <p class="hero-solution reveal reveal-d2">韓国語学習アプリhikaroがあれば、<br><strong>もう迷わなくていいです。</strong></p>
+  <div class="hero-ctas reveal reveal-d3">
+    <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+    <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">Google Play →</a>
+  </div>
+  <p class="hero-note reveal reveal-d4">インストール1分・最初のレッスン5分・無料</p>
+</section>
+
+<section class="bg-offwhite">
+  <div class="section">
+    <div class="section-label reveal">挫折する理由は、実はほとんど同じです</div>
+    <h2 class="section-title reveal reveal-d1">韓国語で挫折した人たちは、<br>みんな同じことを言います</h2>
+
+    <div class="stakes-quotes reveal reveal-d2">
+      <div class="stakes-quote">「あんなに頑張って単語を覚えたのに、また忘れた…」</div>
+      <div class="stakes-quote">「こんな勉強を続けて、本当に韓国語が上手くなれるの？」</div>
+      <div class="stakes-quote">「私って頭が良くないし、語学の才能もないから…」</div>
+    </div>
+
+    <p class="stakes-summary reveal reveal-d3">勉強すればするほど自信がつくどころか、<br>ずっと迷い続けている感じ。</p>
+
+    <div class="stakes-finisher reveal reveal-d4">
+      この状態で続けていたら、また同じように挫折して、<br>結局諦めることになります。
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="section">
+    <div class="section-label reveal">hikaroで学習すると、どれほど変わる？</div>
+    <h2 class="section-title reveal reveal-d1">ガイドがあると、<br>こんなに変わります</h2>
+
+    <div class="topik-scores reveal reveal-d2">
+      <div class="score-card before">
+        <div class="score-period">1月・hikaro開始前</div>
+        <div class="score-num">57<span class="score-unit">点</span></div>
+        <div class="score-badge">TOPIK模擬試験</div>
+      </div>
+      <div class="score-arrow-wrap">
+        <div class="score-arrow">→</div>
+        <div class="score-change">+108点</div>
+      </div>
+      <div class="score-card after">
+        <div class="score-period">4月・3ヶ月後</div>
+        <div class="score-num">165<span class="score-unit">点</span></div>
+        <div class="score-badge">TOPIK模擬試験</div>
+      </div>
+    </div>
+
+    <p class="proof-context reveal">1月に韓国語が一言も話せなかった日本人が、<br>4ヶ月後に私に韓国語で直接送ってきたメッセージです。</p>
+
+    <div class="chat-bubble-wrap reveal">
+      <div class="chat-bubble">
+        <p lang="ko">응! 잘잤어!<br>지금부터 점심이야!<br>장연 밥 먹었어!?<br><br>4월29일부터 연휴야!<br>하고 싶은 일이 많이 있어서 준번을 생각해야돼!!<br>TOPIK1의 텍스트가 사실 아직 안 끝나니까 그냥 그 텍스트를 끝나고 싶어 ㅎㅎ<br>집에의 청소나 드라마도 남아 있으니까 하고 싶은 일이 너무 많이 있어 ㅋㅋㅋㅋ<br>파레토360도 완벽하고 싶어!!</p>
+      </div>
+    </div>
+    <div class="chat-label">実際のユーザーメッセージ（原文）</div>
+
+  </div>
+</section>
+
+<section class="bg-white" id="plan">
+  <div class="section">
+    <div class="section-label reveal">韓国語力を最も効率よく伸ばす方法</div>
+    <h2 class="section-title reveal reveal-d1">韓国語が上手くなるまでの、<br>3ステップ学習マップ</h2>
+
+    <div class="journey-map reveal reveal-d2">
+      <div class="journey-track">
+        <button type="button" class="journey-node" data-target="0" aria-label="初級期ステップへ移動">
+          <div class="journey-dot"></div>
+          <div class="journey-label">初級期</div>
+        </button>
+        <div class="journey-line"></div>
+        <button type="button" class="journey-node" data-target="1" aria-label="中級期ステップへ移動">
+          <div class="journey-dot"></div>
+          <div class="journey-label">中級期</div>
+        </button>
+        <div class="journey-line"></div>
+        <button type="button" class="journey-node" data-target="2" aria-label="上級期ステップへ移動">
+          <span class="journey-flag">達成！</span>
+          <div class="journey-dot"></div>
+          <div class="journey-label">上級期</div>
+        </button>
+      </div>
+    </div>
+
+    <div class="plan-steps">
+      <div class="step-card reveal">
+        <div class="step-number">STEP 01</div>
+        <div class="step-stage">初級期</div>
+        <div class="step-subtitle">基礎単語と文法を積み上げる</div>
+        <div class="step-bullets">
+          <div class="bullet-item">誰もが通る段階。<strong>いかに早く卒業できるかが鍵。</strong></div>
+          <div class="bullet-item">何を・どうやって覚えるか、hikaroがすべて準備してあります。</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>卒業したら？</strong><br>簡単な韓国語の文章を自分で作ることができます。</span>
+        </div>
+      </div>
+
+      <div class="connector reveal"><div class="connector-arrow">→</div></div>
+
+      <div class="step-card reveal reveal-d1">
+        <div class="step-number">STEP 02</div>
+        <div class="step-stage">中級期</div>
+        <div class="step-subtitle">口から韓国語が出てくるようになる</div>
+        <div class="step-bullets">
+          <div class="bullet-item">文章を覚えて作ってみながら、<strong>単語・文法の使い感覚</strong>を身につけます。</div>
+          <div class="bullet-item">文章が作れるので、言葉が出てくるようになります。</div>
+          <div class="bullet-item">「わかるのに話せない」もどかしさが解消されます。</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>卒業したら？</strong><br>動詞・形容詞の変化に慣れて、話せる文章が大幅に増えます。</span>
+        </div>
+      </div>
+
+      <div class="connector reveal"><div class="connector-arrow">→</div></div>
+
+      <div class="step-card dark reveal reveal-d2">
+        <div class="success-chip">ここまで達成したら、韓国語学習の成功！</div>
+        <div class="step-number">STEP 03</div>
+        <div class="step-stage">上級期</div>
+        <div class="step-subtitle">より正確で、より自然な韓国語が話せる</div>
+        <div class="step-bullets">
+          <div class="bullet-item">考えなくても韓国語が出てきます。</div>
+          <div class="bullet-item">意味の伝達を超えて、<strong>ニュアンス</strong>が気になります。</div>
+          <div class="bullet-item">より正確な表現で、<strong>韓国人らしい文章</strong>を使いこなします。</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>目標</strong><br>自分の考えの80%以上を自然な韓国語で話せます。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-closer reveal reveal-d3">
+      <p class="plan-closer-main">各ステップで何をすべきか、何をしなくていいか、<br>hikaroがすべて教えてくれます。</p>
+      <p class="plan-closer-sub">もう一人で迷わなくていいです。</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-offwhite" id="features">
+  <div class="section">
+    <div class="section-label reveal">hikaroで学習すれば、成功できます。</div>
+    <h2 class="section-title reveal reveal-d1">いつも壁になっていた単語と文法、<br>今度こそ失敗しない理由</h2>
+
+    <div class="services-grid services-grid-2">
+      <div class="service-card reveal reveal-d1">
+        <h3>いつの間にか覚えられる単語帳</h3>
+        <div class="service-hook">どんどん忘れても大丈夫</div>
+        <ul class="service-bullets">
+          <li>無理に覚えなくても頭に残ります。</li>
+          <li>紙に書いて覚える方法よりも、<strong>圧倒的に楽で効率がいいです。</strong></li>
+          <li>「また忘れた」が<strong>「私も覚えられる！」</strong>に変わります。</li>
+        </ul>
+        <p class="service-founder-note">
+          漢字をほとんど知らなかった私も、この方法を使って<strong>7ヶ月でJLPT N1に合格</strong>しました。
+          <span class="service-founder-note-author">— hikaro開発者</span>
+        </p>
+      </div>
+
+      <div class="service-card reveal reveal-d2">
+        <h3>文法の近道</h3>
+        <div class="service-hook">最もやさしくわかりやすい説明</div>
+        <ul class="service-bullets">
+          <li>最も詳しい説明ではなく、<strong>最もわかりやすい説明。</strong></li>
+          <li>文法ごとに<strong>変化形の練習</strong>がついているので、すぐに身につきます。</li>
+          <li>韓国語会話に必要な<strong>必須文法25個</strong>を厳選しました。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="user-testimonials reveal reveal-d2">
+      <h3 class="user-testimonials-title">上記の機能で学習したユーザーの実際の反応は？</h3>
+      <div class="user-testimonials-grid">
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</p>
+          <div class="ut-author">新潟県・Mさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「耳が覚えると文字を確認したくなり、自然と覚えていくのが楽しいです。何回、スゴイ！合ってる！分かる～！と口に出た事か。」</p>
+          <div class="ut-author">仙台県・Yさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「何故か次の日には覚えてる単語も増えたりとかして💓 ちょっと嬉しかったり😊」</p>
+          <div class="ut-author">大阪府・Rさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">文法</span>
+          <p class="ut-quote-ja">「文法、本当に勉強になって面白い 笑」</p>
+          <div class="ut-author">新潟県・Kさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">文法</span>
+          <p class="ut-quote-ja">「説明自体はわかりやすいですし、不規則動詞の説明が各文法ごとにされてるのも慣れない人にはいいのかなと思います」</p>
+          <div class="ut-author">愛媛県・Tさん</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="creator">
+  <div class="section">
+    <div class="section-label reveal">作った人</div>
+    <h2 class="section-title reveal reveal-d1">このアプリを作った理由</h2>
+
+    <div class="creator-layout">
+      <div class="creator-photo reveal reveal-d2">
+        <img src="profile.jpg" alt="hikaro開発者フユ">
+      </div>
+      <div class="creator-text reveal reveal-d3">
+        <p>私は韓国人です。<strong>20年間、日本語の勉強に失敗し続けました。</strong></p>
+        <p>それでも2025年7月、<strong>JLPT N1を7ヶ月で取得</strong>しました。</p>
+        <p>私自身も語学学習者として、失敗も成功も経験しました。だから何が効果的で、何が時間の無駄かを正確にわかっています。</p>
+        <p>2025年10月、新潟を旅行した時に、<strong>韓国語学習に何度も失敗した日本人の友人</strong>に出会いました。</p>
+        <p>韓国語が上手くなりたいけど、どうやって勉強すればいいかわからないと、私に助けを求めてきました。そこで2ヶ月間企画した後、2025年12月から私の経験とノウハウを込めてアプリ開発を始めました。</p>
+        <p><strong>その結果がhikaroです。</strong></p>
+        <p>韓国語学習に何度も失敗してきたなら、<strong>今度はhikaroがあなたのガイドになります。</strong></p>
+        <div class="creator-signature"><strong>— フユ</strong>・hikaro開発者</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="final-cta">
+  <h2 class="reveal">何度失敗してきた方も、<br>必ず成功できます。</h2>
+  <p class="final-cta-sub reveal reveal-d1">今度は一人じゃなく、<br>ガイドとマップがあるから。</p>
+  <div class="final-cta-label reveal reveal-d2">無料で始める</div>
+  <div class="final-cta-buttons reveal reveal-d3">
+    <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+    <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">Google Play →</a>
+  </div>
+  <div class="channels-block reveal reveal-d4">
+    <h3 class="channels-title">フユのチャンネル</h3>
+    <p class="channels-sub">韓国語の勉強法、韓国文化、学習のコツを発信しています。</p>
+    <div class="channels-grid">
+      <a class="channel-link" href="https://www.youtube.com/@korean_fuyu" target="_blank" rel="noopener">YouTube</a>
+      <a class="channel-link" href="https://www.instagram.com/korean_fuyu/" target="_blank" rel="noopener">Instagram</a>
+      <a class="channel-link" href="https://www.threads.com/@korean_fuyu" target="_blank" rel="noopener">Threads</a>
+      <a class="channel-link" href="https://note.com/mkt_coach_fuyu" target="_blank" rel="noopener">Note</a>
+    </div>
+  </div>
+
+  <div class="featured-video reveal reveal-d5">
+    <p class="featured-video-title">韓国語の単語が覚えられない？5つの原因と解決法</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/Ig0HPK5wWfM" title="韓国語の単語が覚えられない？5つの原因と解決法" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="terms.html">利用規約</a>
+  </div>
+  <p class="contact">© 2026 hikaro · お問い合わせ: <a href="mailto:hikaro.contact@gmail.com">hikaro.contact@gmail.com</a></p>
+</footer>
+
+<script>
+(function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+// Journey map: light up nodes based on which step-card is most visible
+(function() {
+  const cards = document.querySelectorAll('.step-card');
+  const nodes = document.querySelectorAll('.journey-node');
+  const lines = document.querySelectorAll('.journey-line');
+  const planSteps = document.querySelector('.plan-steps');
+  if (!cards.length || !nodes.length || !planSteps) return;
+
+  const visibility = new Map();
+  cards.forEach(c => visibility.set(c, 0));
+
+  function setActive(idx) {
+    nodes.forEach((n, i) => {
+      n.classList.toggle('active', i === idx);
+      n.classList.toggle('passed', i < idx);
+    });
+    lines.forEach((ln, i) => {
+      ln.classList.toggle('filled', i < idx);
+    });
+  }
+
+  function getActiveIndex() {
+    const isHorizScroll = planSteps.scrollWidth > planSteps.clientWidth + 4;
+    if (isHorizScroll) {
+      const cRect = planSteps.getBoundingClientRect();
+      const targetX = cRect.left + cRect.width / 2;
+      let bestIdx = 0, bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const d = Math.abs(cx - targetX);
+        if (d < bestDist) { bestDist = d; bestIdx = i; }
+      });
+      return bestIdx;
+    } else {
+      let bestIdx = 0, bestRatio = -1;
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const visible = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+        const ratio = visible / Math.min(r.height, vh);
+        if (ratio > bestRatio) { bestRatio = ratio; bestIdx = i; }
+      });
+      const sectionRect = planSteps.getBoundingClientRect();
+      if (sectionRect.top > window.innerHeight * 0.6) return -1;
+      return bestIdx;
+    }
+  }
+
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      setActive(getActiveIndex());
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  planSteps.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  nodes.forEach((node) => {
+    node.addEventListener('click', () => {
+      const idx = parseInt(node.dataset.target, 10);
+      const card = cards[idx];
+      if (!card) return;
+      const isHorizScroll = planSteps.scrollWidth > planSteps.clientWidth + 4;
+      if (isHorizScroll) {
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = planSteps.getBoundingClientRect();
+        const offset = (cardRect.left - containerRect.left)
+          - (containerRect.width - cardRect.width) / 2
+          + planSteps.scrollLeft;
+        planSteps.scrollTo({ left: offset, behavior: 'smooth' });
+      } else {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
