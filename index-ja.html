@@ -1558,11 +1558,14 @@
   }
 
   let ticking = false;
+  let manualActive = -1;
+  let manualActiveTimer = null;
+
   function onScroll() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      setActive(getActiveIndex());
+      if (manualActive === -1) setActive(getActiveIndex());
       ticking = false;
     });
   }
@@ -1586,7 +1589,11 @@
           + planSteps.scrollLeft;
         planSteps.scrollTo({ left: offset, behavior: 'smooth' });
       } else {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        node.blur();
+        manualActive = idx;
+        clearTimeout(manualActiveTimer);
+        manualActiveTimer = setTimeout(() => { manualActive = -1; }, 1000);
+        setActive(idx);
       }
     });
   });
