@@ -1576,7 +1576,7 @@
   window.addEventListener('resize', onScroll);
   onScroll();
 
-  // Click node to jump to corresponding card
+  // Click node to jump to corresponding card (mobile/tablet) or just highlight (desktop)
   nodes.forEach((node) => {
     node.addEventListener('click', () => {
       const idx = parseInt(node.dataset.target, 10);
@@ -1592,7 +1592,8 @@
           + planSteps.scrollLeft;
         planSteps.scrollTo({ left: offset, behavior: 'smooth' });
       } else {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // desktop: all cards visible — just highlight the node
+        setActive(idx);
       }
     });
   });
