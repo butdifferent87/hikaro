@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>hikaro — 한국어 학습 앱</title>
-<meta name="description" content="한국어 공부에 몇 번이나 좌절해온 분들을 위한 학습 앱. 올바른 가이드와 학습 지도로 안내합니다.">
+<title>hikaro — 日本人のための韓国語学習アプリ</title>
+<meta name="description" content="20年間日本語学習に失敗した後、7ヶ月でJLPT N1を取得した開発者が作った、韓国語学習ガイドアプリ。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://butdifferent87.github.io/hikaro/index-ja.html">
+<meta property="og:title" content="hikaro — 日本人のための韓国語学習アプリ">
+<meta property="og:description" content="20年間日本語学習に失敗した後、7ヶ月でJLPT N1を取得した開発者が作った、韓国語学習ガイドアプリ。">
+<meta property="og:image" content="https://butdifferent87.github.io/hikaro/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://butdifferent87.github.io/hikaro/og-image.jpg">
 <style>
   @font-face {
     font-family: 'ResourceHanRoundedKR';
@@ -34,30 +43,138 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'ResourceHanRoundedKR', sans-serif;
+    font-family: 'ResourceHanRoundedJP', sans-serif;
     background: #FAFAF8;
     color: #1A1A1A;
-    line-height: 1.8;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
   }
 
-  :lang(ja) { font-family: 'ResourceHanRoundedJP', sans-serif; }
+  :lang(ko) { font-family: 'ResourceHanRoundedKR', sans-serif; }
 
   p { font-size: 24px; margin-bottom: 16px; color: #1A1A1A; line-height: 1.7; }
-  .text-muted { color: #787774; font-size: 14px; }
-  .text-accent { color: #007050; font-weight: 500; }
+
+  .section {
+    max-width: none;
+    padding: 100px 200px;
+  }
+
+  .section-label {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #007050;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 36px;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+  }
+
+  .bg-dark { background: #1A1A1A; }
+  .bg-white { background: #ffffff; }
+  .bg-offwhite { background: #FAFAF8; }
+  .bg-greentint { background: #EAF8F2; }
+
+  /* ── HEADER (STICKY NAV) ─────────────── */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1A1A1A;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding: 0 200px;
+  }
+  .site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .site-logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #009068;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+  .site-nav {
+    display: flex;
+    gap: 32px;
+  }
+  .site-nav a {
+    color: #FAFAF8;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .site-nav a:hover { color: #fff; }
+  .header-cta {
+    display: flex;
+    gap: 8px;
+  }
+  .header-cta a {
+    background: #fff;
+    color: #1A1A1A;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .header-cta a:hover { background: #F0F0EB; }
+  .header-cta a.outline {
+    background: #009068;
+    color: #fff;
+    border: none;
+  }
+  .header-cta a.outline:hover { background: #007050; }
 
   /* ── HERO ────────────────────────────────── */
   .hero {
     background: #1A1A1A;
-    padding: 140px 80px 120px;
+    padding: 140px 200px 120px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  .hero-brand {
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.35;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,20,15,0.55) 0%, rgba(10,20,15,0.45) 60%, rgba(10,20,15,0.65) 100%);
+    z-index: 1;
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+  .hero-tagline {
     display: inline-block;
-    font-size: 13px;
+    font-size: 20px;
     font-weight: 700;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     color: #009068;
     text-transform: uppercase;
     margin-bottom: 40px;
@@ -69,103 +186,654 @@
     letter-spacing: -3px;
     color: #fff;
     margin-bottom: 28px;
-    max-width: 900px;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
   }
   .hero-sub {
     font-size: 28px;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 56px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 28px;
     line-height: 1.6;
   }
-  .hero-sub strong { color: #C0ECD8; font-weight: 500; }
-  .btn-hero {
-    display: inline-block;
+  .hero-sub strong { color: rgba(255,255,255,0.7); font-weight: 500; }
+  .hero-divider {
+    width: 48px;
+    height: 3px;
+    background: #009068;
+    margin: 0 auto 28px;
+    border-radius: 2px;
+  }
+  .hero-solution {
+    font-size: 28px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 56px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+  }
+  .hero-solution strong { color: #009068; font-weight: 700; }
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     background: #009068;
     color: #fff;
-    padding: 20px 56px;
+    padding: 20px 36px;
     border-radius: 4px;
     text-decoration: none;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    transition: background 0.15s;
+  }
+  .btn-download:hover { background: #007050; }
+  .btn-download.android {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-download.android:hover { background: rgba(255,255,255,0.14); }
+
+  /* Hero CTA color override: App Store white, Google Play medium green */
+  .hero .btn-download {
+    background: #fff;
+    color: #1A1A1A;
+  }
+  .hero .btn-download:hover { background: #F0F0EB; }
+  .hero .btn-download.android {
+    background: #009068;
+    color: #fff;
+    border: none;
+  }
+  .hero .btn-download.android:hover { background: #007050; }
+  .hero-note {
+    font-size: 13px;
+    color: #FAFAF8;
+  }
+  /* ── STAKES ─────────────────────────────── */
+  .stakes-quotes {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .stakes-quote {
+    border-left: 4px solid #009068;
+    padding: 4px 0 4px 24px;
+    font-size: 22px;
+    color: #444;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .stakes-summary {
+    font-size: 22px;
+    color: #555;
+    line-height: 1.7;
+    margin-top: 32px;
+  }
+  .stakes-finisher {
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    font-size: 26px;
+    font-weight: 700;
+    color: #1A1A1A;
+    line-height: 1.5;
+    text-align: center;
+  }
+  /* ── SERVICES ────────────── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 56px;
+  }
+  .services-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .service-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 40px 36px;
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .service-card:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+  }
+  .service-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+  .service-card h3 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1A1A1A;
+  }
+  .service-hook {
     font-size: 18px;
+    font-weight: 500;
+    color: #007050;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .service-desc {
+    font-size: 17px;
+    color: #555;
+    line-height: 1.75;
+  }
+  .service-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .service-bullets li {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 20px;
+    position: relative;
+  }
+  .service-bullets li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #009068;
+    font-weight: 700;
+  }
+  .service-bullets li strong {
+    color: #1A1A1A;
+    font-weight: 700;
+  }
+  .service-founder-note {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(0,144,104,0.15);
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+  }
+  .service-founder-note strong { color: #007050; font-weight: 700; }
+  .service-founder-note-author {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #007050;
+    font-weight: 700;
+  }
+  .service-card { display: flex; flex-direction: column; }
+  /* User testimonials grouped block */
+  .user-testimonials {
+    margin-top: 64px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .user-testimonials-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin: 0 0 32px;
+    letter-spacing: -0.3px;
+  }
+  .user-testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .ut-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    padding: 22px 22px;
+    display: flex;
+    flex-direction: column;
+  }
+  .ut-tag {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 700;
+    color: #007050;
+    background: #EAF8F2;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .ut-quote {
+    font-size: 15px;
+    color: #1A1A1A;
+    line-height: 1.7;
+    margin: 0 0 6px;
+  }
+  .ut-quote-ja {
+    font-size: 14px;
+    color: #5C6863;
+    line-height: 1.65;
+    margin: 0 0 6px;
+  }
+  .ut-author {
+    margin-top: auto;
+    padding-top: 12px;
+    font-size: 12px;
+    color: #007050;
+    font-weight: 700;
+  }
+  /* ── PROOF ─────────────────────────────── */
+  .proof-main {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 56px;
+    max-width: 860px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .proof-story {
+    display: contents;
+  }
+  .proof-score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  /* ── BEFORE/AFTER SCORE CARD ─────────────── */
+  .proof-score-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 40px 48px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0 32px;
+    margin-bottom: 32px;
+  }
+  .proof-score-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .proof-score-col-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FAFAF8;
+    letter-spacing: 0.5px;
+  }
+  .proof-score-num {
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+  .proof-score-num.before { color: #FAFAF8; }
+  .proof-score-num.after  { color: #009068; }
+  .proof-score-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.08);
+    color: #FAFAF8;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+  .proof-score-middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: #FAFAF8;
+    font-size: 22px;
+  }
+  .proof-score-delta {
+    display: inline-block;
+    background: rgba(0,144,104,0.2);
+    color: #009068;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 99px;
+  }
+  .proof-score-label {
+    font-size: 14px;
+    color: #787774;
+    margin-bottom: 32px;
+  }
+  .proof-user-meta {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 8px;
+  }
+  .proof-user-meta strong { color: #FAFAF8; }
+  .proof-story-text {
+    font-size: 18px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    margin-top: 0;
+  }
+  .proof-chat {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .proof-chat-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .chat-bubble {
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px 12px 12px 3px;
+    padding: 24px 28px;
+  }
+  .chat-bubble p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 0;
+    line-height: 1.85;
+  }
+  .proof-extra {
+    margin-top: 0;
+    padding: 32px 36px;
+    background: rgba(255,255,255,0.05);
+    border-left: 4px solid #009068;
+    border-radius: 4px;
+  }
+  .proof-extra-quote {
+    font-size: 19px;
+    color: rgba(255,255,255,0.7);
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .proof-extra-attr {
+    font-size: 14px;
+    color: #787774;
+  }
+  /* ── PLAN (3-STAGE LEARNING MAP) ───────── */
+  .journey-map {
+    margin: 48px auto 0;
+    max-width: 720px;
+    padding: 0 20px;
+  }
+  .journey-track {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+  }
+  .journey-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 80px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px 8px;
+    font-family: inherit;
+  }
+  .journey-node:hover .journey-dot {
+    transform: scale(1.15);
+  }
+  .journey-node:focus-visible {
+    outline: 2px solid #009068;
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+  .journey-flag {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 800;
+    color: #FAFAF8;
+    background: #009068;
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+  .journey-flag::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #009068;
+  }
+  .journey-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #C0ECD8;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,144,104,0.15);
+    margin-bottom: 12px;
+    transition: all 0.4s ease;
+  }
+  .journey-node.passed .journey-dot {
+    background: #009068;
+    box-shadow: 0 0 0 1px rgba(0,144,104,0.25);
+  }
+  .journey-node.active .journey-dot {
+    background: #009068;
+    transform: scale(1.25);
+    box-shadow: 0 0 0 4px rgba(0,144,104,0.2), 0 0 0 1px rgba(0,144,104,0.4);
+  }
+  .journey-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #A8C5B5;
+    letter-spacing: -0.2px;
+    transition: color 0.4s ease;
+  }
+  .journey-node.passed .journey-label,
+  .journey-node.active .journey-label {
+    color: #007050;
+  }
+  .journey-line {
+    flex: 1;
+    height: 2px;
+    background: #E3F0E9;
+    margin-top: 8px;
+    align-self: flex-start;
+    position: relative;
+    overflow: hidden;
+  }
+  .journey-line::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: #009068;
+    transition: width 0.5s ease;
+  }
+  .journey-line.filled::after { width: 100%; }
+  .plan-steps {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
+    margin: 56px 0;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .step-card {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 14px;
+    padding: 32px 28px;
+    border-top: 4px solid #009068;
+    border-left: none;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .step-card.dark {
+    background: #fff;
+    border-top: 4px solid #009068;
+    border-left: none;
+    position: relative;
+  }
+  .success-chip {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 700;
+    color: #FAFAF8;
+    background: #009068;
+    padding: 6px 14px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .step-number {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #009068;
+    margin-bottom: 8px;
+  }
+  .step-stage {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1A1A1A;
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .step-subtitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #009068;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .step-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .bullet-item {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    padding-left: 18px;
+    position: relative;
+  }
+  .bullet-item::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #009068;
+    font-weight: 700;
+  }
+  .step-outcome {
+    padding: 14px 18px;
+    background: #EAF8F2;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    color: #007050;
+    font-weight: 600;
+    line-height: 1.65;
+    margin-top: auto;
+  }
+  .step-card.dark .step-outcome {
+    background: #009068;
+    color: #FAFAF8;
+  }
+  .outcome-icon { flex-shrink: 0; }
+  .plan-closer {
+    margin: 72px auto 0;
+    text-align: center;
+    max-width: 720px;
+  }
+  .plan-closer-main {
+    font-size: 17px;
+    color: #6B7570;
+    line-height: 1.7;
+    margin: 0 0 20px;
+    font-weight: 400;
+  }
+  .plan-closer-sub {
+    font-size: 22px;
+    color: #007050;
+    line-height: 1.5;
+    margin: 0;
     font-weight: 700;
     letter-spacing: -0.3px;
   }
-  .hero-note {
-    margin-top: 20px;
-    font-size: 14px;
-    color: rgba(255,255,255,0.3);
+  .connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 24px;
+    align-self: center;
   }
-
-  /* ── SECTION COMMON ─────────────────────── */
-  .section {
-    max-width: none;
-    padding: 100px 200px;
-  }
-  .section-label {
-    font-size: 13px;
+  .connector-arrow {
+    font-size: 22px;
+    color: #009068;
+    line-height: 1;
     font-weight: 700;
-    letter-spacing: 2px;
-    color: #007050;
-    text-transform: uppercase;
-    margin-bottom: 20px;
   }
-  .section-title {
-    font-size: 48px;
-    font-weight: 700;
-    margin-bottom: 36px;
-    letter-spacing: -1.5px;
-    line-height: 1.2;
+  /* ── CREATOR ──────────────────────────── */
+  .creator-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 56px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .section-divider { border: none; border-top: 1px solid #C0ECD8; margin: 0; }
-
-  .bg-white { background: #ffffff; }
-  .bg-offwhite { background: #FAFAF8; }
-
-  /* ── PROBLEM ─────────────────────────────── */
-  .callout { background: #EAF8F2; border-radius: 4px; padding: 32px 36px; margin-bottom: 32px; }
-  .callout-title { font-size: 22px; font-weight: 700; margin-bottom: 16px; }
-  .quote-block { border-left: 3px solid #009068; padding: 8px 0 8px 20px; margin: 12px 0; color: #555; font-size: 20px; }
-
-  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
-  .problem-card { background: #fff; border: 1px solid #C0ECD8; border-radius: 4px; padding: 32px; }
-  .problem-num { font-size: 12px; font-weight: 700; color: #007050; margin-bottom: 8px; letter-spacing: 1px; }
-  .problem-card h4 { font-size: 24px; font-weight: 700; margin-bottom: 14px; }
-  .problem-card p { font-size: 20px; color: #555; margin-bottom: 0; line-height: 1.75; }
-
-  .agitation-box {
-    background: #1A1A1A;
-    border-radius: 4px;
-    padding: 48px 40px;
-    margin: 32px 0;
-    text-align: center;
+  .creator-photo img {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
   }
-  .agitation-box p { color: rgba(255,255,255,0.6); font-size: 20px; margin-bottom: 12px; }
-  .agitation-main { color: #fff !important; font-size: 26px !important; font-weight: 700; margin-bottom: 0 !important; }
-
-  /* ── SOLUTION ────────────────────────────── */
-  .steps { display: flex; flex-direction: column; margin: 48px 0 28px; }
-  .step-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); border-radius: 14px; padding: 40px 44px; border-left: 4px solid #C0ECD8; }
-  .step-card.dark { background: #fff; border-left: 4px solid #009068; position: relative; }
-  .success-chip { position: absolute; top: 24px; right: 24px; font-size: 12px; font-weight: 700; color: #FAFAF8; background: #009068; padding: 6px 14px; border-radius: 999px; white-space: nowrap; }
-  .step-number { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; color: #009068; margin-bottom: 8px; }
-  .step-stage { font-size: 36px; font-weight: 800; color: #1A1A1A; margin-bottom: 8px; line-height: 1.2; }
-  .step-subtitle { font-size: 20px; font-weight: 500; color: #009068; margin-bottom: 24px; }
-  .step-bullets { display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; }
-  .bullet-item { font-size: 20px; color: #555; line-height: 1.75; padding-left: 22px; position: relative; }
-  .bullet-item::before { content: '•'; position: absolute; left: 0; color: #009068; font-weight: 700; }
-  .step-outcome { padding: 18px 24px; background: #EAF8F2; border-radius: 8px; display: flex; align-items: flex-start; gap: 10px; font-size: 18px; color: #007050; font-weight: 600; line-height: 1.7; }
-  .step-card.dark .step-outcome { background: #009068; color: #FAFAF8; }
-  .outcome-icon { flex-shrink: 0; }
-  .connector { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 40px; position: relative; }
-  .connector::before { content: ''; position: absolute; left: 50%; top: 0; height: 24px; width: 2px; background: #009068; transform: translateX(-50%); }
-  .connector-arrow { position: absolute; bottom: 0; font-size: 18px; color: #009068; line-height: 1; font-weight: 700; }
-
-  /* ── SOCIAL PROOF ─────────────────────────── */
-  .proof-section { background: #1A1A1A; }
-  .proof-section .section-label { color: #009068; }
-  .proof-section .section-title { color: #fff; }
-
+  #proof { background: #1A1A1A; }
+  #proof .section-label { color: #009068; }
+  #proof .section-title { color: #fff; }
   .topik-scores {
     display: flex;
     align-items: center;
@@ -178,35 +846,39 @@
     border: 1px solid rgba(255,255,255,0.07);
   }
   .score-card { text-align: center; }
-  .score-period { font-size: 12px; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .score-period { font-size: 12px; color: #FAFAF8; margin-bottom: 8px; }
   .score-num { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
   .score-unit { font-size: 18px; font-weight: 400; letter-spacing: 0; }
-  .score-card.before .score-num { color: rgba(255,255,255,0.25); }
+  .score-card.before .score-num { color: #FAFAF8; }
   .score-card.after .score-num { color: #009068; }
   .score-badge { display: inline-block; font-size: 11px; font-weight: 700; margin-top: 6px; padding: 2px 10px; border-radius: 99px; }
-  .score-card.before .score-badge { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.35); }
+  .score-card.before .score-badge { background: rgba(255,255,255,0.07); color: #FAFAF8; }
   .score-card.after .score-badge { background: rgba(0,144,104,0.2); color: #009068; }
   .score-arrow-wrap { display: flex; flex-direction: column; align-items: center; gap: 4px; }
   .score-arrow { font-size: 28px; color: #007050; font-weight: 700; }
   .score-change { font-size: 13px; font-weight: 700; color: #009068; }
-
   .proof-context {
     text-align: center;
-    color: rgba(255,255,255,0.5);
+    color: #FAFAF8;
     font-size: 18px;
     margin-bottom: 28px;
     line-height: 1.7;
   }
-
   .chat-bubble-wrap { max-width: 640px; margin: 0 auto 8px; }
-  .chat-bubble {
+  #proof .chat-bubble {
     background: #fff;
     border-radius: 12px 12px 12px 3px;
     padding: 24px 28px;
   }
-  .chat-bubble p { font-size: 18px; color: #1A1A1A; margin-bottom: 0; line-height: 1.85; }
-  .chat-label { text-align: left; font-size: 13px; color: rgba(255,255,255,0.25); margin-bottom: 40px; padding-left: 2px; }
-
+  #proof .chat-bubble p { font-size: 18px; color: #1A1A1A; margin-bottom: 0; line-height: 1.85; }
+  .chat-label { text-align: left; font-size: 13px; color: #FAFAF8; margin-bottom: 40px; padding-left: 2px; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .testimonials-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #009068;
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
   .testimonials { display: flex; flex-direction: column; gap: 16px; }
   .testimonial {
     background: rgba(255,255,255,0.05);
@@ -216,413 +888,624 @@
   }
   .testimonial-quote { font-size: 18px; color: rgba(255,255,255,0.8); line-height: 1.85; margin-bottom: 10px; }
   .testimonial-attr { font-size: 14px; color: rgba(255,255,255,0.3); }
-
-  /* ── FEATURES ─────────────────────────────── */
-  .result-grid { display: flex; flex-direction: column; gap: 14px; margin: 20px 0; }
-  .result-card { background: #EAF8F2; border-radius: 4px; padding: 20px 24px; }
-  .result-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-
-  /* ── STEPS ───────────────────────────────── */
-  .steps { margin: 20px 0; }
-  .step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
-  .step-num { background: #007050; color: #fff; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 4px; }
-
-  /* ── CTA BLOCK ───────────────────────────── */
-  .cta-block { background: #EAF8F2; border-radius: 4px; padding: 28px; margin: 28px 0; text-align: center; }
-  .cta-block .cta-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
-  .cta-link { display: inline-block; background: #007050; color: #fff; padding: 12px 32px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 500; margin-top: 12px; }
-
-  /* ── CREATOR ─────────────────────────────── */
-  .creator-layout { display: flex; gap: 80px; align-items: flex-start; margin-top: 56px; }
-  .creator-photo { flex: 0 0 420px; }
-  .creator-photo img { width: 100%; border-radius: 8px; display: block; object-fit: cover; }
-  .creator-text { flex: 1; }
-  .creator-name { font-size: 48px; font-weight: 700; margin-bottom: 8px; letter-spacing: -1.5px; }
-  .creator-meta { font-size: 20px; color: #787774; margin-bottom: 36px; line-height: 1.7; }
-  .creator-creds { display: flex; flex-direction: column; gap: 16px; margin: 32px 0; }
-  .creator-cred { display: flex; align-items: flex-start; gap: 14px; font-size: 20px; color: #444; line-height: 1.6; }
-  .creator-cred-dot { width: 7px; height: 7px; border-radius: 50%; background: #009068; flex-shrink: 0; margin-top: 10px; }
-  @media (max-width: 768px) {
-    .creator-layout { flex-direction: column; gap: 32px; }
-    .creator-photo { flex: none; width: 100%; max-width: 320px; }
+  #creator { background: #1A1A1A; }
+  #creator .section-label { color: #009068; }
+  #creator .section-title { color: #fff; }
+  .creator-text p {
+    font-size: 21px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.85;
+    margin-bottom: 20px;
   }
-
-  .channel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
-  .channel-card { background: #FAFAF8; border-radius: 4px; padding: 16px 12px; text-align: center; text-decoration: none; color: #1A1A1A; transition: background 0.15s; }
-  .channel-card:hover { background: #EAF8F2; }
-  .channel-icon { font-size: 24px; margin-bottom: 6px; }
-  .channel-name { font-size: 13px; font-weight: 500; }
-  .channel-desc { font-size: 11px; color: #999; margin-top: 2px; }
-
-  /* ── FINAL CTA ───────────────────────────── */
+  .creator-text strong { color: #009068; font-weight: 700; }
+  .creator-signature {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 17px;
+    color: rgba(255,255,255,0.5);
+  }
+  .creator-signature strong {
+    color: #fff;
+    font-weight: 700;
+  }
+  .creator-channels {
+    max-width: 720px;
+    margin: 80px auto 0;
+    text-align: center;
+    padding-top: 56px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .creator-channels-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .creator-channels-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .channel-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    padding: 18px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .channel-card:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: rgba(255,255,255,0.25);
+  }
+  /* ── FINAL CTA ────────────────────────── */
   .final-cta {
-    background: #1A1A1A;
-    padding: 64px 24px;
+    background: #FAFAF8;
+    padding: 100px 200px;
     text-align: center;
   }
-  .final-cta h3 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.4; }
-  .final-cta .final-sub { color: rgba(255,255,255,0.55); font-size: 15px; margin-bottom: 0; }
-  .final-cta .final-cta-label { font-size: 18px; font-weight: 700; color: #fff; margin: 24px 0 0; }
-  .cta-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
-  .btn-white { display: inline-block; background: #ffffff; color: #1A1A1A; padding: 14px 36px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 700; }
-  .btn-outline { display: inline-block; background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 14px 36px; border-radius: 4px; text-decoration: none; font-size: 15px; font-weight: 500; }
+  .final-cta h2 {
+    color: #1A1A1A;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .final-cta-sub {
+    color: #555;
+    font-size: 20px;
+    line-height: 1.6;
+    margin-bottom: 56px;
+  }
+  .final-cta-label {
+    color: #1A1A1A;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .final-cta .btn-download {
+    background: #fff;
+    color: #1A1A1A;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .final-cta .btn-download:hover { background: #F0F0EB; }
+  .final-cta .btn-download.android {
+    background: #009068;
+    color: #fff;
+    border: none;
+  }
+  .final-cta .btn-download.android:hover { background: #007050; }
+  .final-cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+  }
+  /* ── CHANNELS ─────────────────────────── */
+  .channels-block {
+    margin-top: 56px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .channels-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin: 0 0 8px;
+    letter-spacing: -0.3px;
+  }
+  .channels-sub {
+    font-size: 15px;
+    color: rgba(0,0,0,0.45);
+    margin: 0 0 28px;
+    line-height: 1.6;
+  }
+  .channels-grid {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .channel-link {
+    display: inline-block;
+    padding: 10px 22px;
+    border: 1px solid rgba(0,0,0,0.14);
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1A1A1A;
+    text-decoration: none;
+    transition: background 0.18s, border-color 0.18s, color 0.18s;
+  }
+  .channel-link:hover {
+    background: #009068;
+    border-color: #009068;
+    color: #fff;
+  }
+  .featured-video {
+    max-width: 720px;
+    margin: 56px auto 0;
+    text-align: left;
+  }
+  .featured-video-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #007050;
+    margin: 0 0 10px;
+  }
+  .video-embed {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+    background: #000;
+  }
+  .video-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  /* ── FOOTER ───────────────────────────── */
+  .site-footer {
+    background: #1A1A1A;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 200px;
+    text-align: center;
+  }
+  .site-footer a {
+    color: rgba(255,255,255,0.35);
+    font-size: 13px;
+    text-decoration: none;
+    margin: 0 14px;
+  }
+  .site-footer a:hover { color: rgba(255,255,255,0.6); }
+  .site-footer .contact {
+    margin-top: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.2);
+  }
+  .site-footer .contact a { margin: 0; color: rgba(255,255,255,0.2); }
 
-  /* ── FOOTER ──────────────────────────────── */
-  .footer { text-align: center; padding: 28px 24px; background: #1A1A1A; border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer a { color: rgba(255,255,255,0.35); font-size: 13px; text-decoration: none; margin: 0 12px; }
-  .footer a:hover { color: rgba(255,255,255,0.6); }
-  .footer .contact { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.2); }
-  .footer .contact a { margin: 0; color: rgba(255,255,255,0.2); }
+  /* ── RESPONSIVE: TABLET ───────────────── */
+  @media (max-width: 1024px) {
+    .section { padding: 80px 80px; }
+    .hero { padding: 100px 80px 88px; }
+    .final-cta { padding: 80px 80px; }
+    .site-header { padding: 0 80px; }
+    .site-footer { padding: 32px 80px; }
+    .hero-headline { font-size: 64px; letter-spacing: -2px; }
+    .section-title { font-size: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .topik-scores { gap: 20px; padding: 24px 16px; }
+    .site-nav { gap: 20px; }
+    .site-nav a { font-size: 13px; }
 
-  /* ── ANIMATIONS ─────────────────────────── */
+    /* plan horizontal scroll on tablet+ down */
+    .plan-steps {
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+      padding: 12px 0 20px;
+      scroll-padding-left: 80px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+    .step-card {
+      flex: 0 0 78%;
+      min-width: 280px;
+      scroll-snap-align: start;
+    }
+    .connector { display: none; }
+  }
+
+  /* ── RESPONSIVE: MOBILE ───────────────── */
+  @media (max-width: 600px) {
+    .section { padding: 64px 24px; }
+    .hero { padding: 80px 24px 72px; }
+    .final-cta { padding: 64px 24px; }
+    .site-header { padding: 0 24px; height: 56px; }
+    .site-footer { padding: 24px 24px; }
+
+    .hero-headline { font-size: 44px; letter-spacing: -1.5px; }
+    .hero-sub { font-size: 20px; }
+    .hero-solution { font-size: 20px; }
+    .hero-ctas { flex-direction: column; align-items: stretch; gap: 10px; }
+    .btn-download { justify-content: center; padding: 16px 24px; font-size: 16px; }
+
+    .section-title { font-size: 30px; }
+    p { font-size: 18px; }
+
+    .stakes-quote { font-size: 18px; }
+    .stakes-summary { font-size: 18px; }
+    .stakes-finisher { font-size: 21px; }
+
+    .service-card { padding: 28px 24px; }
+    .service-card h3 { font-size: 22px; }
+    .service-hook { font-size: 16px; }
+    .service-desc { font-size: 16px; }
+
+    .topik-scores { flex-direction: column; gap: 16px; }
+    .score-arrow-wrap { flex-direction: row; }
+    .score-num { font-size: 44px; }
+    .testimonial-quote { font-size: 16px; }
+
+    .creator-layout { grid-template-columns: 1fr; gap: 32px; }
+    .creator-photo img { max-width: 320px; margin: 0 auto; }
+    .creator-text p { font-size: 18px; }
+
+    .journey-map { margin-top: 32px; padding: 0 8px; }
+    .journey-node { width: 60px; }
+    .journey-dot { width: 14px; height: 14px; }
+    .journey-label { font-size: 13px; }
+    .plan-steps {
+      scroll-padding-left: 24px;
+      margin: 32px -24px 0;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .plan-closer { margin-top: 48px; }
+    .plan-closer-main { font-size: 15px; }
+    .plan-closer-sub { font-size: 19px; }
+    .step-card { padding: 24px 20px; flex: 0 0 85%; }
+    .step-stage { font-size: 26px; }
+    .step-subtitle { font-size: 15px; }
+    .bullet-item { font-size: 15px; }
+    .step-outcome { font-size: 14px; }
+    .success-chip { top: -12px; }
+    .channels-grid { grid-template-columns: repeat(2, 1fr); }
+    .creator-channels { margin-top: 48px; padding-top: 40px; }
+
+    .final-cta h2 { font-size: 26px; }
+    .final-cta-buttons { flex-direction: column; align-items: stretch; gap: 10px; }
+    .channels-grid { gap: 8px; }
+    .channel-link { padding: 8px 18px; font-size: 13px; }
+
+    .site-nav { display: none; }
+    .header-cta a { font-size: 12px; padding: 6px 12px; }
+    .header-cta { gap: 6px; }
+  }
+
+  /* ── REVEAL ANIMATIONS ────────────────── */
   .reveal {
     opacity: 0;
     transform: translateY(32px);
-    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                transform 0.65s cubic-bezier(0.22,1,0.36,1);
   }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .reveal-d1 { transition-delay: 0.08s; }
   .reveal-d2 { transition-delay: 0.16s; }
   .reveal-d3 { transition-delay: 0.24s; }
   .reveal-d4 { transition-delay: 0.32s; }
-
-  /* ── RESPONSIVE ──────────────────────────── */
-  @media (max-width: 600px) {
-    .hero-headline { font-size: 44px; letter-spacing: -1.5px; }
-    .hero { padding: 80px 24px 72px; }
-    .hero-sub { font-size: 20px; }
-    .btn-hero { display: block; text-align: center; padding: 18px 24px; font-size: 16px; }
-    .section { padding: 72px 24px; }
-    .section-title { font-size: 32px; }
-    p { font-size: 18px; }
-    .problem-grid { grid-template-columns: 1fr; }
-    .problem-card { padding: 24px; }
-    .problem-card h4 { font-size: 20px; }
-    .problem-card p { font-size: 17px; }
-    .agitation-box { padding: 32px 24px; }
-    .agitation-box p { font-size: 17px; }
-    .agitation-main { font-size: 21px !important; }
-    .topik-scores { flex-direction: column; gap: 16px; padding: 24px 16px; }
-    .score-arrow-wrap { flex-direction: row; }
-    .score-arrow { transform: rotate(0deg); font-size: 22px; }
-    .score-num { font-size: 44px; }
-    .chat-bubble p { font-size: 16px; }
-    .testimonial-quote { font-size: 16px; }
-    .channel-grid { grid-template-columns: repeat(2, 1fr); }
-    .cta-buttons { flex-direction: column; align-items: center; }
-    .step-card { padding: 24px 20px; }
-    .step-stage { font-size: 28px; }
-    .step-subtitle { font-size: 17px; }
-    .bullet-item { font-size: 17px; }
-    .step-outcome { font-size: 16px; }
-    .success-chip { position: static; display: inline-block; margin-bottom: 12px; }
-    .creator-name { font-size: 32px; }
-    .creator-meta { font-size: 17px; }
-    .creator-cred { font-size: 17px; }
-  }
 </style>
 </head>
 <body>
 
-<!-- ── HERO ─────────────────────────────────── -->
-<div class="hero">
-  <div class="hero-brand reveal">hikaro</div>
-  <h1 class="hero-headline reveal reveal-d1">한국어 공부,<br>몇 번이나 포기하셨나요?</h1>
-  <p class="hero-sub reveal reveal-d2">재능이 아닙니다.<br><strong>지도가 없었던 겁니다.</strong></p>
-  <a class="btn-hero reveal reveal-d3" href="https://apps.apple.com/kr/app/hikaro/id6758513552">무료로 시작하기 →</a>
-  <p class="hero-note reveal reveal-d4">설치 1분 · 첫 학습 5분 · 무료</p>
-</div>
-
-
-<!-- ── PROBLEM ──────────────────────────────── -->
-<div class="bg-white">
-  <div class="section">
-    <div class="section-label reveal">왜 계속 실패하는가</div>
-    <h2 class="section-title reveal reveal-d1">몇 번이나 포기했다면,<br>그건 재능 때문이 아닙니다</h2>
-
-    <div class="callout reveal reveal-d2">
-      <div class="callout-title">이런 마음, 공감되시나요?</div>
-      <div class="quote-block">「또 단어를 외우려다가, 또 까먹었어…」</div>
-      <div class="quote-block">「몇 번을 시작해도, 어차피 안 돼…」</div>
-      <div class="quote-block">「혹시 나는 재능이 없는 걸까…」</div>
-      <p style="margin-top: 12px;">이 말이 내 이야기처럼 느껴졌다면, 꼭 읽어보세요.<br>
-      <span class="text-accent">원인은 딱 두 가지뿐입니다.</span></p>
-    </div>
-
-    <div class="problem-grid">
-      <div class="problem-card reveal">
-        <div class="problem-num">문제 1</div>
-        <h4>잘못된 방법</h4>
-        <p>언어학습에서 암기는 필수입니다. 그런데 대부분의 학습자들은 암기 효율이 가장 나쁜 방법 — 종이에 반복해서 쓰기 — 으로 열심히 하고 있습니다.<br><br>잘못된 방법으로 아무리 노력해도 결국 까먹고, 또 좌절합니다.</p>
-      </div>
-      <div class="problem-card reveal reveal-d1">
-        <div class="problem-num">문제 2</div>
-        <h4>학습 지도가 없음</h4>
-        <p>지금 어디쯤 와 있는지, 다음에 뭘 해야 하는지, 어떻게 하면 한국어를 잘 할 수 있는지 — 아무것도 보이지 않는 상태.<br><br>매일 열심히 할수록 성장이 아니라, 혼자서 안개 속을 헤매는 기분이 듭니다.</p>
-      </div>
-    </div>
-
-    <div class="agitation-box reveal">
-      <p>이 상태가 계속되면 어떻게 될까요?</p>
-      <p>도전과 좌절이 반복되면서, 결국 <span style="color:#C0ECD8; font-weight:700;">"나는 언어 재능이 없어"</span>라는 결론을 내리게 됩니다.</p>
-      <p class="agitation-main">하지만 그건 틀렸습니다. <span style="color:#009068;">가이드</span><span style="color:#fff;">와</span><span style="color:#009068;"> 지도</span>가 없었던 겁니다.</p>
-      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);">
-        <p style="color:rgba(255,255,255,0.65); font-size:17px; margin-bottom:8px;">가이드는 잘못된 방법을 반복하지 않도록 해주고, 지도는 목적지까지 헤매지 않고 갈 수 있게 해줍니다.</p>
-        <p style="color:rgba(255,255,255,0.4); font-size:16px; margin-bottom:0;">같은 시간을 공부해도 훨씬 많이 기억에 남고, 매일 헤매는 기분이 아니라 확신을 갖고 학습할 수 있습니다.</p>
-      </div>
-    </div>
-
-    <div style="margin-top: 28px; background: #EAF8F2; border-radius: 8px; padding: 24px;">
-      <span style="background: #009068; color: #fff; font-size: 15.6px; font-weight: 700; padding: 5px 24px; border-radius: 8px; display: inline-block;">나에게도 이런 날이 올까?</span>
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-        <div style="display: flex; align-items: flex-start; gap: 12px;">
-          <span style="color: #009068; font-weight: 700; flex-shrink: 0; margin-top: 2px;">✓</span>
-          <p style="margin: 0; color: #555;">서울의 카페에서 점원과 한국어로 자연스럽게 대화하는 날.</p>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 12px;">
-          <span style="color: #009068; font-weight: 700; flex-shrink: 0; margin-top: 2px;">✓</span>
-          <p style="margin: 0; color: #555;">좋아하는 한국 드라마 대사가 자막 없이 들리는 경험.</p>
-        </div>
-        <div style="display: flex; align-items: flex-start; gap: 12px;">
-          <span style="color: #009068; font-weight: 700; flex-shrink: 0; margin-top: 2px;">✓</span>
-          <p style="margin: 0; color: #555;">한국인 친구에게 "한국어 정말 잘하시네요"라고 처음 듣는 순간.</p>
-        </div>
-      </div>
-      <div style="margin-top: 20px; border-top: 1px solid #C0ECD8; padding-top: 16px;">
-        <p style="margin: 0; font-size: 17px; font-weight: 700; color: #007050;">올바른 가이드와 지도만 있다면, 충분히 가능한 이야기입니다.</p>
-      </div>
+<header class="site-header">
+  <div class="site-header-inner">
+    <a href="#top" class="site-logo">hikaro</a>
+    <nav class="site-nav">
+      <a href="#stakes">なぜ失敗するか</a>
+      <a href="#proof">どう変わるか</a>
+      <a href="#plan">どう勉強するか</a>
+      <a href="#creator">作った理由</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.hikaro" class="outline">Google Play</a>
     </div>
   </div>
-</div>
+</header>
 
+<section class="hero" id="top">
+  <video class="hero-video" autoplay muted loop playsinline preload="auto">
+    <source src="videos/hero-bg.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-headline reveal">韓国語の勉強、<br>何度も挫折していませんか？</h1>
+    <p class="hero-sub reveal reveal-d1">覚えても忘れて、何年経っても初級のまま。<br><strong>才能のせいじゃありません。正しい勉強法を知らなかっただけです。</strong></p>
+    <div class="hero-divider reveal reveal-d2"></div>
+    <p class="hero-solution reveal reveal-d2">韓国語学習アプリhikaroがあれば、<br><strong>もう迷わなくていいです。</strong></p>
+    <div class="hero-ctas reveal reveal-d3">
+      <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+      <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">Google Play →</a>
+    </div>
+    <p class="hero-note reveal reveal-d4">インストール1分・最初のレッスン5分・無料</p>
+  </div>
+</section>
 
-<!-- ── SOLUTION ─────────────────────────────── -->
-<div class="bg-offwhite">
+<section class="bg-offwhite" id="stakes">
   <div class="section">
-    <div class="section-label reveal">해결책</div>
-    <h2 class="section-title reveal reveal-d1">hikaro = 당신의 학습 지도</h2>
+    <div class="section-label reveal">挫折する理由は、実はほとんど同じです</div>
+    <h2 class="section-title reveal reveal-d1">韓国語で挫折した人たちは、<br>みんな同じことを言います</h2>
 
-    <p class="reveal reveal-d2">한국어를 잘 하게 되기까지 크게 3단계가 있습니다. 지금 어떤 단계에 있고, 뭘 학습해야 하는지, 어떻게 학습해야 가장 효율적으로 다음 단계를 졸업할 수 있는지 — hikaro가 안내합니다.</p>
-
-    <div class="steps">
-
-      <div class="step-card reveal">
-        <div class="step-number">STEP 01</div>
-        <div class="step-stage">유아기</div>
-        <div class="step-subtitle">기초 단어와 문법을 쌓는다</div>
-        <div class="step-bullets">
-          <div class="bullet-item">언어학습에서 반드시 필요한 과정이기 때문에, 이 단계를 얼마나 효율적이고 빠르게 졸업하느냐가 관건입니다.</div>
-          <div class="bullet-item">hikaro에는 무엇을 외워야 하는지, 어떻게 쉽게 외울 수 있는지가 모두 준비되어 있습니다.</div>
-        </div>
-        <div class="step-outcome">
-          <span class="outcome-icon">→</span>
-          <span><strong>졸업하면?</strong><br>아직 느리고 완벽하진 않지만, 간단한 한국어 문장을 스스로 만들 수 있습니다.</span>
-        </div>
-      </div>
-
-      <div class="connector"><div class="connector-arrow">↓</div></div>
-
-      <div class="step-card reveal">
-        <div class="step-number">STEP 02</div>
-        <div class="step-stage">청년기</div>
-        <div class="step-subtitle">입에서 한국어가 나오기 시작한다</div>
-        <div class="step-bullets">
-          <div class="bullet-item">문장을 외우고, 또 실제로 만들어 보면서 단어와 문법의 사용 감각을 익힙니다.</div>
-          <div class="bullet-item">문장을 만들 수 있게 되기 때문에, 점점 말을 할 수 있게 됩니다.</div>
-          <div class="bullet-item">단어와 문법은 아는데 막상 말이 안 나왔던 답답함이 풀립니다.</div>
-        </div>
-        <div class="step-outcome">
-          <span class="outcome-icon">→</span>
-          <span><strong>졸업하면?</strong><br>동사와 형용사의 변형이 좀 더 익숙해지고, 말할 수 있는 문장이 대폭 늘어납니다.</span>
-        </div>
-      </div>
-
-      <div class="connector"><div class="connector-arrow">↓</div></div>
-
-      <div class="step-card dark reveal">
-        <div class="success-chip">여기까지 도달했다면, 한국어 공부 성공!</div>
-        <div class="step-number">STEP 03</div>
-        <div class="step-stage">성인기</div>
-        <div class="step-subtitle">더 정확하고, 더 자연스러운 한국어로 말할 수 있다</div>
-        <div class="step-bullets">
-          <div class="bullet-item">생각하지 않고도 한국어가 나오는 빈도가 많아집니다.</div>
-          <div class="bullet-item">단순 의미 전달이 아니라, 뉘앙스가 자연스럽게 신경 쓰이기 시작합니다.</div>
-          <div class="bullet-item">더 정확한 단어와 표현으로, 더욱 한국인스러운 문장을 말할 수 있게 됩니다.</div>
-        </div>
-        <div class="step-outcome">
-          <span class="outcome-icon">→</span>
-          <span><strong>목표</strong><br>내 생각의 80% 이상을 자연스러운 한국어로 말할 수 있습니다.</span>
-        </div>
-      </div>
-
+    <div class="stakes-quotes reveal reveal-d2">
+      <div class="stakes-quote">「あんなに頑張って単語を覚えたのに、また忘れた…」</div>
+      <div class="stakes-quote">「こんな勉強を続けて、本当に韓国語が上手くなれるの？」</div>
+      <div class="stakes-quote">「私って頭が良くないし、語学の才能もないから…」</div>
     </div>
 
-    <p><span style="color: #007050; font-weight: 500;">가장 효율적인 언어학습에 대한 고민과 연구는 hikaro가 하고, 앱에 반영합니다.<br>당신은 그저 앱을 열고, 포치포치만 하면 됩니다.</span></p>
+    <p class="stakes-summary reveal reveal-d3">勉強すればするほど自信がつくどころか、<br>ずっと迷い続けている感じ。</p>
+
+    <div class="stakes-finisher reveal reveal-d4">
+      この状態で続けていたら、また同じように挫折して、<br>結局諦めることになります。
+    </div>
   </div>
-</div>
+</section>
 
-
-<!-- ── SOCIAL PROOF ──────────────────────────── -->
-<div class="proof-section">
+<section id="proof">
   <div class="section">
-    <div class="section-label reveal">실제 사용자</div>
-    <h2 class="section-title reveal reveal-d1">지도가 생기면,<br>이렇게 달라집니다</h2>
+    <div class="section-label reveal">hikaroで学習すると、どれほど変わる？</div>
+    <h2 class="section-title reveal reveal-d1">ガイドがあると、<br>こんなに変わります</h2>
 
     <div class="topik-scores reveal reveal-d2">
       <div class="score-card before">
-        <div class="score-period">1월 · hikaro 시작 전</div>
-        <div class="score-num">57<span class="score-unit">점</span></div>
-        <div class="score-badge">TOPIK 모의고사</div>
+        <div class="score-period">1月・hikaro開始前</div>
+        <div class="score-num">57<span class="score-unit">点</span></div>
+        <div class="score-badge">TOPIK模擬試験</div>
       </div>
       <div class="score-arrow-wrap">
         <div class="score-arrow">→</div>
-        <div class="score-change">+108점</div>
+        <div class="score-change">+108点</div>
       </div>
       <div class="score-card after">
-        <div class="score-period">4월 · 3개월 후</div>
-        <div class="score-num">165<span class="score-unit">점</span></div>
-        <div class="score-badge">TOPIK 모의고사</div>
+        <div class="score-period">4月・3ヶ月後</div>
+        <div class="score-num">165<span class="score-unit">点</span></div>
+        <div class="score-badge">TOPIK模擬試験</div>
       </div>
     </div>
 
-    <p class="proof-context reveal">1월에 한국어를 한 글자도 읽지 못했던 유저가,<br>4개월 후 저한테 한국어로 직접 보내온 메시지입니다.</p>
+    <p class="proof-context reveal">1月に韓国語が一言も話せなかった日本人が、<br>4ヶ月後に私に韓国語で直接送ってきたメッセージです。</p>
 
     <div class="chat-bubble-wrap reveal">
       <div class="chat-bubble">
-        <p>응! 잘잤어!<br>지금부터 점심이야!<br>장연 밥 먹었어!?<br><br>4월29일부터 연휴야!<br>하고 싶은 일이 많이 있어서 준번을 생각해야돼!!<br>TOPIK1의 텍스트가 사실 아직 안 끝나니까 그냥 그 텍스트를 끝나고 싶어 ㅎㅎ<br>집에의 청소나 드라마도 남아 있으니까 하고 싶은 일이 너무 많이 있어 ㅋㅋㅋㅋ<br>파레토360도 완벽하고 싶어!!</p>
+        <p lang="ko">응! 잘잤어!<br>지금부터 점심이야!<br>장연 밥 먹었어!?<br><br>4월29일부터 연휴야!<br>하고 싶은 일이 많이 있어서 준번을 생각해야돼!!<br>TOPIK1의 텍스트가 사실 아직 안 끝나니까 그냥 그 텍스트를 끝나고 싶어 ㅎㅎ<br>집에의 청소나 드라마도 남아 있으니까 하고 싶은 일이 너무 많이 있어 ㅋㅋㅋㅋ<br>파레토360도 완벽하고 싶어!!</p>
       </div>
     </div>
-    <div class="chat-label">실제 유저 메시지 원문</div>
+    <div class="chat-label">実際のユーザーメッセージ（原文）</div>
 
-    <div class="testimonials">
-      <div class="testimonial reveal" lang="ja">
-        <div class="testimonial-quote">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</div>
-        <div class="testimonial-attr">20代・会社員</div>
+  </div>
+</section>
+
+<section class="bg-white" id="plan">
+  <div class="section">
+    <div class="section-label reveal">韓国語力を最も効率よく伸ばす方法</div>
+    <h2 class="section-title reveal reveal-d1">韓国語が上手くなるまでの、<br>3ステップ学習マップ</h2>
+
+    <div class="journey-map reveal reveal-d2">
+      <div class="journey-track">
+        <button type="button" class="journey-node" data-target="0" aria-label="初級期ステップへ移動">
+          <div class="journey-dot"></div>
+          <div class="journey-label">初級期</div>
+        </button>
+        <div class="journey-line"></div>
+        <button type="button" class="journey-node" data-target="1" aria-label="中級期ステップへ移動">
+          <div class="journey-dot"></div>
+          <div class="journey-label">中級期</div>
+        </button>
+        <div class="journey-line"></div>
+        <button type="button" class="journey-node" data-target="2" aria-label="上級期ステップへ移動">
+          <span class="journey-flag">達成！</span>
+          <div class="journey-dot"></div>
+          <div class="journey-label">上級期</div>
+        </button>
       </div>
-      <div class="testimonial reveal reveal-d1" lang="ja">
-        <div class="testimonial-quote">「耳が覚えると文字を確認したくなり、自然と覚えていくのが楽しいです。何回、スゴイ！合ってる！分かる～！と口に出た事か。」</div>
-        <div class="testimonial-attr">30代</div>
+    </div>
+
+    <div class="plan-steps">
+      <div class="step-card reveal">
+        <div class="step-number">STEP 01</div>
+        <div class="step-stage">初級期</div>
+        <div class="step-subtitle">基礎単語と文法を積み上げる</div>
+        <div class="step-bullets">
+          <div class="bullet-item">誰もが通る段階。<strong>いかに早く卒業できるかが鍵。</strong></div>
+          <div class="bullet-item">何を・どうやって覚えるか、hikaroがすべて準備してあります。</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>卒業したら？</strong><br>簡単な韓国語の文章を自分で作ることができます。</span>
+        </div>
       </div>
-      <div class="testimonial reveal reveal-d2" lang="ja">
-        <div class="testimonial-quote">「何故か次の日には覚えてる単語も増えたりとかして、ちょっと嬉しかったり」</div>
-        <div class="testimonial-attr">40代・主婦</div>
+
+      <div class="connector reveal"><div class="connector-arrow">→</div></div>
+
+      <div class="step-card reveal reveal-d1">
+        <div class="step-number">STEP 02</div>
+        <div class="step-stage">中級期</div>
+        <div class="step-subtitle">口から韓国語が出てくるようになる</div>
+        <div class="step-bullets">
+          <div class="bullet-item">文章を覚えて作ってみながら、<strong>単語・文法の使い感覚</strong>を身につけます。</div>
+          <div class="bullet-item">文章が作れるので、言葉が出てくるようになります。</div>
+          <div class="bullet-item">「わかるのに話せない」もどかしさが解消されます。</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>卒業したら？</strong><br>動詞・形容詞の変化に慣れて、話せる文章が大幅に増えます。</span>
+        </div>
+      </div>
+
+      <div class="connector reveal"><div class="connector-arrow">→</div></div>
+
+      <div class="step-card dark reveal reveal-d2">
+        <div class="success-chip">ここまで達成したら、韓国語学習の成功！</div>
+        <div class="step-number">STEP 03</div>
+        <div class="step-stage">上級期</div>
+        <div class="step-subtitle">より正確で、より自然な韓国語が話せる</div>
+        <div class="step-bullets">
+          <div class="bullet-item">考えなくても韓国語が出てきます。</div>
+          <div class="bullet-item">意味の伝達を超えて、<strong>ニュアンス</strong>が気になります。</div>
+          <div class="bullet-item">より正確な表現で、<strong>韓国人らしい文章</strong>を使いこなします。</div>
+        </div>
+        <div class="step-outcome">
+          <span class="outcome-icon">→</span>
+          <span><strong>目標</strong><br>自分の考えの80%以上を自然な韓国語で話せます。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="plan-closer reveal reveal-d3">
+      <p class="plan-closer-main">各ステップで何をすべきか、何をしなくていいか、<br>hikaroがすべて教えてくれます。</p>
+      <p class="plan-closer-sub">もう一人で迷わなくていいです。</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-offwhite" id="features">
+  <div class="section">
+    <div class="section-label reveal">hikaroで学習すれば、成功できます。</div>
+    <h2 class="section-title reveal reveal-d1">いつも壁になっていた単語と文法、<br>今度こそ失敗しない理由</h2>
+
+    <div class="services-grid services-grid-2">
+      <div class="service-card reveal reveal-d1">
+        <h3>いつの間にか覚えられる単語帳</h3>
+        <div class="service-hook">どんどん忘れても大丈夫</div>
+        <ul class="service-bullets">
+          <li>無理に覚えなくても頭に残ります。</li>
+          <li>紙に書いて覚える方法よりも、<strong>圧倒的に楽で効率がいいです。</strong></li>
+          <li>「また忘れた」が<strong>「私も覚えられる！」</strong>に変わります。</li>
+        </ul>
+        <p class="service-founder-note">
+          漢字をほとんど知らなかった私も、この方法を使って<strong>7ヶ月でJLPT N1に合格</strong>しました。
+          <span class="service-founder-note-author">— hikaro開発者</span>
+        </p>
+      </div>
+
+      <div class="service-card reveal reveal-d2">
+        <h3>文法の近道</h3>
+        <div class="service-hook">最もやさしくわかりやすい説明</div>
+        <ul class="service-bullets">
+          <li>最も詳しい説明ではなく、<strong>最もわかりやすい説明。</strong></li>
+          <li>文法ごとに<strong>変化形の練習</strong>がついているので、すぐに身につきます。</li>
+          <li>韓国語会話に必要な<strong>必須文法25個</strong>を厳選しました。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="user-testimonials reveal reveal-d2">
+      <h3 class="user-testimonials-title">上記の機能で学習したユーザーの実際の反応は？</h3>
+      <div class="user-testimonials-grid">
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「3日4日同じ単語を繰り返してみてると、お！覚えてる！！って言う日が来るね！それが楽しい！！」</p>
+          <div class="ut-author">新潟県・Mさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「耳が覚えると文字を確認したくなり、自然と覚えていくのが楽しいです。何回、スゴイ！合ってる！分かる～！と口に出た事か。」</p>
+          <div class="ut-author">宮城県・Yさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「何故か次の日には覚えてる単語も増えたりとかして💓 ちょっと嬉しかったり😊」</p>
+          <div class="ut-author">大阪府・Rさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「わからない単語だけが自然と集まってくるから、そこを集中的に覚えればいい。気づいたら自分のものになってる感じです。<br>例文も〜습니다、〜합니다みたいな参考書っぽい表現じゃなくて、実際の会話に近いから自然に頭に入ってくるんですよね。」</p>
+          <div class="ut-author">大阪府・Sさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">単語帳</span>
+          <p class="ut-quote-ja">「働いていると、勉強時間を確保するのがすごく難しいけど、Hikaroは移動中とかにも勉強する事ができるから、続けやすくて助かってる。<br>同じ単語を何度も間違えて嫌になる時もあるけど、1単語だけでも毎日覚えていたら、母音で挫折した私でも、韓国語の文章を書ける様になっていました。」</p>
+          <div class="ut-author">北海道・Aさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">文法</span>
+          <p class="ut-quote-ja">「不規則変換もわかりやすい解説付きで、不規則変化だけを練習することもできるので、無意識に理解できるようになるまで飽きずに繰り返すこともでき最高です！」</p>
+          <div class="ut-author">新潟県・Kさん</div>
+        </div>
+        <div class="ut-card">
+          <span class="ut-tag">文法</span>
+          <p class="ut-quote-ja">「説明自体はわかりやすいですし、不規則動詞の説明が各文法ごとにされてるのも慣れない人にはいいのかなと思います」</p>
+          <div class="ut-author">愛媛県・Tさん</div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-
-<!-- ── FEATURES ──────────────────────────────── -->
-<div class="bg-white">
+<section id="creator">
   <div class="section">
-    <div class="section-label reveal">올바른 방법</div>
-    <h2 class="section-title reveal reveal-d1">올바른 방법으로 학습하면,<br>이렇게 달라집니다</h2>
-
-    <div class="result-grid">
-      <div class="result-card reveal">
-        <h4>마음껏 까먹어도 됩니다. 결국 외워지는 단어장이니까.</h4>
-        <ul style="margin:8px 0 0; padding-left:20px; font-size:15px; color:#555; line-height:1.8;">
-          <li>"외웠는데 또 까먹었어"가 "나도 단어를 외울 수 있어!"로 바뀝니다.</li>
-          <li>억지로 외우려고 하지 않아도, 어느새 머릿속에 남아있습니다.</li>
-        </ul>
-      </div>
-      <div class="result-card reveal reveal-d1">
-        <h4>가장 친절하고 쉬운 문법 가이드</h4>
-        <ul style="margin:8px 0 0; padding-left:20px; font-size:15px; color:#555; line-height:1.8;">
-          <li>가장 자세한 설명이 아니라, 가장 직관적이고 쉬운 설명을 목표로 만들었습니다.</li>
-          <li>문법마다 연습 기능이 있어서, 쉽고 효율적으로 익힐 수 있습니다.</li>
-        </ul>
-      </div>
-      <div class="result-card reveal reveal-d2">
-        <h4>내가 매일 쓰는 일본어를 한국어로</h4>
-        <ul style="margin:8px 0 0; padding-left:20px; font-size:15px; color:#555; line-height:1.8;">
-          <li>자신이 일상에서 쓰는 일본어 표현을 하나씩 한국어로 바꿔나가는 가장 빠른 방법.</li>
-          <li>hikaro가 최적의 타이밍에 복습을 도와 실력을 빠르게 키울 수 있습니다.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ── STEPS ─────────────────────────────────── -->
-<div class="bg-offwhite">
-  <div class="section">
-    <div class="section-label">사용법</div>
-    <h2 class="section-title">사용법은 심플합니다</h2>
-
-    <div class="steps">
-      <div class="step"><div class="step-num">1</div><p>앱을 다운로드한다</p></div>
-      <div class="step"><div class="step-num">2</div><p>매일 앱을 열고, "알아" "몰라"만 답한다</p></div>
-      <div class="step"><div class="step-num">3</div><p>나머지는 hikaro가 최적의 타이밍으로 복습을 돕는다</p></div>
-    </div>
-
-    <div class="cta-block">
-      <div class="cta-title">무료로 시작하고, 나에게 맞는지 확인하기</div>
-      <p class="text-muted">설치 1분, 첫 학습은 5분이면 충분합니다.</p>
-      <div style="display: flex; gap: 12px; justify-content: center;">
-        <a class="cta-link" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
-        <a class="cta-link" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ── CREATOR ───────────────────────────────── -->
-<div class="bg-white">
-  <div class="section">
-    <div class="section-label reveal">만든 사람</div>
+    <div class="section-label reveal">作った人</div>
+    <h2 class="section-title reveal reveal-d1">このアプリを作った理由</h2>
 
     <div class="creator-layout">
-      <div class="creator-photo reveal">
-        <img src="profile.jpg" alt="후유 (歩夢)">
+      <div class="creator-photo reveal reveal-d2">
+        <img src="profile.jpg" alt="hikaro開発者フユ">
       </div>
-      <div class="creator-text reveal reveal-d1">
-        <div class="creator-name">후유 (歩夢)</div>
-        <div class="creator-meta">hikaro 개발자 · 한국어 학습 연구자</div>
-
-        <p>일본인이 가장 쉽고 효율적으로 한국어를 배울 수 있는 방법을 연구하고, 앱으로 구현합니다.</p>
-        <p class="text-muted">hikaro(光路) — 깜깜한 터널 속에서 헤매고 있는 언어학습자들에게 출구가 어디인지 알려주는 빛이 되고 싶다는 마음으로 이름을 지었습니다.</p>
-
-        <div class="creator-creds">
-          <div class="creator-cred"><div class="creator-cred-dot"></div>SUNY Stonybrook 졸업 (화학공학과)</div>
-          <div class="creator-cred"><div class="creator-cred-dot"></div>서울대학교 대학원</div>
-          <div class="creator-cred"><div class="creator-cred-dot"></div>JLPT N1 합격 (2025.07) — 7개월 만에 취득</div>
-        </div>
-
-        <div style="font-size: 17px; font-weight: 700; margin: 32px 0 8px;">후유의 채널</div>
-        <p class="text-muted" style="margin-bottom: 14px;">한국어 공부법, 한국 문화, 학습 팁을 발신하고 있습니다.</p>
-        <div class="channel-grid">
-          <a class="channel-card" href="#"><div class="channel-name">YouTube</div><div class="channel-desc">공부법·해설 영상</div></a>
-          <a class="channel-card" href="#"><div class="channel-name">Instagram</div><div class="channel-desc">학습 카드·일상</div></a>
-          <a class="channel-card" href="#"><div class="channel-name">Threads</div><div class="channel-desc">학습 팁·생각</div></a>
-          <a class="channel-card" href="#"><div class="channel-name">Note</div><div class="channel-desc">깊이 있는 글·칼럼</div></a>
-        </div>
+      <div class="creator-text reveal reveal-d3">
+        <p>私は韓国人です。<strong>20年間、日本語の勉強に失敗し続けました。</strong></p>
+        <p>それでも2025年7月、<strong>JLPT N1を7ヶ月で取得</strong>しました。</p>
+        <p>私自身も語学学習者として、失敗も成功も経験しました。だから何が効果的で、何が時間の無駄かを正確にわかっています。</p>
+        <p>2025年10月、新潟を旅行した時に、<strong>韓国語学習に何度も失敗した日本人の友人</strong>に出会いました。</p>
+        <p>韓国語が上手くなりたいけど、どうやって勉強すればいいかわからないと、私に助けを求めてきました。そこで2ヶ月間企画した後、2025年12月から私の経験とノウハウを込めてアプリ開発を始めました。</p>
+        <p><strong>その結果がhikaroです。</strong></p>
+        <p>韓国語学習に何度も失敗してきたなら、<strong>今度はhikaroがあなたのガイドになります。</strong></p>
+        <div class="creator-signature"><strong>— フユ</strong>・hikaro開発者</div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- ── FINAL CTA ──────────────────────────────── -->
-<div class="final-cta">
-  <h3 class="reveal">몇 번이나 실패했던 분들도,<br>분명 성공할 수 있습니다.</h3>
-  <p class="final-sub reveal reveal-d1">이번에는 혼자가 아니라,<br>가이드와 지도가 있으니까요.</p>
-  <p class="final-cta-label reveal reveal-d2">무료로 시작해보기</p>
-  <div class="cta-buttons reveal reveal-d3">
-    <a class="btn-white" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
-    <a class="btn-outline" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
   </div>
-</div>
+</section>
 
-<!-- ── FOOTER ─────────────────────────────────── -->
-<div class="footer">
-  <a href="terms.html">이용약관</a>
-  <a href="privacy.html">개인정보 처리방침</a>
-  <div class="contact">문의: <a href="mailto:hikaro.world@gmail.com">hikaro.world@gmail.com</a></div>
-</div>
+<section class="final-cta">
+  <h2 class="reveal">何度失敗してきた方も、<br>必ず成功できます。</h2>
+  <p class="final-cta-sub reveal reveal-d1">今度は一人じゃなく、<br>ガイドとマップがあるから。</p>
+  <div class="final-cta-label reveal reveal-d2">無料で始める</div>
+  <div class="final-cta-buttons reveal reveal-d3">
+    <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
+    <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.hikaro">Google Play →</a>
+  </div>
+  <div class="channels-block reveal reveal-d4">
+    <h3 class="channels-title">フユのチャンネル</h3>
+    <p class="channels-sub">韓国語の勉強法、韓国文化、学習のコツを発信しています。</p>
+    <div class="channels-grid">
+      <a class="channel-link" href="https://www.youtube.com/@korean_fuyu" target="_blank" rel="noopener">YouTube</a>
+      <a class="channel-link" href="https://www.instagram.com/korean_fuyu/" target="_blank" rel="noopener">Instagram</a>
+      <a class="channel-link" href="https://www.threads.com/@korean_fuyu" target="_blank" rel="noopener">Threads</a>
+      <a class="channel-link" href="https://note.com/mkt_coach_fuyu" target="_blank" rel="noopener">Note</a>
+    </div>
+  </div>
+
+  <div class="featured-video reveal reveal-d5">
+    <p class="featured-video-title">韓国語の単語が覚えられない？5つの原因と解決法</p>
+    <div class="video-embed">
+      <iframe src="https://www.youtube.com/embed/Ig0HPK5wWfM" title="韓国語の単語が覚えられない？5つの原因と解決法" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div>
+    <a href="privacy.html">プライバシーポリシー</a>
+    <a href="terms.html">利用規約</a>
+  </div>
+  <p class="contact">© 2026 hikaro · お問い合わせ: <a href="mailto:hikaro.contact@gmail.com">hikaro.contact@gmail.com</a></p>
+</footer>
 
 <script>
+(function() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -630,9 +1513,102 @@
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+// Journey map: light up nodes based on which step-card is most visible
+(function() {
+  const cards = document.querySelectorAll('.step-card');
+  const nodes = document.querySelectorAll('.journey-node');
+  const lines = document.querySelectorAll('.journey-line');
+  const planSteps = document.querySelector('.plan-steps');
+  if (!cards.length || !nodes.length || !planSteps) return;
+
+  const visibility = new Map();
+  cards.forEach(c => visibility.set(c, 0));
+
+  function setActive(idx) {
+    nodes.forEach((n, i) => {
+      n.classList.toggle('active', i === idx);
+      n.classList.toggle('passed', i < idx);
+    });
+    lines.forEach((ln, i) => {
+      ln.classList.toggle('filled', i < idx);
+    });
+  }
+
+  function getActiveIndex() {
+    const isHorizScroll = planSteps.scrollWidth > planSteps.clientWidth + 4;
+    if (isHorizScroll) {
+      const cRect = planSteps.getBoundingClientRect();
+      const targetX = cRect.left + cRect.width / 2;
+      let bestIdx = 0, bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const d = Math.abs(cx - targetX);
+        if (d < bestDist) { bestDist = d; bestIdx = i; }
+      });
+      return bestIdx;
+    } else {
+      let bestIdx = 0, bestRatio = -1;
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const visible = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+        const ratio = visible / Math.min(r.height, vh);
+        if (ratio > bestRatio) { bestRatio = ratio; bestIdx = i; }
+      });
+      const sectionRect = planSteps.getBoundingClientRect();
+      if (sectionRect.top > window.innerHeight * 0.6) return -1;
+      return bestIdx;
+    }
+  }
+
+  let ticking = false;
+  let manualActive = -1;
+  let manualActiveTimer = null;
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      if (manualActive === -1) setActive(getActiveIndex());
+      ticking = false;
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  planSteps.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  nodes.forEach((node) => {
+    node.addEventListener('click', () => {
+      const idx = parseInt(node.dataset.target, 10);
+      const card = cards[idx];
+      if (!card) return;
+      const isHorizScroll = planSteps.scrollWidth > planSteps.clientWidth + 4;
+      if (isHorizScroll) {
+        const cardRect = card.getBoundingClientRect();
+        const containerRect = planSteps.getBoundingClientRect();
+        const offset = (cardRect.left - containerRect.left)
+          - (containerRect.width - cardRect.width) / 2
+          + planSteps.scrollLeft;
+        planSteps.scrollTo({ left: offset, behavior: 'smooth' });
+      } else {
+        node.blur();
+        manualActive = idx;
+        clearTimeout(manualActiveTimer);
+        manualActiveTimer = setTimeout(() => { manualActive = -1; }, 1000);
+        setActive(idx);
+      }
+    });
+  });
+})();
 </script>
+
 </body>
 </html>
