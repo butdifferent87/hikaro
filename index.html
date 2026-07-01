@@ -1094,6 +1094,20 @@
     margin: 56px auto 0;
     text-align: left;
   }
+  .featured-videos-row {
+    max-width: 1080px;
+    margin: 56px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .featured-videos-row .featured-video {
+    max-width: none;
+    margin: 0;
+  }
+  @media (max-width: 768px) {
+    .featured-videos-row { grid-template-columns: 1fr; gap: 40px; }
+  }
   .featured-video-title {
     font-size: 15px;
     font-weight: 700;
@@ -1549,17 +1563,19 @@
     </div>
   </div>
 
-  <div class="featured-video reveal reveal-d5">
-    <p class="featured-video-title">韓国語の単語が覚えられない？5つの原因と解決法</p>
-    <div class="video-embed">
-      <iframe src="https://www.youtube.com/embed/Ig0HPK5wWfM" title="韓国語の単語が覚えられない？5つの原因と解決法" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+  <div class="featured-videos-row reveal reveal-d5">
+    <div class="featured-video">
+      <p class="featured-video-title">韓国語の単語が覚えられない？5つの原因と解決法</p>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/Ig0HPK5wWfM" title="韓国語の単語が覚えられない？5つの原因と解決法" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
     </div>
-  </div>
 
-  <div class="featured-video reveal reveal-d5">
-    <p class="featured-video-title">韓国語が話せるようになる、たった3ステップ</p>
-    <div class="video-embed">
-      <iframe src="https://www.youtube.com/embed/8ZPUWzie2bY" title="韓国語が話せるようになる、たった3ステップ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+    <div class="featured-video">
+      <p class="featured-video-title">韓国語が話せるようになる、たった3ステップ</p>
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/8ZPUWzie2bY" title="韓国語が話せるようになる、たった3ステップ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+      </div>
     </div>
   </div>
 </section>
