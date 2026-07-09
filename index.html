@@ -1268,6 +1268,20 @@
   .reveal-d3 { transition-delay: 0.24s; }
   .reveal-d4 { transition-delay: 0.32s; }
 </style>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XBCFC6FWB6');
+  // 다운로드 클릭 추적 — iOS/Android 자동 구분 (버튼 개별 수정 불필요)
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href*="apps.apple.com"], a[href*="play.google.com"]');
+    if (!a) return;
+    gtag('event', 'click_download', { store: a.href.indexOf('apps.apple.com') > -1 ? 'ios' : 'android' });
+  });
+</script>
 </head>
 <body>
 
