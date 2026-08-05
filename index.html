@@ -1047,6 +1047,35 @@
     gap: 14px;
     justify-content: center;
   }
+  /* ── LEAD MAGNET ──────────────────────────
+     앱 CTA 바로 아래에 두되 의도적으로 약하게 만든다. 스토어 버튼과 비슷한
+     무게로 그리면 설치하려던 사람의 클릭을 가져가고, 그러면 "릴스 시청자가
+     앱에 관심이 있는가"를 재는 신호가 오염된다. 여기는 설치까지는 아직인
+     사람이 빈손으로 나가지 않게 받쳐주는 자리다. */
+  .lead-magnet {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .lead-magnet-note {
+    font-size: 15px;
+    color: rgba(0,0,0,0.45);
+    margin: 0 0 12px;
+    line-height: 1.6;
+  }
+  .lead-magnet-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #007050;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,112,80,0.3);
+    padding-bottom: 2px;
+  }
+  .lead-magnet-link:hover { border-bottom-color: #007050; }
   /* ── CHANNELS ─────────────────────────── */
   .channels-block {
     margin-top: 56px;
@@ -1267,6 +1296,8 @@
   .reveal-d2 { transition-delay: 0.16s; }
   .reveal-d3 { transition-delay: 0.24s; }
   .reveal-d4 { transition-delay: 0.32s; }
+  .reveal-d5 { transition-delay: 0.40s; }
+  .reveal-d6 { transition-delay: 0.48s; }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
@@ -1280,6 +1311,14 @@
     var a = e.target.closest('a[href*="apps.apple.com"], a[href*="play.google.com"]');
     if (!a) return;
     gtag('event', 'click_download', { store: a.href.indexOf('apps.apple.com') > -1 ? 'ios' : 'android' });
+  });
+  // 리드마그넷 클릭 추적 — click_download 와 분리해서 센다.
+  // 둘을 합치면 "앱에 관심 있는 사람"과 "PDF만 원하는 사람"이 한 숫자에
+  // 섞여, 음독 모드 착공 판정(앱 관심이 실재하는가)이 불가능해진다.
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href$=".pdf"]');
+    if (!a) return;
+    gtag('event', 'click_lead_magnet', { asset: 'onyomi_henkan' });
   });
 </script>
 </head>
@@ -1566,7 +1605,14 @@
     <a class="btn-download" href="https://apps.apple.com/kr/app/hikaro/id6758513552">App Store →</a>
     <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
   </div>
-  <div class="channels-block reveal reveal-d4">
+  <div class="lead-magnet reveal reveal-d4">
+    <p class="lead-magnet-note">アプリはまだ迷っている方へ。</p>
+    <a class="lead-magnet-link" href="lead/onyomi-henkan.pdf" target="_blank" rel="noopener">
+      漢字の音読み → ハングル 変換表（PDF・無料）→
+    </a>
+  </div>
+
+  <div class="channels-block reveal reveal-d5">
     <h3 class="channels-title">フユのチャンネル</h3>
     <p class="channels-sub">韓国語の勉強法、韓国文化、学習のコツを発信しています。</p>
     <div class="channels-grid">
@@ -1577,7 +1623,7 @@
     </div>
   </div>
 
-  <div class="featured-videos-row reveal reveal-d5">
+  <div class="featured-videos-row reveal reveal-d6">
     <div class="featured-video">
       <p class="featured-video-title">韓国語の単語が覚えられない？5つの原因と解決法</p>
       <div class="video-embed">
