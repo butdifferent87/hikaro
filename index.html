@@ -1298,6 +1298,15 @@
   .reveal-d4 { transition-delay: 0.32s; }
   .reveal-d5 { transition-delay: 0.40s; }
   .reveal-d6 { transition-delay: 0.48s; }
+
+  /* STEP 見出しに添える時期名（例: ためる 幼児期・児童期） */
+  .step-stage .stage-sub {
+    font-size: 0.52em;
+    font-weight: 700;
+    color: #5C7066;
+    margin-left: 6px;
+    letter-spacing: 0;
+  }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
@@ -1423,20 +1432,20 @@
 
     <div class="journey-map reveal reveal-d2">
       <div class="journey-track">
-        <button type="button" class="journey-node" data-target="0" aria-label="初級期ステップへ移動">
+        <button type="button" class="journey-node" data-target="0" aria-label="幼児期・児童期ステップへ移動">
           <div class="journey-dot"></div>
-          <div class="journey-label">初級期</div>
+          <div class="journey-label">幼児期・児童期</div>
         </button>
         <div class="journey-line"></div>
-        <button type="button" class="journey-node" data-target="1" aria-label="中級期ステップへ移動">
+        <button type="button" class="journey-node" data-target="1" aria-label="青年期ステップへ移動">
           <div class="journey-dot"></div>
-          <div class="journey-label">中級期</div>
+          <div class="journey-label">青年期</div>
         </button>
         <div class="journey-line"></div>
-        <button type="button" class="journey-node" data-target="2" aria-label="上級期ステップへ移動">
+        <button type="button" class="journey-node" data-target="2" aria-label="成人期ステップへ移動">
           <span class="journey-flag">達成！</span>
           <div class="journey-dot"></div>
-          <div class="journey-label">上級期</div>
+          <div class="journey-label">成人期</div>
         </button>
       </div>
     </div>
@@ -1444,15 +1453,16 @@
     <div class="plan-steps">
       <div class="step-card reveal">
         <div class="step-number">STEP 01</div>
-        <div class="step-stage">初級期</div>
-        <div class="step-subtitle">基礎単語と文法を積み上げる</div>
+        <div class="step-stage">ためる<span class="stage-sub">幼児期・児童期</span></div>
+        <div class="step-subtitle">単語と文法を積み上げる</div>
         <div class="step-bullets">
           <div class="bullet-item">誰もが通る段階。<strong>いかに早く卒業できるかが鍵。</strong></div>
+          <div class="bullet-item">かたまりで覚え、<strong>漢字で名詞を一気に増やします。</strong></div>
           <div class="bullet-item">何を・どうやって覚えるか、hikaroがすべて準備してあります。</div>
         </div>
         <div class="step-outcome">
           <span class="outcome-icon">→</span>
-          <span><strong>卒業したら？</strong><br>簡単な韓国語の文章を自分で作ることができます。</span>
+          <span><strong>卒業したら？</strong><br>簡単な韓国語の文章を、自分で作れるようになります。</span>
         </div>
       </div>
 
@@ -1460,16 +1470,16 @@
 
       <div class="step-card reveal reveal-d1">
         <div class="step-number">STEP 02</div>
-        <div class="step-stage">中級期</div>
-        <div class="step-subtitle">口から韓国語が出てくるようになる</div>
+        <div class="step-stage">つかう<span class="stage-sub">青年期</span></div>
+        <div class="step-subtitle">文章を作り、自分の言葉を韓国語にする</div>
         <div class="step-bullets">
-          <div class="bullet-item">文章を覚えて作ってみながら、<strong>単語・文法の使い感覚</strong>を身につけます。</div>
-          <div class="bullet-item">文章が作れるので、言葉が出てくるようになります。</div>
+          <div class="bullet-item">覚えたものを、<strong>実際に使い始める段階。</strong></div>
+          <div class="bullet-item">ここを飛ばすと、会話にはつながりません。</div>
           <div class="bullet-item">「わかるのに話せない」もどかしさが解消されます。</div>
         </div>
         <div class="step-outcome">
           <span class="outcome-icon">→</span>
-          <span><strong>卒業したら？</strong><br>動詞・形容詞の変化に慣れて、話せる文章が大幅に増えます。</span>
+          <span><strong>卒業したら？</strong><br>自分の言いたいことを、自分の文章で言えるようになります。</span>
         </div>
       </div>
 
@@ -1478,18 +1488,19 @@
       <div class="step-card dark reveal reveal-d2">
         <div class="success-chip">ここまで達成したら、韓国語学習の成功！</div>
         <div class="step-number">STEP 03</div>
-        <div class="step-stage">上級期</div>
-        <div class="step-subtitle">より正確で、より自然な韓国語が話せる</div>
+        <div class="step-stage">ひろげる<span class="stage-sub">成人期</span></div>
+        <div class="step-subtitle">自分の考えと感情を韓国語で表現する</div>
         <div class="step-bullets">
           <div class="bullet-item">考えなくても韓国語が出てきます。</div>
           <div class="bullet-item">意味の伝達を超えて、<strong>ニュアンス</strong>が気になります。</div>
-          <div class="bullet-item">より正確な表現で、<strong>韓国人らしい文章</strong>を使いこなします。</div>
+          <div class="bullet-item">学び方が自由になり、<strong>自分に合う方法を選べます。</strong></div>
         </div>
         <div class="step-outcome">
           <span class="outcome-icon">→</span>
           <span><strong>目標</strong><br>自分の考えの80%以上を自然な韓国語で話せます。</span>
         </div>
       </div>
+
     </div>
 
     <div class="plan-closer reveal reveal-d3">
