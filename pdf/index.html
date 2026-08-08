@@ -1,22 +1,55 @@
 <!doctype html>
+<html lang="ja">
 <meta charset="utf-8">
-<title>Hikaro</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>「音読み変換法」変換表 — Hikaro</title>
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://hikaro-world.com/">
 <!--
   스토리 하이라이트「変換」의 링크 스티커 착지점.
 
-  /ig · /st 처럼 단순 리다이렉트로 두지 않는 이유: 최종 목적지가 PDF 파일이라
-  GA 스크립트가 실릴 자리가 없다. 여기서 이벤트를 먼저 쏘고 나서 파일로 보낸다.
-  이 한 칸이 없으면 리드마그넷이 몇 번 받아졌는지 영영 모른다.
+  /ig · /st 처럼 순수 리다이렉트로 두지 않는 이유가 둘 있다.
 
-  캠페인 값을 URL 파라미터가 아니라 config 에 직접 박는 이유: 스티커 주소를
+  1) 최종 목적지가 PDF 파일이라 GA 스크립트가 실릴 자리가 없다. 여기서 이벤트를
+     먼저 쏘고 파일로 보낸다. 이 한 칸이 없으면 몇 번 받아졌는지 영영 모른다.
+
+  2) 🔴 PDF 로의 자동 이동은 브라우저마다 다르게 논다. 인스타 인앱 브라우저는
+     application/pdf 를 못 열거나 조용히 무시할 수 있다. 자동 이동만 믿고 만들면
+     "탭했는데 아무 일도 안 남" = 우리가 지금 고치고 있는 그 막다른 길이 재발한다.
+     그래서 자동 이동은 "되면 좋은 것"으로 두고, 눈에 보이는 진짜 버튼을 항상 그린다.
+     자동 이동이 되면 버튼은 보이기 전에 지나간다.
+
+  캠페인 값을 URL 파라미터가 아니라 config 에 직접 박은 이유: 스티커 주소를
   hikaro-world.com/pdf 로 짧게 유지하려고. 후유가 폰에서 손으로 치는 주소다.
 -->
+<style>
+  @font-face{font-family:'RHR-JP';src:url('/fonts/ResourceHanRoundedJP-Bold.ttf');font-weight:700;font-display:swap}
+  @font-face{font-family:'RHR-JP';src:url('/fonts/ResourceHanRoundedJP-Regular.ttf');font-weight:400;font-display:swap}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#FAFAF8;color:#1A1A1A;font-family:'RHR-JP',system-ui,sans-serif;
+       min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+       align-items:center;text-align:center;padding:32px 24px;gap:8px}
+  .brand{font-family:system-ui,sans-serif;font-weight:800;color:#007050;letter-spacing:.5px;
+         font-size:20px;margin-bottom:20px}
+  .eyebrow{font-size:13px;color:#007050;letter-spacing:2px;font-weight:700}
+  h1{font-size:26px;line-height:1.4;font-weight:700;margin-top:10px}
+  .meta{font-size:14px;color:#5C7066;font-weight:400;margin-top:10px}
+  /* 버튼은 한 손 엄지로 누르는 위치·크기. 인앱 브라우저는 화면이 더 좁다. */
+  .btn{display:block;width:100%;max-width:340px;margin-top:32px;padding:20px 24px;
+       background:#007050;color:#FAFAF8;font-size:18px;font-weight:700;
+       border-radius:14px;text-decoration:none}
+  .note{font-size:12px;color:#9AB3A8;font-weight:400;margin-top:18px;line-height:1.6}
+</style>
+
+<div class="brand">Hikaro</div>
+<div class="eyebrow">無料プレゼント</div>
+<h1>「音読み変換法」<br>変換表</h1>
+<div class="meta">PDF・全12ページ</div>
+<a class="btn" id="dl" href="/lead/onyomi-henkan.pdf">ダウンロードする</a>
+<div class="note">自動で開かない場合は、<br>上のボタンを押してください。</div>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
 <script>
-  var DEST = 'https://hikaro-world.com/lead/onyomi-henkan.pdf';
-
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -29,21 +62,16 @@
   // 홈페이지 본문과 같은 이벤트명·asset 값을 쓴다. 이름이 갈리면 GA4 에서
   // "리드마그넷 총 몇 건"이 두 줄로 쪼개져 합계를 사람이 손으로 더해야 한다.
   // entry 로 유입구만 구분한다 (본문 = page, 여기 = story).
-  var moved = false;
-  function go() { if (!moved) { moved = true; location.replace(DEST); } }
+  //
+  // 도착 시점에 한 번만 센다. 이 페이지는 PDF 받으러 오는 것 말고 할 게 없어서
+  // 도착 = 의도다. 버튼 클릭에도 걸면 자동 이동이 실패한 사람만 두 번 세어져
+  // 브라우저 사정이 숫자를 오염시킨다.
+  gtag('event', 'click_lead_magnet', { asset: 'onyomi_henkan', entry: 'story' });
 
-  gtag('event', 'click_lead_magnet', {
-    asset: 'onyomi_henkan',
-    entry: 'story',
-    event_callback: go
-  });
-
-  // gtag 가 차단되거나 느리면 콜백이 영영 안 온다. 1.2초면 계측은 대개 끝나고,
-  // 사용자는 아직 기다려줄 수 있는 길이다.
-  setTimeout(go, 1200);
+  // 자동 이동은 보조 수단이다. 실패해도 위 버튼이 그대로 살아 있다.
+  // 계측이 나갈 틈을 준 뒤 시도한다.
+  setTimeout(function () {
+    location.replace(document.getElementById('dl').href);
+  }, 700);
 </script>
-<noscript><meta http-equiv="refresh" content="0; url=https://hikaro-world.com/lead/onyomi-henkan.pdf"></noscript>
-<p style="font-family:sans-serif;padding:24px;font-size:15px">
-  ダウンロードを準備しています…
-  <a href="https://hikaro-world.com/lead/onyomi-henkan.pdf">開かない場合はこちら</a>
-</p>
+</html>
