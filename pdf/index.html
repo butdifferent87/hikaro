@@ -19,8 +19,14 @@
      그래서 자동 이동은 "되면 좋은 것"으로 두고, 눈에 보이는 진짜 버튼을 항상 그린다.
      자동 이동이 되면 버튼은 보이기 전에 지나간다.
 
-  캠페인 값을 URL 파라미터가 아니라 config 에 직접 박은 이유: 스티커 주소를
-  hikaro-world.com/pdf 로 짧게 유지하려고. 후유가 폰에서 손으로 치는 주소다.
+  🔴 유입구는 주소의 ?s= 로 받는다. 코드에 박지 않는다.
+     처음엔 주소를 짧게 하려고 instagram/story 를 config 에 박았는데, 그러면 이 PDF
+     링크를 바이오·피드·note 어디에 걸어도 전부 "스토리에서 왔다"로 찍힌다. 구분이
+     안 되는 정도가 아니라 틀린 값이 들어간다. 게다가 GA4 에서는 config 의
+     campaign_* 가 URL 의 utm_* 를 이겨서, 나중에 utm 을 붙여도 안 고쳐진다.
+
+     쓰는 법: hikaro-world.com/pdf?s=story  (아래 ENTRY 에 있는 코드만 유효)
+     모르는 값·없는 값이면 캠페인을 아예 세팅하지 않는다. 지어내느니 비워둔다.
 -->
 <style>
   @font-face{font-family:'RHR-JP';src:url('/fonts/ResourceHanRoundedJP-Bold.ttf');font-weight:700;font-display:swap}
@@ -50,23 +56,47 @@
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
 <script>
+  // 유입구 코드 → [source, medium]. /ig · /st 가 쓰는 값과 같은 어휘를 쓴다.
+  // 여기서 새 이름을 지으면 GA4 에서 같은 인스타가 두 종류로 갈린다.
+  // 새 유입구를 만들 때는 이 표에 한 줄 추가하고 주소에 ?s=코드 를 붙인다.
+  var ENTRY = {
+    story: ['instagram', 'story'],
+    bio:   ['instagram', 'bio'],
+    feed:  ['instagram', 'feed'],
+    dm:    ['instagram', 'dm'],
+    note:  ['note', 'article'],
+    yt:    ['youtube', 'video'],
+    th:    ['threads', 'post']
+  };
+
+  // 표에 없는 값은 버린다. 주소는 남이 고쳐서 보낼 수 있어서, 받은 문자열을
+  // 그대로 GA 에 넣으면 리포트에 쓰레기 값이 쌓인다.
+  var code = new URLSearchParams(location.search).get('s');
+  var hit = Object.prototype.hasOwnProperty.call(ENTRY, code) ? ENTRY[code] : null;
+
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XBCFC6FWB6', {
-    campaign_source: 'instagram',
-    campaign_medium: 'story',
+
+  // 아는 유입구일 때만 캠페인을 세팅한다. 모르면 손대지 않는다 —
+  // GA4 가 알아서 리퍼러나 URL 의 utm_* 로 잡게 두는 편이, 지어낸 값보다 낫다.
+  gtag('config', 'G-XBCFC6FWB6', hit ? {
+    campaign_source: hit[0],
+    campaign_medium: hit[1],
     campaign_name: 'onyomi_pdf'
-  });
+  } : {});
 
   // 홈페이지 본문과 같은 이벤트명·asset 값을 쓴다. 이름이 갈리면 GA4 에서
   // "리드마그넷 총 몇 건"이 두 줄로 쪼개져 합계를 사람이 손으로 더해야 한다.
-  // entry 로 유입구만 구분한다 (본문 = page, 여기 = story).
+  // entry 로 유입구만 구분한다 (본문 = page, 여기 = 주소가 말해주는 값).
   //
   // 도착 시점에 한 번만 센다. 이 페이지는 PDF 받으러 오는 것 말고 할 게 없어서
   // 도착 = 의도다. 버튼 클릭에도 걸면 자동 이동이 실패한 사람만 두 번 세어져
   // 브라우저 사정이 숫자를 오염시킨다.
-  gtag('event', 'click_lead_magnet', { asset: 'onyomi_henkan', entry: 'story' });
+  gtag('event', 'click_lead_magnet', {
+    asset: 'onyomi_henkan',
+    entry: hit ? code : 'unknown'
+  });
 
   // 자동 이동은 보조 수단이다. 실패해도 위 버튼이 그대로 살아 있다.
   // 계측이 나갈 틈을 준 뒤 시도한다.
