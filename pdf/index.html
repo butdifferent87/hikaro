@@ -1,0 +1,49 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Hikaro</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://hikaro-world.com/">
+<!--
+  스토리 하이라이트「変換」의 링크 스티커 착지점.
+
+  /ig · /st 처럼 단순 리다이렉트로 두지 않는 이유: 최종 목적지가 PDF 파일이라
+  GA 스크립트가 실릴 자리가 없다. 여기서 이벤트를 먼저 쏘고 나서 파일로 보낸다.
+  이 한 칸이 없으면 리드마그넷이 몇 번 받아졌는지 영영 모른다.
+
+  캠페인 값을 URL 파라미터가 아니라 config 에 직접 박는 이유: 스티커 주소를
+  hikaro-world.com/pdf 로 짧게 유지하려고. 후유가 폰에서 손으로 치는 주소다.
+-->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
+<script>
+  var DEST = 'https://hikaro-world.com/lead/onyomi-henkan.pdf';
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XBCFC6FWB6', {
+    campaign_source: 'instagram',
+    campaign_medium: 'story',
+    campaign_name: 'onyomi_pdf'
+  });
+
+  // 홈페이지 본문과 같은 이벤트명·asset 값을 쓴다. 이름이 갈리면 GA4 에서
+  // "리드마그넷 총 몇 건"이 두 줄로 쪼개져 합계를 사람이 손으로 더해야 한다.
+  // entry 로 유입구만 구분한다 (본문 = page, 여기 = story).
+  var moved = false;
+  function go() { if (!moved) { moved = true; location.replace(DEST); } }
+
+  gtag('event', 'click_lead_magnet', {
+    asset: 'onyomi_henkan',
+    entry: 'story',
+    event_callback: go
+  });
+
+  // gtag 가 차단되거나 느리면 콜백이 영영 안 온다. 1.2초면 계측은 대개 끝나고,
+  // 사용자는 아직 기다려줄 수 있는 길이다.
+  setTimeout(go, 1200);
+</script>
+<noscript><meta http-equiv="refresh" content="0; url=https://hikaro-world.com/lead/onyomi-henkan.pdf"></noscript>
+<p style="font-family:sans-serif;padding:24px;font-size:15px">
+  ダウンロードを準備しています…
+  <a href="https://hikaro-world.com/lead/onyomi-henkan.pdf">開かない場合はこちら</a>
+</p>
