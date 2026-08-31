@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>パレート30 — 韓国語でいちばん使う動詞 — Hikaro</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://hikaro-world.com/">
+<!--
+  리드마그넷 2탄「パレート30」착지점. /pdf 와 같은 구조·같은 어휘를 쓴다.
+
+  왜 /pdf 를 재사용하지 않고 한 칸 더 파는가:
+    한 주소가 두 파일을 조건으로 갈라 주면, GA4 에서 "몇 명이 무엇을 받았나"가
+    한 이벤트에 섞인다. asset 파라미터로 나눌 수는 있지만, 그러려면 링크마다
+    쿼리를 두 개(?s= 와 ?a=) 붙여야 하고 사람이 손으로 조합하다 틀린다.
+    자산이 늘 때마다 칸을 하나 파는 편이, 링크가 짧고 통계가 안 섞인다.
+
+  🔴 유입구는 주소의 ?s= 로 받는다 (/pdf 와 동일 규칙, 같은 ENTRY 표).
+     2탄의 주 유입구는 LINE 이라 line 코드를 추가했다.
+     쓰는 법: hikaro-world.com/pdf2?s=line
+-->
+<style>
+  @font-face{font-family:'RHR-JP';src:url('/fonts/ResourceHanRoundedJP-Bold.ttf');font-weight:700;font-display:swap}
+  @font-face{font-family:'RHR-JP';src:url('/fonts/ResourceHanRoundedJP-Regular.ttf');font-weight:400;font-display:swap}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#FAFAF8;color:#1A1A1A;font-family:'RHR-JP',system-ui,sans-serif;
+       min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+       align-items:center;text-align:center;padding:32px 24px;gap:8px}
+  .brand{font-family:system-ui,sans-serif;font-weight:800;color:#007050;letter-spacing:.5px;
+         font-size:20px;margin-bottom:20px}
+  .eyebrow{font-size:13px;color:#007050;letter-spacing:2px;font-weight:700}
+  h1{font-size:26px;line-height:1.4;font-weight:700;margin-top:10px}
+  .meta{font-size:14px;color:#5C7066;font-weight:400;margin-top:10px}
+  .btn{display:block;width:100%;max-width:340px;margin-top:32px;padding:20px 24px;
+       background:#007050;color:#FAFAF8;font-size:18px;font-weight:700;
+       border-radius:14px;text-decoration:none}
+  .note{font-size:12px;color:#9AB3A8;font-weight:400;margin-top:18px;line-height:1.6}
+</style>
+
+<div class="brand">Hikaro</div>
+<div class="eyebrow">第2弾・無料プレゼント</div>
+<h1>パレート30<br>いちばん使う動詞</h1>
+<div class="meta">PDF・全12ページ</div>
+<a class="btn" id="dl" href="/lead/pareto30.pdf">ダウンロードする</a>
+<div class="note">自動で開かない場合は、<br>上のボタンを押してください。</div>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
+<script>
+  // /pdf 와 같은 표. 새 이름을 지으면 GA4 에서 같은 채널이 두 종류로 갈린다.
+  // line = LINE 공식계정(인사말·리치메뉴·정기배신) — 2탄의 주 유입구.
+  var ENTRY = {
+    line:  ['line', 'official_account'],
+    story: ['instagram', 'story'],
+    bio:   ['instagram', 'bio'],
+    feed:  ['instagram', 'feed'],
+    dm:    ['instagram', 'dm'],
+    note:  ['note', 'article'],
+    yt:    ['youtube', 'video'],
+    th:    ['threads', 'post']
+  };
+
+  var code = new URLSearchParams(location.search).get('s');
+  var hit = Object.prototype.hasOwnProperty.call(ENTRY, code) ? ENTRY[code] : null;
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XBCFC6FWB6', hit ? {
+    campaign_source: hit[0],
+    campaign_medium: hit[1],
+    campaign_name: 'pareto30_pdf'
+  } : {});
+
+  // 이벤트명은 1탄과 같게 두고 asset 으로 가른다 — "리드마그넷 총합"과
+  // "자산별"을 GA4 에서 둘 다 볼 수 있다. 이름을 새로 지으면 총합이 깨진다.
+  gtag('event', 'click_lead_magnet', {
+    asset: 'pareto30',
+    entry: hit ? code : 'unknown'
+  });
+
+  setTimeout(function () {
+    location.replace(document.getElementById('dl').href);
+  }, 700);
+</script>
+</html>
