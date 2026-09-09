@@ -1307,6 +1307,56 @@
     margin-left: 6px;
     letter-spacing: 0;
   }
+
+  /* ── 音読みスイッチ ─────────────────────────
+     기능 섹션(単語帳·文法) 다음, 作った理由 앞에 둔다. 히어로에 올리지 않는
+     이유는 "몇 번 좌절했나"라는 검증된 훅이 첫 인상을 잡아야 하고, 음독은
+     "그래서 왜 이 앱이 남과 다른가"의 답이라 뒤에 와야 논리가 맞기 때문.
+     법칙표(パッチム 6종)는 일부러 넣지 않는다 — 홈페이지는 "예측이 된다"는
+     감각만 주고, 규칙 자체는 리드마그넷 PDF 의 대가로 남긴다. */
+  .bg-tint { background: #EAF8F2; }
+  .onyomi-lead { font-size: 22px; color: #3A4A42; margin-bottom: 48px; line-height: 1.85; }
+  .ony-steps { display: flex; flex-direction: column; gap: 18px; margin-bottom: 56px; }
+  .ony-step { background: #fff; border: 1px solid rgba(0,0,0,.06); border-radius: 20px;
+              padding: 30px 34px; display: flex; gap: 22px; align-items: flex-start;
+              box-shadow: 0 8px 24px rgba(0,112,80,.09); }
+  .ony-step-hi { border-color: rgba(0,112,80,.35); box-shadow: 0 12px 34px rgba(0,112,80,.16); }
+  .ony-n { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 12px; background: #007050;
+           color: #fff; font-weight: 700; font-size: 19px; display: flex;
+           align-items: center; justify-content: center; }
+  .ony-body { flex: 1; min-width: 0; }
+  .ony-say { font-size: 18px; font-weight: 700; color: #1A1A1A; margin-bottom: 16px; }
+  .ony-row { display: flex; align-items: baseline; gap: 14px; }
+  .ony-k { font-size: 44px; font-weight: 700; line-height: 1.1; }
+  .ony-y { font-size: 16px; color: #5C7066; font-weight: 600; }
+  .ony-to { font-size: 24px; color: #009068; }
+  .ony-h { font-size: 44px; font-weight: 700; color: #007050; line-height: 1.1; }
+  .ony-words { display: flex; flex-wrap: wrap; gap: 12px; }
+  .ony-words-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .ony-w { display: inline-flex; align-items: baseline; gap: 10px; background: #EAF8F2;
+           border-radius: 14px; padding: 14px 18px; }
+  .ony-w b { font-size: 28px; font-weight: 700; }
+  .ony-w i { font-size: 14px; color: #5C7066; font-style: normal; font-weight: 600; }
+  .ony-w em { font-size: 18px; color: #009068; font-style: normal; }
+  .ony-w u { font-size: 28px; font-weight: 700; color: #007050; text-decoration: none; }
+  .ony-note { margin-top: 14px; font-size: 16px; font-weight: 700; color: #007050; }
+  .onyomi-app { background: #007050; color: #fff; border-radius: 24px; padding: 44px 48px; }
+  .oa-label { font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #C0ECD8; margin-bottom: 16px; }
+  .oa-text { font-size: 21px; color: #fff; line-height: 1.85; margin-bottom: 0; }
+  .oa-text strong { color: #C0ECD8; }
+  .oa-gift { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.22); }
+  .oa-gift-note { font-size: 16px; color: rgba(255,255,255,.85); line-height: 1.75; margin-bottom: 18px; }
+  .oa-line { display: inline-block; background: #fff; color: #007050; font-weight: 700;
+             font-size: 17px; padding: 16px 30px; border-radius: 999px; text-decoration: none; }
+  @media (max-width: 900px) {
+    .onyomi-lead { font-size: 18px; }
+    .ony-step { padding: 24px 20px; gap: 14px; }
+    .ony-k, .ony-h { font-size: 36px; }
+    .ony-w b, .ony-w u { font-size: 24px; }
+    .ony-words-grid { grid-template-columns: 1fr; }
+    .onyomi-app { padding: 32px 24px; }
+    .oa-text { font-size: 18px; }
+  }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
@@ -1329,6 +1379,16 @@
     if (!a) return;
     gtag('event', 'click_lead_magnet', { asset: 'onyomi_henkan' });
   });
+
+  // LINE 게이트 클릭 — click_lead_magnet 과 분리해서 센다. 합치면 "PDF 만
+  // 원한 사람"과 "명단에 들어온 사람"이 한 숫자가 되어 게이트 효과를 못 잰다.
+  // where 로 두 자리(음독 섹션 / 최종 CTA)를 구분해 어느 쪽이 미는지 본다.
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href*="line.me"]');
+    if (!a) return;
+    var where = a.closest('#onyomi') ? 'onyomi_section' : 'final_cta';
+    gtag('event', 'click_line_gate', { entry: 'homepage', where: where });
+  });
 </script>
 </head>
 <body>
@@ -1340,6 +1400,7 @@
       <a href="#stakes">なぜ失敗するか</a>
       <a href="#proof">どう変わるか</a>
       <a href="#plan">どう勉強するか</a>
+      <a href="#onyomi">日本人だけの近道</a>
       <a href="#creator">作った理由</a>
     </nav>
     <div class="header-cta">
@@ -1584,6 +1645,57 @@
   </div>
 </section>
 
+
+<section class="bg-tint" id="onyomi">
+  <div class="section">
+    <div class="section-label reveal">日本人だけの近道</div>
+    <h2 class="section-title reveal reveal-d1">はじめて見る単語も、<br>読めてしまう。</h2>
+    <p class="onyomi-lead reveal reveal-d1">韓国語の単語の多くは、日本語と<strong>同じ漢字</strong>からできています。<br>だから漢字の「音読み」を手がかりにすると、<strong>まだ習っていない単語</strong>まで読めてしまいます。<br>これは、漢字を知っている日本人にしか使えない近道です。</p>
+
+    <div class="ony-steps reveal reveal-d2">
+      <div class="ony-step">
+        <div class="ony-n">1</div>
+        <div class="ony-body">
+          <div class="ony-say">漢字を、ひとつ覚えます。</div>
+          <div class="ony-row"><span class="ony-k">電</span><span class="ony-y">でん</span><span class="ony-to">→</span><span class="ony-h" lang="ko">전</span></div>
+        </div>
+      </div>
+      <div class="ony-step">
+        <div class="ony-n">2</div>
+        <div class="ony-body">
+          <div class="ony-say">すると、知っている単語が読めます。</div>
+          <div class="ony-words ony-words-grid">
+            <span class="ony-w"><b>電話</b><i>でんわ</i><em>→</em><u lang="ko">전화</u></span>
+            <span class="ony-w"><b>電気</b><i>でんき</i><em>→</em><u lang="ko">전기</u></span>
+            <span class="ony-w"><b>電子</b><i>でんし</i><em>→</em><u lang="ko">전자</u></span>
+            <span class="ony-w"><b>電力</b><i>でんりょく</i><em>→</em><u lang="ko">전력</u></span>
+            <span class="ony-w"><b>電源</b><i>でんげん</i><em>→</em><u lang="ko">전원</u></span>
+            <span class="ony-w"><b>充電</b><i>じゅうでん</i><em>→</em><u lang="ko">충전</u></span>
+          </div>
+        </div>
+      </div>
+      <div class="ony-step ony-step-hi">
+        <div class="ony-n">3</div>
+        <div class="ony-body">
+          <div class="ony-say">そして、はじめて見る単語まで。</div>
+          <div class="ony-words">
+            <span class="ony-w"><b>電池</b><i>でんち</i><em>→</em><u lang="ko">전지</u></span>
+          </div>
+          <div class="ony-note">習っていないのに、読めました。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="onyomi-app reveal reveal-d3">
+      <div class="oa-label">hikaroの「音読みスイッチ」</div>
+      <p class="oa-text">漢字を1文字覚えるたびに、<strong>読める単語が増えていきます。</strong><br>hikaroは、この感覚が身につくまでクイズで繰り返します。<br>ルールを暗記するのではなく、<strong>漢字を見た瞬間ハングルが浮かぶまで。</strong></p>
+      <div class="oa-gift">
+        <p class="oa-gift-note">「音読み変換法」の変換表（PDF・全13ページ）を無料でお配りしています。<br>LINEからお届けします。1タップで完了します。</p>
+        <a class="oa-line" href="https://line.me/R/ti/p/@318wqtvv" target="_blank" rel="noopener">LINEで変換表を受け取る →</a>
+      </div>
+    </div>
+  </div>
+</section>
 <section id="creator">
   <div class="section">
     <div class="section-label reveal">作った人</div>
@@ -1617,9 +1729,9 @@
     <a class="btn-download android" href="https://play.google.com/store/apps/details?id=com.fuyu.korean">Google Play →</a>
   </div>
   <div class="lead-magnet reveal reveal-d4">
-    <p class="lead-magnet-note">アプリはまだ迷っている方へ。</p>
-    <a class="lead-magnet-link" href="lead/onyomi-henkan.pdf" target="_blank" rel="noopener">
-      漢字の音読み → ハングル 変換表（PDF・無料）→
+    <p class="lead-magnet-note">アプリはまだ迷っている方へ。<br>「音読み変換法」の変換表（PDF・全13ページ）を無料でお配りしています。</p>
+    <a class="lead-magnet-link" href="https://line.me/R/ti/p/@318wqtvv" target="_blank" rel="noopener">
+      LINEで変換表を受け取る（1タップで完了）→
     </a>
   </div>
 
