@@ -37,16 +37,17 @@
 </style>
 
 <div class="brand">Hikaro</div>
-<div class="eyebrow">第2弾・無料プレゼント</div>
-<h1>パレート30<br>いちばん使う単語</h1>
-<div class="meta">PDF・全12ページ</div>
-<a class="btn" id="dl" href="/lead/pareto30.pdf">ダウンロードする</a>
+<div class="eyebrow">無料プレゼント</div>
+<h1>パーツ早見表</h1>
+<div class="meta">PDF・全11ページ</div>
+<a class="btn" id="dl" href="/lead/parts-quickref.pdf">ダウンロードする</a>
 <div class="note">自動で開かない場合は、<br>上のボタンを押してください。</div>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBCFC6FWB6"></script>
 <script>
   // /pdf 와 같은 표. 새 이름을 지으면 GA4 에서 같은 채널이 두 종류로 갈린다.
-  // line = LINE 공식계정(인사말·리치메뉴·정기배신) — 2탄의 주 유입구.
+  // line = LINE 공식계정(인사말·리치메뉴·정기배신).
+  // 이 자료는 1탄(메인 미끼)이라 dm·threads 유입이 많다.
   var ENTRY = {
     line:  ['line', 'official_account'],
     story: ['instagram', 'story'],
@@ -68,13 +69,13 @@
   gtag('config', 'G-XBCFC6FWB6', hit ? {
     campaign_source: hit[0],
     campaign_medium: hit[1],
-    campaign_name: 'pareto30_pdf'
+    campaign_name: 'parts_quickref_pdf'
   } : {});
 
   // 이벤트명은 1탄과 같게 두고 asset 으로 가른다 — "리드마그넷 총합"과
   // "자산별"을 GA4 에서 둘 다 볼 수 있다. 이름을 새로 지으면 총합이 깨진다.
   gtag('event', 'click_lead_magnet', {
-    asset: 'pareto30',
+    asset: 'parts_quickref',
     entry: hit ? code : 'unknown'
   });
 
