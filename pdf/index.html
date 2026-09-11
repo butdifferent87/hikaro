@@ -67,7 +67,10 @@
     dm:    ['instagram', 'dm'],
     note:  ['note', 'article'],
     yt:    ['youtube', 'video'],
-    th:    ['threads', 'post']
+    th:    ['threads', 'post'],
+    // 카드뉴스 생성기(build_family.mjs)의 스레드 고정답글이 ?s=threads 로 나간다(51곳).
+    // th 만 받으면 그 유입이 전부 unknown 으로 잡혀서 별칭으로 같이 받는다.
+    threads: ['threads', 'post']
   };
 
   // 표에 없는 값은 버린다. 주소는 남이 고쳐서 보낼 수 있어서, 받은 문자열을
